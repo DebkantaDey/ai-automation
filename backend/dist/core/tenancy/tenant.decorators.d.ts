@@ -1,0 +1,10 @@
+export declare const IS_PUBLIC_KEY = "isPublic";
+export declare const Public: () => import("@nestjs/common").CustomDecorator<string>;
+export declare const REQUIRE_TENANT_KEY = "requireTenant";
+export declare const RequireTenant: () => import("@nestjs/common").CustomDecorator<string>;
+export declare const REQUIRE_WORKSPACE_KEY = "requireWorkspace";
+export declare const RequireWorkspace: () => import("@nestjs/common").CustomDecorator<string>;
+export declare const CurrentUser: (...dataOrPipes: (string | import("@nestjs/common").PipeTransform<any, any> | import("@nestjs/common").Type<import("@nestjs/common").PipeTransform<any, any>>)[]) => ParameterDecorator;
+export declare const CurrentOrganizationId: (...dataOrPipes: unknown[]) => ParameterDecorator;
+export declare const CurrentWorkspaceId: (...dataOrPipes: unknown[]) => ParameterDecorator;
+export declare const CurrentTenant: (...dataOrPipes: unknown[]) => ParameterDecorator;
