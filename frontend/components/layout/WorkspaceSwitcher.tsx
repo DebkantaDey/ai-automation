@@ -120,14 +120,13 @@ export function WorkspaceSwitcher() {
       <div className="relative">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex w-full items-center justify-between gap-2 rounded-lg border border-neutral-200/90 dark:border-neutral-800/90 bg-white dark:bg-neutral-900 px-2.5 py-1.5 text-left text-xs font-medium hover:border-neutral-300 dark:hover:border-neutral-700 shadow-sm transition-all"
+          className="flex w-full items-center justify-between gap-2 rounded-lg border border-neutral-200 bg-white px-2.5 py-1.5 text-left text-xs font-medium hover:border-neutral-300 shadow-none transition-all cursor-pointer"
         >
           <div className="flex items-center gap-2 overflow-hidden">
             <span
-              className="h-2 w-2 rounded-full shrink-0 shadow-sm ring-1 ring-black/10 dark:ring-white/20"
-              style={{ backgroundColor: currentWorkspace?.color || '#3B82F6' }}
+              className="h-2 w-2 rounded-full shrink-0 bg-neutral-800"
             />
-            <span className="truncate text-neutral-800 dark:text-neutral-200 font-semibold">
+            <span className="truncate text-neutral-800 font-semibold">
               {currentWorkspace?.name || 'Default Workspace'}
             </span>
           </div>
@@ -137,7 +136,7 @@ export function WorkspaceSwitcher() {
         {isOpen && (
           <>
             <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
-            <div className="absolute left-0 top-full z-50 mt-1 w-full min-w-48 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-1.5 shadow-xl animate-in fade-in-0 zoom-in-95">
+            <div className="absolute left-0 top-full z-50 mt-1 w-full min-w-48 rounded-xl border border-neutral-200 bg-white p-1.5 shadow-xl animate-in fade-in-0 zoom-in-95">
               <div className="px-2 py-1 text-[10px] font-bold tracking-wider text-neutral-400 uppercase">
                 Workspaces ({workspaces.length})
               </div>
@@ -149,32 +148,31 @@ export function WorkspaceSwitcher() {
                     <button
                       key={ws.id || ws.slug}
                       onClick={() => handleSelectWorkspace(ws)}
-                      className={`flex w-full items-center justify-between rounded-lg px-2 py-1.5 text-xs transition-colors ${
+                      className={`flex w-full items-center justify-between rounded-lg px-2.5 py-1.5 text-xs transition-colors cursor-pointer ${
                         isSelected
-                          ? 'bg-blue-50 text-blue-600 dark:bg-blue-950/50 dark:text-blue-400 font-semibold'
-                          : 'text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800'
+                          ? 'bg-neutral-100 text-neutral-900 font-semibold'
+                          : 'text-neutral-700 hover:bg-neutral-50'
                       }`}
                     >
                       <div className="flex items-center gap-2 truncate">
                         <span
-                          className="h-2 w-2 rounded-full shrink-0 shadow-sm"
-                          style={{ backgroundColor: ws.color || '#3B82F6' }}
+                          className="h-2 w-2 rounded-full shrink-0 bg-neutral-700"
                         />
                         <span className="truncate">{ws.name}</span>
                       </div>
-                      {isSelected && <Check className="h-3.5 w-3.5 shrink-0" />}
+                      {isSelected && <Check className="h-3.5 w-3.5 text-neutral-900 shrink-0" />}
                     </button>
                   );
                 })}
               </div>
 
-              <div className="my-1 border-t border-neutral-100 dark:border-neutral-800" />
+              <div className="my-1 border-t border-neutral-100" />
               <button
                 onClick={() => {
                   setIsOpen(false);
                   setShowCreateModal(true);
                 }}
-                className="flex w-full items-center gap-1.5 rounded-lg px-2 py-1.5 text-xs text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/40 font-semibold"
+                className="flex w-full items-center gap-1.5 rounded-lg px-2 py-1.5 text-xs text-neutral-900 hover:bg-neutral-100 font-semibold cursor-pointer"
               >
                 <Plus className="h-3.5 w-3.5" />
                 <span>New Workspace</span>
@@ -186,16 +184,16 @@ export function WorkspaceSwitcher() {
 
       {/* Create Workspace Modal */}
       {showCreateModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-          <Card className="w-full max-w-sm shadow-2xl border-neutral-200 dark:border-neutral-800 animate-in fade-in-0 zoom-in-95">
-            <CardHeader className="flex flex-row items-center justify-between pb-3 border-b border-neutral-100 dark:border-neutral-800">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
+          <Card className="w-full max-w-sm shadow-2xl border-neutral-200 animate-in fade-in-0 zoom-in-95">
+            <CardHeader className="flex flex-row items-center justify-between pb-3 border-b border-neutral-100">
               <CardTitle className="text-sm font-bold flex items-center gap-2">
-                <Layers className="h-4 w-4 text-blue-600" />
+                <Layers className="h-4 w-4 text-neutral-800" />
                 <span>Create Workspace</span>
               </CardTitle>
               <button
                 onClick={() => setShowCreateModal(false)}
-                className="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200"
+                className="text-neutral-400 hover:text-neutral-600 cursor-pointer"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -204,13 +202,13 @@ export function WorkspaceSwitcher() {
             <form onSubmit={handleCreateWorkspace}>
               <CardContent className="space-y-3.5 pt-4">
                 {error && (
-                  <div className="p-2.5 rounded-lg bg-red-50 text-red-600 text-xs dark:bg-red-950/40 border border-red-200 dark:border-red-900">
+                  <div className="p-2.5 rounded-lg bg-red-50 text-red-600 text-xs border border-red-200">
                     {error}
                   </div>
                 )}
 
                 <div className="space-y-1">
-                  <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                  <label className="text-xs font-semibold text-neutral-700">
                     Workspace Name *
                   </label>
                   <Input
@@ -224,7 +222,7 @@ export function WorkspaceSwitcher() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                  <label className="text-xs font-semibold text-neutral-700">
                     Description (optional)
                   </label>
                   <Input
@@ -235,28 +233,9 @@ export function WorkspaceSwitcher() {
                     className="text-xs"
                   />
                 </div>
-
-                <div className="space-y-1">
-                  <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
-                    Badge Color
-                  </label>
-                  <div className="flex items-center gap-2 pt-1">
-                    {PRESET_COLORS.map((col) => (
-                      <button
-                        key={col}
-                        type="button"
-                        onClick={() => setNewWsColor(col)}
-                        className={`h-5 w-5 rounded-full transition-transform cursor-pointer ${
-                          newWsColor === col ? 'scale-125 ring-2 ring-blue-500 ring-offset-2' : 'hover:scale-110'
-                        }`}
-                        style={{ backgroundColor: col }}
-                      />
-                    ))}
-                  </div>
-                </div>
               </CardContent>
 
-              <div className="flex justify-end gap-2 p-3.5 border-t border-neutral-100 dark:border-neutral-800">
+              <div className="flex justify-end gap-2 p-3.5 border-t border-neutral-100">
                 <Button
                   type="button"
                   variant="outline"
@@ -269,7 +248,7 @@ export function WorkspaceSwitcher() {
                   type="submit"
                   size="sm"
                   disabled={creating}
-                  className="bg-blue-600 hover:bg-blue-500 text-white"
+                  className="bg-neutral-900 hover:bg-neutral-800 text-white"
                 >
                   {creating ? 'Creating...' : 'Create Workspace'}
                 </Button>

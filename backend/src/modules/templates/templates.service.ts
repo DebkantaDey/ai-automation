@@ -84,7 +84,7 @@ export class TemplatesService {
     // 2. Create Vertical Autonomous AI Agent
     let agent: any = null;
     if (this.agentsService) {
-      agent = await this.agentsService.create(organizationId, workspaceId, userId, {
+      agent = await this.agentsService.createAgent(organizationId, workspaceId, userId, {
         name: vertical.aiAgent.name,
         description: vertical.aiAgent.description,
         instructions: vertical.aiAgent.instructions,

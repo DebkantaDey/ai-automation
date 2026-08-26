@@ -16,6 +16,7 @@ import { WorkflowExecution, WorkflowExecutionDocument } from './schemas/workflow
 import { CreateWorkflowDto, TriggerExecutionDto } from './dto/create-workflow.dto';
 import { PaginationQueryDto } from '../../core/common/dto/pagination.dto';
 import { WorkflowEngineService } from './engine/workflow-engine.service';
+import { DeadLetterQueueService } from './services/dead-letter-queue.service';
 import { SubscriptionAccessService } from '../billing/services/subscription-access.service';
 import { AiGatewayService } from '../../integrations/ai/ai-gateway.service';
 import {
@@ -34,9 +35,14 @@ export class WorkflowsService {
     @InjectQueue(QUEUE_WORKFLOW_EXECUTION) private readonly executionQueue: Queue,
     private readonly workflowEngine: WorkflowEngineService,
     private readonly aiGateway: AiGatewayService,
+    @Optional() private readonly deadLetterService?: DeadLetterQueueService,
     @Optional() private readonly subscriptionAccess?: SubscriptionAccessService,
     @Optional() private readonly usageService?: any,
   ) {}
+
+  getDeadLetterQueueService(): DeadLetterQueueService | undefined {
+    return this.deadLetterService;
+  }
 
   private toObjectId(id: string | any): Types.ObjectId | any {
     if (typeof id === 'string' && Types.ObjectId.isValid(id)) {

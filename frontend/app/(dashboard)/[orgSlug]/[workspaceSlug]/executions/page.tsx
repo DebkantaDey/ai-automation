@@ -165,10 +165,10 @@ export default function ExecutionsHistoryPage() {
   return (
     <div className="space-y-6">
       {/* Top Header */}
-      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between border-b border-neutral-200/80 dark:border-neutral-800/80 pb-5">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between border-b border-neutral-200 pb-5">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-white">
+            <h1 className="text-xl font-bold tracking-tight text-neutral-900">
               Workflow Executions Telemetry
             </h1>
             <Badge variant="secondary" className="text-[10px] font-mono">
@@ -196,8 +196,8 @@ export default function ExecutionsHistoryPage() {
         <div
           className={`p-3 rounded-lg text-xs flex items-center gap-2 border ${
             message.type === 'success'
-              ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400'
-              : 'bg-red-50 text-red-700 border-red-200 dark:bg-red-950/40 dark:text-red-400'
+              ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+              : 'bg-red-50 text-red-700 border-red-200'
           }`}
         >
           {message.type === 'success' ? <CheckCircle2 className="h-4 w-4" /> : <AlertCircle className="h-4 w-4" />}
@@ -220,8 +220,8 @@ export default function ExecutionsHistoryPage() {
               onClick={() => setSelectedFilter(tab.id)}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
                 selectedFilter === tab.id
-                  ? 'bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 shadow-sm'
-                  : 'bg-neutral-100 dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-800'
+                  ? 'bg-neutral-900 text-white shadow-sm'
+                  : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
               }`}
             >
               {tab.label}
@@ -241,7 +241,7 @@ export default function ExecutionsHistoryPage() {
       </div>
 
       {/* Executions Table */}
-      <Card className="border-neutral-200/80 dark:border-neutral-800/80">
+      <Card className="border-neutral-200">
         <CardContent className="p-0">
           {loading ? (
             <div className="flex h-48 items-center justify-center">
@@ -249,14 +249,14 @@ export default function ExecutionsHistoryPage() {
             </div>
           ) : filteredExecutions.length === 0 ? (
             <div className="text-center py-16 space-y-2">
-              <Layers className="h-8 w-8 mx-auto text-neutral-300 dark:text-neutral-700" />
+              <Layers className="h-8 w-8 mx-auto text-neutral-300" />
               <p className="text-xs text-neutral-500">No workflow executions match the current filter.</p>
             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="border-b border-neutral-100 dark:border-neutral-800 text-neutral-400 font-medium bg-neutral-50/60 dark:bg-neutral-900/50">
+                  <tr className="border-b border-neutral-100 text-neutral-400 font-medium bg-neutral-50">
                     <th className="py-3 px-5">Status</th>
                     <th className="py-3 px-5">Workflow Name</th>
                     <th className="py-3 px-5">Trigger Mechanism</th>
@@ -266,29 +266,29 @@ export default function ExecutionsHistoryPage() {
                     <th className="py-3 px-5 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
+                <tbody className="divide-y divide-neutral-100">
                   {filteredExecutions.map((exec) => (
                     <tr
                       key={exec._id}
-                      className="hover:bg-neutral-50/80 dark:hover:bg-neutral-900/60 transition-colors"
+                      className="hover:bg-neutral-50 transition-colors"
                     >
                       <td className="py-3 px-5">{getStatusBadge(exec.status)}</td>
-                      <td className="py-3 px-5 font-semibold text-neutral-900 dark:text-white">
+                      <td className="py-3 px-5 font-semibold text-neutral-900">
                         <Link
                           href={`/${orgSlug}/${wsSlug}/executions/${exec._id}`}
-                          className="hover:text-blue-600 transition-colors"
+                          className="hover:underline"
                         >
                           {exec.workflowId?.name || 'Automation Pipeline'}
                         </Link>
                       </td>
                       <td className="py-3 px-5 capitalize text-neutral-500 font-mono">{exec.triggerType}</td>
-                      <td className="py-3 px-5 font-mono text-[11px] text-neutral-600 dark:text-neutral-300">
+                      <td className="py-3 px-5 font-mono text-[11px] text-neutral-600">
                         {exec.durationMs ? `${exec.durationMs}ms` : '—'}
                       </td>
                       <td className="py-3 px-5">
                         {exec.aiUsage?.totalTokens ? (
-                          <span className="flex items-center gap-1 text-purple-600 dark:text-purple-400 font-mono text-[11px] font-medium">
-                            <Sparkles className="h-3 w-3" />
+                          <span className="flex items-center gap-1 text-neutral-700 font-mono text-[11px] font-medium">
+                            <Sparkles className="h-3 w-3 text-neutral-500" />
                             {exec.aiUsage.totalTokens.toLocaleString()}
                           </span>
                         ) : (
@@ -305,7 +305,7 @@ export default function ExecutionsHistoryPage() {
                               size="sm"
                               disabled={actingId === exec._id}
                               onClick={() => handleApprove(exec._id)}
-                              className="h-6 px-2.5 text-[11px] bg-emerald-600 hover:bg-emerald-500 text-white"
+                              className="h-6 px-2.5 text-[11px] bg-neutral-900 hover:bg-neutral-800 text-white"
                             >
                               <Check className="h-3 w-3 mr-1" />
                               Approve
@@ -315,7 +315,7 @@ export default function ExecutionsHistoryPage() {
                               variant="outline"
                               disabled={actingId === exec._id}
                               onClick={() => handleReject(exec._id)}
-                              className="h-6 px-2.5 text-[11px] border-rose-300 text-rose-700 hover:bg-rose-50 dark:border-rose-900 dark:text-rose-400"
+                              className="h-6 px-2.5 text-[11px] border-neutral-200 text-neutral-700 hover:bg-neutral-50"
                             >
                               <X className="h-3 w-3 mr-1" />
                               Reject
@@ -323,7 +323,7 @@ export default function ExecutionsHistoryPage() {
                           </div>
                         ) : (
                           <Link href={`/${orgSlug}/${wsSlug}/executions/${exec._id}`}>
-                            <Button variant="ghost" size="sm" className="h-6 px-2 text-xs text-blue-600 dark:text-blue-400 hover:text-blue-500">
+                            <Button variant="ghost" size="sm" className="h-6 px-2 text-xs text-neutral-700 hover:text-neutral-900">
                               <span>Trace</span>
                               <ArrowRight className="h-3 w-3 ml-1" />
                             </Button>

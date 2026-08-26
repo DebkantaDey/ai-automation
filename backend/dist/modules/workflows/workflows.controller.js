@@ -85,6 +85,23 @@ let WorkflowsController = class WorkflowsController {
     async triggerByWebhook(webhookId, payload) {
         return this.workflowsService.triggerByWebhook(webhookId, payload);
     }
+    async listDeadLetterJobs(orgId, status, workflowId, page, limit) {
+        return this.workflowsService.getDeadLetterQueueService()?.listDeadLetterJobs(orgId, {
+            status,
+            workflowId,
+            page: page ? Number(page) : 1,
+            limit: limit ? Number(limit) : 20,
+        });
+    }
+    async getDeadLetterJob(orgId, id) {
+        return this.workflowsService.getDeadLetterQueueService()?.getDeadLetterJob(orgId, id);
+    }
+    async replayDeadLetterJob(orgId, userId, id, customPayload) {
+        return this.workflowsService.getDeadLetterQueueService()?.replayJob(orgId, id, userId, customPayload);
+    }
+    async dismissDeadLetterJob(orgId, userId, id) {
+        return this.workflowsService.getDeadLetterQueueService()?.dismissJob(orgId, id, userId);
+    }
 };
 exports.WorkflowsController = WorkflowsController;
 __decorate([
@@ -365,6 +382,64 @@ __decorate([
     __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], WorkflowsController.prototype, "triggerByWebhook", null);
+__decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, permissions_guard_1.PermissionsGuard),
+    (0, tenant_decorators_1.RequireTenant)(),
+    (0, common_1.Get)('dlq/jobs'),
+    (0, permissions_decorator_1.RequirePermissions)(permission_enum_1.Permission.WORKFLOW_READ),
+    (0, swagger_1.ApiOperation)({ summary: 'List dead letter queue failed executions' }),
+    __param(0, (0, tenant_decorators_1.CurrentOrganizationId)()),
+    __param(1, (0, common_1.Query)('status')),
+    __param(2, (0, common_1.Query)('workflowId')),
+    __param(3, (0, common_1.Query)('page')),
+    __param(4, (0, common_1.Query)('limit')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String, String, Number, Number]),
+    __metadata("design:returntype", Promise)
+], WorkflowsController.prototype, "listDeadLetterJobs", null);
+__decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, permissions_guard_1.PermissionsGuard),
+    (0, tenant_decorators_1.RequireTenant)(),
+    (0, common_1.Get)('dlq/jobs/:id'),
+    (0, permissions_decorator_1.RequirePermissions)(permission_enum_1.Permission.WORKFLOW_READ),
+    (0, swagger_1.ApiOperation)({ summary: 'Get details of dead letter queue job' }),
+    __param(0, (0, tenant_decorators_1.CurrentOrganizationId)()),
+    __param(1, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", Promise)
+], WorkflowsController.prototype, "getDeadLetterJob", null);
+__decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, permissions_guard_1.PermissionsGuard),
+    (0, tenant_decorators_1.RequireTenant)(),
+    (0, common_1.Post)('dlq/jobs/:id/replay'),
+    (0, permissions_decorator_1.RequirePermissions)(permission_enum_1.Permission.WORKFLOW_EXECUTE),
+    (0, swagger_1.ApiOperation)({ summary: 'Replay dead letter job via BullMQ' }),
+    __param(0, (0, tenant_decorators_1.CurrentOrganizationId)()),
+    __param(1, (0, tenant_decorators_1.CurrentUser)('id')),
+    __param(2, (0, common_1.Param)('id')),
+    __param(3, (0, common_1.Body)('customPayload')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String, String, Object]),
+    __metadata("design:returntype", Promise)
+], WorkflowsController.prototype, "replayDeadLetterJob", null);
+__decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, permissions_guard_1.PermissionsGuard),
+    (0, tenant_decorators_1.RequireTenant)(),
+    (0, common_1.Post)('dlq/jobs/:id/dismiss'),
+    (0, permissions_decorator_1.RequirePermissions)(permission_enum_1.Permission.WORKFLOW_UPDATE),
+    (0, swagger_1.ApiOperation)({ summary: 'Dismiss dead letter job' }),
+    __param(0, (0, tenant_decorators_1.CurrentOrganizationId)()),
+    __param(1, (0, tenant_decorators_1.CurrentUser)('id')),
+    __param(2, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String, String]),
+    __metadata("design:returntype", Promise)
+], WorkflowsController.prototype, "dismissDeadLetterJob", null);
 exports.WorkflowsController = WorkflowsController = __decorate([
     (0, swagger_1.ApiTags)('Workflows & Executions'),
     (0, common_1.Controller)('workflows'),

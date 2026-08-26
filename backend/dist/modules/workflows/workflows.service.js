@@ -24,6 +24,7 @@ const workflow_schema_1 = require("./schemas/workflow.schema");
 const workflow_version_schema_1 = require("./schemas/workflow-version.schema");
 const workflow_execution_schema_1 = require("./schemas/workflow-execution.schema");
 const workflow_engine_service_1 = require("./engine/workflow-engine.service");
+const dead_letter_queue_service_1 = require("./services/dead-letter-queue.service");
 const subscription_access_service_1 = require("../billing/services/subscription-access.service");
 const ai_gateway_service_1 = require("../../integrations/ai/ai-gateway.service");
 const queue_constants_1 = require("../../core/queue/queue.constants");
@@ -34,18 +35,23 @@ let WorkflowsService = WorkflowsService_1 = class WorkflowsService {
     executionQueue;
     workflowEngine;
     aiGateway;
+    deadLetterService;
     subscriptionAccess;
     usageService;
     logger = new common_1.Logger(WorkflowsService_1.name);
-    constructor(workflowModel, versionModel, executionModel, executionQueue, workflowEngine, aiGateway, subscriptionAccess, usageService) {
+    constructor(workflowModel, versionModel, executionModel, executionQueue, workflowEngine, aiGateway, deadLetterService, subscriptionAccess, usageService) {
         this.workflowModel = workflowModel;
         this.versionModel = versionModel;
         this.executionModel = executionModel;
         this.executionQueue = executionQueue;
         this.workflowEngine = workflowEngine;
         this.aiGateway = aiGateway;
+        this.deadLetterService = deadLetterService;
         this.subscriptionAccess = subscriptionAccess;
         this.usageService = usageService;
+    }
+    getDeadLetterQueueService() {
+        return this.deadLetterService;
     }
     toObjectId(id) {
         if (typeof id === 'string' && mongoose_2.Types.ObjectId.isValid(id)) {
@@ -413,12 +419,14 @@ exports.WorkflowsService = WorkflowsService = WorkflowsService_1 = __decorate([
     __param(3, (0, bullmq_1.InjectQueue)(queue_constants_1.QUEUE_WORKFLOW_EXECUTION)),
     __param(6, (0, common_1.Optional)()),
     __param(7, (0, common_1.Optional)()),
+    __param(8, (0, common_1.Optional)()),
     __metadata("design:paramtypes", [mongoose_2.Model,
         mongoose_2.Model,
         mongoose_2.Model,
         bullmq_2.Queue,
         workflow_engine_service_1.WorkflowEngineService,
         ai_gateway_service_1.AiGatewayService,
+        dead_letter_queue_service_1.DeadLetterQueueService,
         subscription_access_service_1.SubscriptionAccessService, Object])
 ], WorkflowsService);
 //# sourceMappingURL=workflows.service.js.map

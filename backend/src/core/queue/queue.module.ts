@@ -12,6 +12,7 @@ import {
   QUEUE_FILE_PROCESSING,
   QUEUE_BILLING_EVENTS,
   QUEUE_AUDIT_LOGS,
+  QUEUE_DEAD_LETTER,
 } from './queue.constants';
 
 @Global()
@@ -52,6 +53,7 @@ import {
       { name: QUEUE_FILE_PROCESSING },
       { name: QUEUE_BILLING_EVENTS },
       { name: QUEUE_AUDIT_LOGS },
+      { name: QUEUE_DEAD_LETTER },
     ),
   ],
   exports: [BullModule],

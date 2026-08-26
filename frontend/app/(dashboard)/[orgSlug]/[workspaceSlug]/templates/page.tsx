@@ -148,12 +148,12 @@ export default function AutomationTemplatesPage() {
   return (
     <div className="space-y-6">
       {/* Top Header */}
-      <div className="border-b border-neutral-200/80 dark:border-neutral-800/80 pb-5">
+      <div className="border-b border-neutral-200 pb-5">
         <div className="flex items-center gap-2">
-          <h1 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-white">
+          <h1 className="text-xl font-bold tracking-tight text-neutral-900">
             Automation Templates & Natural Language Builder
           </h1>
-          <Badge variant="purple" className="text-[10px] font-mono">
+          <Badge variant="default" className="text-[10px] font-mono">
             Text-to-DAG
           </Badge>
         </div>
@@ -166,8 +166,8 @@ export default function AutomationTemplatesPage() {
         <div
           className={`p-3 rounded-lg text-xs flex items-center gap-2 border ${
             message.type === 'success'
-              ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400'
-              : 'bg-red-50 text-red-700 border-red-200 dark:bg-red-950/40 dark:text-red-400'
+              ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+              : 'bg-red-50 text-red-700 border-red-200'
           }`}
         >
           {message.type === 'success' ? <CheckCircle2 className="h-4 w-4" /> : <AlertCircle className="h-4 w-4" />}
@@ -176,11 +176,11 @@ export default function AutomationTemplatesPage() {
       )}
 
       {/* AI Natural Language Prompt Synthesizer */}
-      <Card className="border-purple-200 dark:border-purple-900/60 bg-gradient-to-r from-purple-50/50 via-blue-50/30 to-white dark:from-purple-950/20 dark:via-blue-950/20 dark:to-neutral-950 p-6 shadow-sm">
+      <Card className="border-neutral-200 bg-neutral-50/50 p-6 shadow-none">
         <div className="space-y-3.5">
           <div className="flex items-center gap-2">
-            <Sparkles className="h-4 w-4 text-purple-600 dark:text-purple-400 animate-pulse" />
-            <h2 className="text-sm font-bold text-neutral-900 dark:text-white">
+            <Sparkles className="h-4 w-4 text-neutral-800" />
+            <h2 className="text-sm font-bold text-neutral-900">
               AI Natural Language Workflow Generator
             </h2>
           </div>
@@ -191,14 +191,14 @@ export default function AutomationTemplatesPage() {
                 placeholder='e.g. "When a lead arrives, score with AI, add to HubSpot, and send a Slack alert if budget > $5,000"'
                 value={nlPrompt}
                 onChange={(e) => setNlPrompt(e.target.value)}
-                className="text-xs bg-white dark:bg-neutral-900 h-9.5"
+                className="text-xs bg-white h-9.5"
                 disabled={isGenerating}
               />
               <Button
                 type="submit"
                 isLoading={isGenerating}
                 disabled={!nlPrompt.trim()}
-                className="text-xs bg-purple-600 hover:bg-purple-500 text-white gap-1.5 shrink-0 font-semibold h-9.5 px-4"
+                className="text-xs bg-neutral-900 hover:bg-neutral-800 text-white gap-1.5 shrink-0 font-semibold h-9.5 px-4"
               >
                 <Sparkles className="h-3.5 w-3.5" />
                 <span>{isGenerating ? 'Synthesizing DAG...' : 'Generate Pipeline'}</span>
@@ -212,7 +212,7 @@ export default function AutomationTemplatesPage() {
                   key={suggestion}
                   type="button"
                   onClick={() => setNlPrompt(suggestion)}
-                  className="text-[11px] rounded-full border border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-neutral-900/80 px-2.5 py-0.5 text-neutral-600 dark:text-neutral-400 hover:border-purple-400 hover:text-purple-600 transition-colors cursor-pointer"
+                  className="text-[11px] rounded-full border border-neutral-200 bg-white px-2.5 py-0.5 text-neutral-600 hover:border-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
                 >
                   {suggestion}
                 </button>
@@ -230,8 +230,8 @@ export default function AutomationTemplatesPage() {
             onClick={() => setSelectedCategory(cat)}
             className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
               selectedCategory === cat
-                ? 'bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 shadow-sm'
-                : 'bg-neutral-100 dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-800'
+                ? 'bg-neutral-900 text-white shadow-sm'
+                : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
             }`}
           >
             {cat}
@@ -248,11 +248,11 @@ export default function AutomationTemplatesPage() {
           return (
             <Card
               key={template.slug}
-              className="p-5 flex flex-col justify-between border-neutral-200/80 dark:border-neutral-800/80 hover:border-blue-500/50 hover:shadow-md transition-all"
+              className="p-5 flex flex-col justify-between border-neutral-200 hover:border-neutral-300 hover:shadow-sm transition-all"
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <div className="p-2 rounded-lg bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400">
+                  <div className="p-2 rounded-lg bg-neutral-100 text-neutral-800">
                     <Icon className="h-5 w-5" />
                   </div>
                   <Badge variant="secondary" className="text-[10px]">
@@ -261,7 +261,7 @@ export default function AutomationTemplatesPage() {
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-bold text-neutral-900 dark:text-white">{template.name}</h3>
+                  <h3 className="text-sm font-bold text-neutral-900">{template.name}</h3>
                   <p className="text-xs text-neutral-500 mt-1 line-clamp-2">{template.description}</p>
                 </div>
 
@@ -272,12 +272,12 @@ export default function AutomationTemplatesPage() {
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-neutral-100 dark:border-neutral-800 mt-4 flex items-center justify-end">
+              <div className="pt-4 border-t border-neutral-100 mt-4 flex items-center justify-end">
                 <Button
                   size="sm"
                   isLoading={isCloning}
                   onClick={() => handleClone(template.slug)}
-                  className="text-xs bg-blue-600 hover:bg-blue-500 text-white gap-1.5 font-semibold"
+                  className="text-xs bg-neutral-900 hover:bg-neutral-800 text-white gap-1.5 font-semibold"
                 >
                   <span>Use Template</span>
                   <ArrowRight className="h-3.5 w-3.5" />

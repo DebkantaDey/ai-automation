@@ -115,10 +115,10 @@ export default function AnalyticsDashboardPage() {
   return (
     <div className="space-y-6">
       {/* Top Header */}
-      <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between border-b border-neutral-200/80 dark:border-neutral-800/80 pb-5">
+      <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between border-b border-neutral-200 pb-5">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-white">
+            <h1 className="text-xl font-bold tracking-tight text-neutral-900">
               Telemetry & Resource Quotas
             </h1>
             <Badge variant="default" className="text-[10px] font-mono">
@@ -140,65 +140,65 @@ export default function AnalyticsDashboardPage() {
 
       {/* KPI Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card className="p-4 border-neutral-200/80 dark:border-neutral-800/80">
+        <Card className="p-4 border-neutral-200">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-neutral-500">Total Executions</span>
-            <div className="p-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400">
+            <div className="p-1.5 rounded-lg bg-neutral-100 text-neutral-800">
               <Zap className="h-4 w-4" />
             </div>
           </div>
           <div className="mt-3">
-            <span className="text-2xl font-bold text-neutral-900 dark:text-white font-mono">
+            <span className="text-2xl font-bold text-neutral-900 font-mono">
               {business.totalExecutions}
             </span>
-            <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold mt-1 flex items-center gap-1">
-              <CheckCircle2 className="h-3 w-3" />
+            <p className="text-[11px] text-neutral-600 font-semibold mt-1 flex items-center gap-1">
+              <CheckCircle2 className="h-3 w-3 text-emerald-600" />
               <span>{business.successRate}% Success Rate</span>
             </p>
           </div>
         </Card>
 
-        <Card className="p-4 border-neutral-200/80 dark:border-neutral-800/80">
+        <Card className="p-4 border-neutral-200">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-neutral-500">Active Workflows</span>
-            <div className="p-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400">
+            <div className="p-1.5 rounded-lg bg-neutral-100 text-neutral-800">
               <TrendingUp className="h-4 w-4" />
             </div>
           </div>
           <div className="mt-3">
-            <span className="text-2xl font-bold text-neutral-900 dark:text-white font-mono">
+            <span className="text-2xl font-bold text-neutral-900 font-mono">
               {business.activeWorkflows} / {business.totalWorkflows}
             </span>
             <p className="text-[11px] text-neutral-400 mt-1">Live DAG Automations</p>
           </div>
         </Card>
 
-        <Card className="p-4 border-neutral-200/80 dark:border-neutral-800/80">
+        <Card className="p-4 border-neutral-200">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-neutral-500">AI Tokens Consumed</span>
-            <div className="p-1.5 rounded-lg bg-purple-50 dark:bg-purple-950/50 text-purple-600 dark:text-purple-400">
+            <div className="p-1.5 rounded-lg bg-neutral-100 text-neutral-800">
               <Sparkles className="h-4 w-4" />
             </div>
           </div>
           <div className="mt-3">
-            <span className="text-2xl font-bold text-neutral-900 dark:text-white font-mono">
+            <span className="text-2xl font-bold text-neutral-900 font-mono">
               {ai.aiTotalTokens.toLocaleString()}
             </span>
-            <p className="text-[11px] text-purple-600 dark:text-purple-400 font-semibold mt-1">
+            <p className="text-[11px] text-neutral-600 font-semibold mt-1">
               {ai.aiExecutions} AI Operations Run
             </p>
           </div>
         </Card>
 
-        <Card className="p-4 border-neutral-200/80 dark:border-neutral-800/80">
+        <Card className="p-4 border-neutral-200">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-neutral-500">Estimated AI Spend</span>
-            <div className="p-1.5 rounded-lg bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400">
+            <div className="p-1.5 rounded-lg bg-neutral-100 text-neutral-800">
               <CreditCard className="h-4 w-4" />
             </div>
           </div>
           <div className="mt-3">
-            <span className="text-2xl font-bold text-neutral-900 dark:text-white font-mono">
+            <span className="text-2xl font-bold text-neutral-900 font-mono">
               ${ai.estimatedCostUsd.toFixed(4)}
             </span>
             <p className="text-[11px] text-neutral-400 mt-1">Active Billing Period</p>
@@ -207,10 +207,10 @@ export default function AnalyticsDashboardPage() {
       </div>
 
       {/* Quota Limits & Utilization */}
-      <Card className="border-neutral-200/80 dark:border-neutral-800/80 p-5 space-y-4">
+      <Card className="border-neutral-200 p-5 space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-sm font-bold text-neutral-900 dark:text-white flex items-center gap-2">
+            <h3 className="text-sm font-bold text-neutral-900 flex items-center gap-2">
               <span>Subscription Quota Utilization</span>
               <Badge variant="secondary" className="text-[10px] uppercase font-mono">
                 {plan?.name || 'Starter'} Plan
@@ -230,14 +230,14 @@ export default function AnalyticsDashboardPage() {
           {/* Workflows Quota */}
           <div className="space-y-1.5">
             <div className="flex justify-between text-xs font-semibold">
-              <span className="text-neutral-700 dark:text-neutral-300">Total Workflows</span>
+              <span className="text-neutral-700">Total Workflows</span>
               <span className="text-neutral-500 font-mono">
                 {quotas.workflows.current} / {quotas.workflows.limit === -1 ? '∞' : quotas.workflows.limit}
               </span>
             </div>
-            <div className="w-full h-2 rounded-full bg-neutral-100 dark:bg-neutral-800 overflow-hidden">
+            <div className="w-full h-2 rounded-full bg-neutral-100 overflow-hidden">
               <div
-                className="h-full bg-blue-600 rounded-full transition-all"
+                className="h-full bg-neutral-900 rounded-full transition-all"
                 style={{ width: `${Math.min(100, quotas.workflows.percent)}%` }}
               />
             </div>
@@ -246,14 +246,14 @@ export default function AnalyticsDashboardPage() {
           {/* Monthly Executions */}
           <div className="space-y-1.5">
             <div className="flex justify-between text-xs font-semibold">
-              <span className="text-neutral-700 dark:text-neutral-300">Monthly Executions</span>
+              <span className="text-neutral-700">Monthly Executions</span>
               <span className="text-neutral-500 font-mono">
                 {quotas.monthlyExecutions.current} / {quotas.monthlyExecutions.limit === -1 ? '∞' : quotas.monthlyExecutions.limit}
               </span>
             </div>
-            <div className="w-full h-2 rounded-full bg-neutral-100 dark:bg-neutral-800 overflow-hidden">
+            <div className="w-full h-2 rounded-full bg-neutral-100 overflow-hidden">
               <div
-                className="h-full bg-emerald-600 rounded-full transition-all"
+                className="h-full bg-neutral-900 rounded-full transition-all"
                 style={{ width: `${Math.min(100, quotas.monthlyExecutions.percent)}%` }}
               />
             </div>
@@ -262,14 +262,14 @@ export default function AnalyticsDashboardPage() {
           {/* Monthly AI Executions */}
           <div className="space-y-1.5">
             <div className="flex justify-between text-xs font-semibold">
-              <span className="text-neutral-700 dark:text-neutral-300">Monthly AI Runs</span>
+              <span className="text-neutral-700">Monthly AI Runs</span>
               <span className="text-neutral-500 font-mono">
                 {quotas.monthlyAiExecutions.current} / {quotas.monthlyAiExecutions.limit === -1 ? '∞' : quotas.monthlyAiExecutions.limit}
               </span>
             </div>
-            <div className="w-full h-2 rounded-full bg-neutral-100 dark:bg-neutral-800 overflow-hidden">
+            <div className="w-full h-2 rounded-full bg-neutral-100 overflow-hidden">
               <div
-                className="h-full bg-purple-600 rounded-full transition-all"
+                className="h-full bg-neutral-900 rounded-full transition-all"
                 style={{ width: `${Math.min(100, quotas.monthlyAiExecutions.percent)}%` }}
               />
             </div>
@@ -283,7 +283,7 @@ export default function AnalyticsDashboardPage() {
           Recent Workflow Execution Activity
         </h3>
 
-        <Card className="border-neutral-200/80 dark:border-neutral-800/80">
+        <Card className="border-neutral-200">
           <CardContent className="p-0">
             {recentExecutions?.length === 0 ? (
               <p className="text-xs text-neutral-400 text-center py-8">No executions recorded yet.</p>
@@ -291,7 +291,7 @@ export default function AnalyticsDashboardPage() {
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs">
                   <thead>
-                    <tr className="border-b border-neutral-100 dark:border-neutral-800 text-neutral-400 font-medium bg-neutral-50/60 dark:bg-neutral-900/50">
+                    <tr className="border-b border-neutral-100 text-neutral-400 font-medium bg-neutral-50">
                       <th className="py-3 px-5">Status</th>
                       <th className="py-3 px-5">Workflow</th>
                       <th className="py-3 px-5">Trigger</th>
@@ -300,9 +300,9 @@ export default function AnalyticsDashboardPage() {
                       <th className="py-3 px-5">Timestamp</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
+                  <tbody className="divide-y divide-neutral-100">
                     {recentExecutions?.map((exec: any) => (
-                      <tr key={exec._id} className="hover:bg-neutral-50/80 dark:hover:bg-neutral-900/60">
+                      <tr key={exec._id} className="hover:bg-neutral-50">
                         <td className="py-3 px-5">
                           <Badge
                             variant={
@@ -320,14 +320,14 @@ export default function AnalyticsDashboardPage() {
                             {exec.status}
                           </Badge>
                         </td>
-                        <td className="py-3 px-5 font-semibold text-neutral-900 dark:text-white">
-                          <Link href={`/${orgSlug}/${wsSlug}/executions/${exec._id}`} className="hover:text-blue-600 transition-colors">
+                        <td className="py-3 px-5 font-semibold text-neutral-900">
+                          <Link href={`/${orgSlug}/${wsSlug}/executions/${exec._id}`} className="hover:underline">
                             {exec.workflowId?.name || 'Automated Workflow'}
                           </Link>
                         </td>
                         <td className="py-3 px-5 font-mono text-neutral-500 capitalize">{exec.triggerType}</td>
-                        <td className="py-3 px-5 font-mono text-neutral-600 dark:text-neutral-300">{exec.durationMs || 0}ms</td>
-                        <td className="py-3 px-5 font-mono text-purple-600 dark:text-purple-400">{exec.aiUsage?.totalTokens || 0}</td>
+                        <td className="py-3 px-5 font-mono text-neutral-600">{exec.durationMs || 0}ms</td>
+                        <td className="py-3 px-5 font-mono text-neutral-700">{exec.aiUsage?.totalTokens || 0}</td>
                         <td suppressHydrationWarning className="py-3 px-5 text-neutral-400 text-[11px] font-mono">
                           {new Date(exec.createdAt).toLocaleString()}
                         </td>

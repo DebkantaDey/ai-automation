@@ -80,13 +80,13 @@ export default function TasksPage() {
   return (
     <div className="space-y-6">
       {/* Top Header */}
-      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between border-b border-neutral-200/80 dark:border-neutral-800/80 pb-5">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between border-b border-neutral-200 pb-5">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-white">
+            <h1 className="text-xl font-bold tracking-tight text-neutral-900">
               Automated Tasks & Operations
             </h1>
-            <Badge variant="purple" className="text-[10px] font-mono">
+            <Badge variant="default" className="text-[10px] font-mono">
               Workflow Generated
             </Badge>
           </div>
@@ -95,16 +95,16 @@ export default function TasksPage() {
           </p>
         </div>
 
-        <Button size="sm" className="text-xs gap-1.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold">
+        <Button size="sm" className="text-xs gap-1.5 bg-neutral-900 hover:bg-neutral-800 text-white font-semibold">
           <Plus className="h-3.5 w-3.5" />
           <span>Create Task</span>
         </Button>
       </div>
 
       {/* Task List Table */}
-      <Card className="border-neutral-200/80 dark:border-neutral-800/80">
-        <CardHeader className="py-3 px-5 border-b border-neutral-100 dark:border-neutral-800 flex flex-row items-center justify-between">
-          <CardTitle className="text-sm font-bold text-neutral-900 dark:text-white">
+      <Card className="border-neutral-200">
+        <CardHeader className="py-3 px-5 border-b border-neutral-100 flex flex-row items-center justify-between">
+          <CardTitle className="text-sm font-bold text-neutral-900">
             Task Queue ({filteredTasks.length})
           </CardTitle>
           <div className="w-64">
@@ -118,36 +118,36 @@ export default function TasksPage() {
         </CardHeader>
 
         <CardContent className="p-0">
-          <div className="divide-y divide-neutral-100 dark:divide-neutral-800 text-xs">
+          <div className="divide-y divide-neutral-100 text-xs">
             {filteredTasks.map((task) => {
               const isCompleted = task.status === 'Completed';
 
               return (
                 <div
                   key={task.id}
-                  className="p-4 flex items-center justify-between hover:bg-neutral-50/60 dark:hover:bg-neutral-900/40 transition-colors"
+                  className="p-4 flex items-center justify-between hover:bg-neutral-50 transition-colors"
                 >
                   <div className="flex items-center gap-3">
                     <input
                       type="checkbox"
                       checked={isCompleted}
                       onChange={() => toggleTask(task.id)}
-                      className="h-4 w-4 rounded border-neutral-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
+                      className="h-4 w-4 rounded border-neutral-300 text-neutral-900 focus:ring-neutral-900 cursor-pointer"
                     />
                     <div>
                       <h3
                         className={`font-semibold ${
-                          isCompleted ? 'line-through text-neutral-400' : 'text-neutral-900 dark:text-white'
+                          isCompleted ? 'line-through text-neutral-400' : 'text-neutral-900'
                         }`}
                       >
                         {task.title}
                       </h3>
                       <p className="text-[11px] text-neutral-500 mt-0.5">
-                        Client: <strong className="text-neutral-700 dark:text-neutral-300">{task.relatedCustomer}</strong> • Assigned to: {task.assignee}
+                        Client: <strong className="text-neutral-700">{task.relatedCustomer}</strong> • Assigned to: {task.assignee}
                       </p>
                       {task.isAiGenerated && (
-                        <p className="text-[10px] text-purple-600 dark:text-purple-400 font-mono mt-0.5 flex items-center gap-1">
-                          <Sparkles className="h-3 w-3" />
+                        <p className="text-[10px] text-neutral-600 font-mono mt-0.5 flex items-center gap-1">
+                          <Sparkles className="h-3 w-3 text-neutral-500" />
                           {task.source}
                         </p>
                       )}

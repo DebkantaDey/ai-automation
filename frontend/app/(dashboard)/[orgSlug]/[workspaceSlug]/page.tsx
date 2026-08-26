@@ -133,10 +133,10 @@ export default function DashboardOverviewPage() {
   return (
     <div className="space-y-6">
       {/* Top Welcome Header & Quick Actions */}
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between border-b border-neutral-200/80 dark:border-neutral-800/80 pb-5">
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between border-b border-neutral-200 pb-5">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-white">
+            <h1 className="text-xl font-bold tracking-tight text-neutral-900">
               Automation Command Center
             </h1>
             <Badge variant="default" className="text-[10px] font-mono uppercase">
@@ -151,12 +151,12 @@ export default function DashboardOverviewPage() {
         <div className="flex items-center gap-2.5">
           <Link href={`/${orgSlug}/${wsSlug}/templates`}>
             <Button variant="outline" size="sm" className="gap-1.5 text-xs">
-              <Layers className="h-3.5 w-3.5 text-blue-600" />
+              <Layers className="h-3.5 w-3.5 text-neutral-700" />
               <span>Browse Templates</span>
             </Button>
           </Link>
           <Link href={`/${orgSlug}/${wsSlug}/workflows`}>
-            <Button size="sm" className="gap-1.5 text-xs bg-blue-600 hover:bg-blue-500 text-white font-semibold">
+            <Button size="sm" className="gap-1.5 text-xs bg-neutral-900 hover:bg-neutral-800 text-white font-semibold">
               <Plus className="h-3.5 w-3.5" />
               <span>New Pipeline</span>
             </Button>
@@ -166,22 +166,22 @@ export default function DashboardOverviewPage() {
 
       {/* Pending Approvals Warning Gate */}
       {business.waitingApprovalExecutions > 0 && (
-        <div className="p-4 rounded-xl border border-amber-300 dark:border-amber-900/60 bg-amber-50/70 dark:bg-amber-950/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm">
+        <div className="p-4 rounded-xl border border-amber-200 bg-amber-50/70 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-none">
           <div className="flex items-center gap-3 text-xs">
-            <div className="p-2 rounded-lg bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 shrink-0">
+            <div className="p-2 rounded-lg bg-amber-100 text-amber-700 shrink-0">
               <AlertTriangle className="h-4 w-4" />
             </div>
             <div>
-              <p className="font-bold text-amber-900 dark:text-amber-200 text-xs">
+              <p className="font-bold text-amber-900 text-xs">
                 {business.waitingApprovalExecutions} workflow actions paused
               </p>
-              <p className="text-amber-700 dark:text-amber-400 text-[11px] mt-0.5">
+              <p className="text-amber-700 text-[11px] mt-0.5">
                 Critical gate steps require human review before continuing execution.
               </p>
             </div>
           </div>
           <Link href={`/${orgSlug}/${wsSlug}/executions`}>
-            <Button size="sm" variant="outline" className="h-7 text-xs bg-white dark:bg-neutral-900 border-amber-300 text-amber-900 dark:text-amber-200">
+            <Button size="sm" variant="outline" className="h-7 text-xs bg-white border-amber-300 text-amber-900">
               Review Queue
             </Button>
           </Link>
@@ -190,76 +190,76 @@ export default function DashboardOverviewPage() {
 
       {/* KPI Metric Cards */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Card className="p-4 border-neutral-200/80 dark:border-neutral-800/80 hover:border-blue-500/40 transition-all">
+        <Card className="p-4 border-neutral-200 hover:border-neutral-300 transition-all">
           <div className="flex items-center justify-between text-neutral-500 text-xs font-semibold">
             <span>Active Workflows</span>
-            <div className="p-1.5 rounded-md bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400">
+            <div className="p-1.5 rounded-md bg-neutral-100 text-neutral-700">
               <GitFork className="h-4 w-4" />
             </div>
           </div>
           <div className="mt-3">
             <div className="flex items-baseline gap-1.5">
-              <span className="text-2xl font-bold font-mono text-neutral-900 dark:text-white">
+              <span className="text-2xl font-bold font-mono text-neutral-900">
                 {business.activeWorkflows}
               </span>
               <span className="text-xs text-neutral-400 font-mono">/ {business.totalWorkflows}</span>
             </div>
-            <div className="flex items-center gap-1.5 mt-1.5 text-[11px] text-emerald-600 dark:text-emerald-400 font-medium">
+            <div className="flex items-center gap-1.5 mt-1.5 text-[11px] text-neutral-600 font-medium">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
               <span>DAG Engine Active</span>
             </div>
           </div>
         </Card>
 
-        <Card className="p-4 border-neutral-200/80 dark:border-neutral-800/80 hover:border-indigo-500/40 transition-all">
+        <Card className="p-4 border-neutral-200 hover:border-neutral-300 transition-all">
           <div className="flex items-center justify-between text-neutral-500 text-xs font-semibold">
             <span>Total Executions</span>
-            <div className="p-1.5 rounded-md bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400">
+            <div className="p-1.5 rounded-md bg-neutral-100 text-neutral-700">
               <Activity className="h-4 w-4" />
             </div>
           </div>
           <div className="mt-3">
-            <span className="text-2xl font-bold font-mono text-neutral-900 dark:text-white">
+            <span className="text-2xl font-bold font-mono text-neutral-900">
               {formatNumber(business.totalExecutions)}
             </span>
-            <div className="flex items-center gap-1.5 mt-1.5 text-[11px] text-emerald-600 dark:text-emerald-400 font-medium">
-              <CheckCircle2 className="h-3 w-3" />
+            <div className="flex items-center gap-1.5 mt-1.5 text-[11px] text-neutral-600 font-medium">
+              <CheckCircle2 className="h-3 w-3 text-emerald-600" />
               <span>{business.successRate}% Success Rate</span>
             </div>
           </div>
         </Card>
 
-        <Card className="p-4 border-neutral-200/80 dark:border-neutral-800/80 hover:border-purple-500/40 transition-all">
+        <Card className="p-4 border-neutral-200 hover:border-neutral-300 transition-all">
           <div className="flex items-center justify-between text-neutral-500 text-xs font-semibold">
             <span>AI Tokens Processed</span>
-            <div className="p-1.5 rounded-md bg-purple-50 dark:bg-purple-950/50 text-purple-600 dark:text-purple-400">
+            <div className="p-1.5 rounded-md bg-neutral-100 text-neutral-700">
               <Bot className="h-4 w-4" />
             </div>
           </div>
           <div className="mt-3">
-            <span className="text-2xl font-bold font-mono text-neutral-900 dark:text-white">
+            <span className="text-2xl font-bold font-mono text-neutral-900">
               {formatNumber(ai.aiTotalTokens)}
             </span>
-            <div className="flex items-center gap-1.5 mt-1.5 text-[11px] text-purple-600 dark:text-purple-400 font-medium">
-              <Sparkles className="h-3 w-3" />
+            <div className="flex items-center gap-1.5 mt-1.5 text-[11px] text-neutral-600 font-medium">
+              <Sparkles className="h-3 w-3 text-neutral-700" />
               <span>Est. Cost: ${ai.estimatedCostUsd}</span>
             </div>
           </div>
         </Card>
 
-        <Card className="p-4 border-neutral-200/80 dark:border-neutral-800/80 hover:border-amber-500/40 transition-all">
+        <Card className="p-4 border-neutral-200 hover:border-neutral-300 transition-all">
           <div className="flex items-center justify-between text-neutral-500 text-xs font-semibold">
             <span>Avg Execution Latency</span>
-            <div className="p-1.5 rounded-md bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400">
+            <div className="p-1.5 rounded-md bg-neutral-100 text-neutral-700">
               <Clock className="h-4 w-4" />
             </div>
           </div>
           <div className="mt-3">
-            <span className="text-2xl font-bold font-mono text-neutral-900 dark:text-white">
+            <span className="text-2xl font-bold font-mono text-neutral-900">
               1.42s
             </span>
-            <div className="flex items-center gap-1.5 mt-1.5 text-[11px] text-emerald-600 dark:text-emerald-400 font-medium">
-              <ShieldCheck className="h-3 w-3" />
+            <div className="flex items-center gap-1.5 mt-1.5 text-[11px] text-neutral-600 font-medium">
+              <ShieldCheck className="h-3 w-3 text-emerald-600" />
               <span>Zero Queue Backlog</span>
             </div>
           </div>
@@ -268,10 +268,10 @@ export default function DashboardOverviewPage() {
 
       {/* Chart Section & AI Gateway Status */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        <Card className="lg:col-span-2 border-neutral-200/80 dark:border-neutral-800/80">
-          <CardHeader className="py-3 px-5 border-b border-neutral-100 dark:border-neutral-800/80 flex flex-row items-center justify-between">
+        <Card className="lg:col-span-2 border-neutral-200">
+          <CardHeader className="py-3 px-5 border-b border-neutral-100 flex flex-row items-center justify-between">
             <div>
-              <CardTitle className="text-sm font-bold text-neutral-900 dark:text-white">
+              <CardTitle className="text-sm font-bold text-neutral-900">
                 Execution Throughput & AI Demand
               </CardTitle>
               <CardDescription className="text-xs">
@@ -287,27 +287,28 @@ export default function DashboardOverviewPage() {
               <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                 <defs>
                   <linearGradient id="colorExec" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#2563eb" stopOpacity={0.35} />
-                    <stop offset="95%" stopColor="#2563eb" stopOpacity={0.0} />
+                    <stop offset="5%" stopColor="#18181b" stopOpacity={0.15} />
+                    <stop offset="95%" stopColor="#18181b" stopOpacity={0.0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} opacity={0.5} />
-                <XAxis dataKey="time" stroke="#9ca3af" fontSize={11} tickLine={false} />
-                <YAxis stroke="#9ca3af" fontSize={11} tickLine={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#f4f4f5" vertical={false} />
+                <XAxis dataKey="time" stroke="#71717a" fontSize={11} tickLine={false} />
+                <YAxis stroke="#71717a" fontSize={11} tickLine={false} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#18181b',
+                    backgroundColor: '#ffffff',
                     borderRadius: '8px',
-                    border: '1px solid #27272a',
-                    color: '#fff',
+                    border: '1px solid #e4e4e7',
+                    color: '#09090b',
                     fontSize: '11px',
                     padding: '8px 12px',
+                    boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.05)',
                   }}
                 />
                 <Area
                   type="monotone"
                   dataKey="executions"
-                  stroke="#2563eb"
+                  stroke="#18181b"
                   strokeWidth={2}
                   fillOpacity={1}
                   fill="url(#colorExec)"
@@ -318,56 +319,56 @@ export default function DashboardOverviewPage() {
         </Card>
 
         {/* AI Gateway Routing Status Card */}
-        <Card className="border-neutral-200/80 dark:border-neutral-800/80">
-          <CardHeader className="py-3 px-5 border-b border-neutral-100 dark:border-neutral-800/80">
+        <Card className="border-neutral-200">
+          <CardHeader className="py-3 px-5 border-b border-neutral-100">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-sm font-bold text-neutral-900 dark:text-white">AI Gateway Routing</CardTitle>
-              <Cpu className="h-4 w-4 text-purple-600" />
+              <CardTitle className="text-sm font-bold text-neutral-900">AI Gateway Routing</CardTitle>
+              <Cpu className="h-4 w-4 text-neutral-700" />
             </div>
             <CardDescription className="text-xs">Multi-provider dynamic failover routing</CardDescription>
           </CardHeader>
           <CardContent className="p-4 space-y-2.5">
-            <div className="flex items-center justify-between p-2.5 rounded-lg border border-neutral-200/80 dark:border-neutral-800 bg-neutral-50/60 dark:bg-neutral-900/60">
+            <div className="flex items-center justify-between p-2.5 rounded-lg border border-neutral-200 bg-neutral-50">
               <div className="flex items-center gap-2">
                 <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-xs font-semibold text-neutral-900 dark:text-white">OpenAI (GPT-4o)</span>
+                <span className="text-xs font-semibold text-neutral-900">OpenAI (GPT-4o)</span>
               </div>
-              <Badge variant="success" className="text-[9px] font-mono uppercase">Primary</Badge>
+              <Badge variant="success" className="text-[9px] font-mono uppercase" dot>Primary</Badge>
             </div>
 
-            <div className="flex items-center justify-between p-2.5 rounded-lg border border-neutral-200/80 dark:border-neutral-800 bg-neutral-50/60 dark:bg-neutral-900/60">
+            <div className="flex items-center justify-between p-2.5 rounded-lg border border-neutral-200 bg-neutral-50">
               <div className="flex items-center gap-2">
-                <div className="h-2 w-2 rounded-full bg-emerald-500" />
-                <span className="text-xs font-semibold text-neutral-900 dark:text-white">Google Gemini 1.5</span>
+                <div className="h-2 w-2 rounded-full bg-neutral-400" />
+                <span className="text-xs font-semibold text-neutral-900">Google Gemini 1.5</span>
               </div>
               <Badge variant="secondary" className="text-[9px] font-mono uppercase">Active</Badge>
             </div>
 
-            <div className="flex items-center justify-between p-2.5 rounded-lg border border-neutral-200/80 dark:border-neutral-800 bg-neutral-50/60 dark:bg-neutral-900/60">
+            <div className="flex items-center justify-between p-2.5 rounded-lg border border-neutral-200 bg-neutral-50">
               <div className="flex items-center gap-2">
-                <div className="h-2 w-2 rounded-full bg-emerald-500" />
-                <span className="text-xs font-semibold text-neutral-900 dark:text-white">Anthropic Claude 3.5</span>
+                <div className="h-2 w-2 rounded-full bg-neutral-400" />
+                <span className="text-xs font-semibold text-neutral-900">Anthropic Claude 3.5</span>
               </div>
               <Badge variant="secondary" className="text-[9px] font-mono uppercase">Fallback</Badge>
             </div>
 
-            <div className="pt-2 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between text-xs text-neutral-500">
+            <div className="pt-2 border-t border-neutral-100 flex items-center justify-between text-xs text-neutral-500">
               <span>Automatic Failover</span>
-              <span className="font-semibold text-emerald-600 dark:text-emerald-400">Zero Downtime</span>
+              <span className="font-semibold text-neutral-800">Zero Downtime</span>
             </div>
           </CardContent>
         </Card>
       </div>
 
       {/* Recent Executions Real-Time Table */}
-      <Card className="border-neutral-200/80 dark:border-neutral-800/80">
-        <CardHeader className="py-3 px-5 flex flex-row items-center justify-between border-b border-neutral-100 dark:border-neutral-800/80">
+      <Card className="border-neutral-200">
+        <CardHeader className="py-3 px-5 flex flex-row items-center justify-between border-b border-neutral-100">
           <div>
-            <CardTitle className="text-sm font-bold text-neutral-900 dark:text-white">Live Execution Activity</CardTitle>
+            <CardTitle className="text-sm font-bold text-neutral-900">Live Execution Activity</CardTitle>
             <CardDescription className="text-xs">Streaming telemetry from distributed worker queue</CardDescription>
           </div>
           <Link href={`/${orgSlug}/${wsSlug}/executions`}>
-            <Button variant="ghost" size="sm" className="gap-1 text-xs text-blue-600 hover:text-blue-500">
+            <Button variant="ghost" size="sm" className="gap-1 text-xs text-neutral-700 hover:text-neutral-900">
               <span>View All Executions</span>
               <ArrowUpRight className="h-3.5 w-3.5" />
             </Button>
@@ -377,7 +378,7 @@ export default function DashboardOverviewPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead>
-                <tr className="border-b border-neutral-100 dark:border-neutral-800 text-neutral-400 font-medium bg-neutral-50/60 dark:bg-neutral-900/50">
+                <tr className="border-b border-neutral-100 text-neutral-400 font-medium bg-neutral-50">
                   <th className="py-3 px-5">Status</th>
                   <th className="py-3 px-5">Workflow Name</th>
                   <th className="py-3 px-5">Trigger Mechanism</th>
@@ -386,9 +387,9 @@ export default function DashboardOverviewPage() {
                   <th className="py-3 px-5">Timestamp</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
+              <tbody className="divide-y divide-neutral-100">
                 {recentExecutions.map((exec: any) => (
-                  <tr key={exec._id} className="hover:bg-neutral-50/80 dark:hover:bg-neutral-900/60 transition-colors">
+                  <tr key={exec._id} className="hover:bg-neutral-50 transition-colors">
                     <td className="py-3 px-5">
                       <Badge
                         variant={exec.status === 'completed' ? 'success' : exec.status === 'failed' ? 'destructive' : 'outline'}
@@ -398,14 +399,14 @@ export default function DashboardOverviewPage() {
                         {exec.status}
                       </Badge>
                     </td>
-                    <td className="py-3 px-5 font-semibold text-neutral-900 dark:text-white">
-                      <Link href={`/${orgSlug}/${wsSlug}/executions/${exec._id}`} className="hover:text-blue-600 transition-colors">
+                    <td className="py-3 px-5 font-semibold text-neutral-900">
+                      <Link href={`/${orgSlug}/${wsSlug}/executions/${exec._id}`} className="hover:underline">
                         {exec.workflowId?.name || 'Automated Pipeline'}
                       </Link>
                     </td>
                     <td className="py-3 px-5 capitalize font-mono text-neutral-500">{exec.triggerType}</td>
-                    <td className="py-3 px-5 font-mono text-neutral-600 dark:text-neutral-300">{exec.durationMs || 0}ms</td>
-                    <td className="py-3 px-5 font-mono text-purple-600 dark:text-purple-400 font-medium">
+                    <td className="py-3 px-5 font-mono text-neutral-600">{exec.durationMs || 0}ms</td>
+                    <td className="py-3 px-5 font-mono text-neutral-700 font-medium">
                       {exec.aiUsage?.totalTokens ? formatNumber(exec.aiUsage.totalTokens) : '0'}
                     </td>
                     <td suppressHydrationWarning className="py-3 px-5 text-neutral-400 text-[11px] font-mono">

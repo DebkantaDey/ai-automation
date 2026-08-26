@@ -102,8 +102,8 @@ export default function PrivacySettingsPage() {
   return (
     <div className="space-y-6 max-w-4xl">
       {/* Header */}
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">
+      <div className="border-b border-neutral-200 pb-5">
+        <h1 className="text-xl font-bold tracking-tight text-neutral-900">
           Privacy & Data Governance
         </h1>
         <p className="text-xs text-neutral-500 mt-1">
@@ -119,11 +119,11 @@ export default function PrivacySettingsPage() {
       )}
 
       {/* GDPR Data Portability Export Card */}
-      <Card className="border-neutral-200 dark:border-neutral-800">
-        <CardHeader className="py-4 border-b border-neutral-100 dark:border-neutral-800">
+      <Card className="border-neutral-200">
+        <CardHeader className="py-4 border-b border-neutral-100">
           <div className="flex items-center gap-2">
-            <Download className="h-4 w-4 text-blue-600" />
-            <CardTitle className="text-sm font-bold text-neutral-900 dark:text-white">
+            <Download className="h-4 w-4 text-neutral-700" />
+            <CardTitle className="text-sm font-bold text-neutral-900">
               Data Portability Export (GDPR Article 20)
             </CardTitle>
           </div>
@@ -132,11 +132,11 @@ export default function PrivacySettingsPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="p-4 space-y-4">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 rounded-lg border border-neutral-100 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 gap-3">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 rounded-lg border border-neutral-100 bg-neutral-50 gap-3">
             <div className="flex items-center gap-3">
               <User className="h-4 w-4 text-neutral-500" />
               <div>
-                <h4 className="text-xs font-semibold text-neutral-900 dark:text-white">User Account Profile Package</h4>
+                <h4 className="text-xs font-semibold text-neutral-900">User Account Profile Package</h4>
                 <p className="text-[11px] text-neutral-500">Includes profile, permissions, login audit trail, and consent records.</p>
               </div>
             </div>
@@ -145,18 +145,18 @@ export default function PrivacySettingsPage() {
               variant="outline"
               onClick={downloadUserData}
               disabled={downloadingUser}
-              className="text-xs gap-1.5 shrink-0"
+              className="text-xs gap-1.5 shrink-0 border-neutral-200"
             >
               {downloadingUser ? <RefreshCw className="h-3.5 w-3.5 animate-spin" /> : <Download className="h-3.5 w-3.5" />}
               <span>Export User JSON</span>
             </Button>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 rounded-lg border border-neutral-100 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 gap-3">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 rounded-lg border border-neutral-100 bg-neutral-50 gap-3">
             <div className="flex items-center gap-3">
               <Building className="h-4 w-4 text-neutral-500" />
               <div>
-                <h4 className="text-xs font-semibold text-neutral-900 dark:text-white">Organization Complete Archive</h4>
+                <h4 className="text-xs font-semibold text-neutral-900">Organization Complete Archive</h4>
                 <p className="text-[11px] text-neutral-500">Includes workflows, versions, execution statistics, knowledge base metadata, and billing logs.</p>
               </div>
             </div>
@@ -165,7 +165,7 @@ export default function PrivacySettingsPage() {
               variant="outline"
               onClick={downloadOrgData}
               disabled={downloadingOrg}
-              className="text-xs gap-1.5 shrink-0"
+              className="text-xs gap-1.5 shrink-0 border-neutral-200"
             >
               {downloadingOrg ? <RefreshCw className="h-3.5 w-3.5 animate-spin" /> : <Download className="h-3.5 w-3.5" />}
               <span>Export Organization JSON</span>
@@ -175,11 +175,11 @@ export default function PrivacySettingsPage() {
       </Card>
 
       {/* Consent & Privacy Preferences */}
-      <Card className="border-neutral-200 dark:border-neutral-800">
-        <CardHeader className="py-4 border-b border-neutral-100 dark:border-neutral-800">
+      <Card className="border-neutral-200">
+        <CardHeader className="py-4 border-b border-neutral-100">
           <div className="flex items-center gap-2">
-            <Lock className="h-4 w-4 text-purple-600" />
-            <CardTitle className="text-sm font-bold text-neutral-900 dark:text-white">
+            <Lock className="h-4 w-4 text-neutral-700" />
+            <CardTitle className="text-sm font-bold text-neutral-900">
               Consent & Tracking Preferences
             </CardTitle>
           </div>
@@ -188,24 +188,26 @@ export default function PrivacySettingsPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="p-4 space-y-3">
-          <div className="flex items-center justify-between py-2 border-b border-neutral-100 dark:border-neutral-800">
+          <div className="flex items-center justify-between py-2 border-b border-neutral-100">
             <div>
-              <p className="text-xs font-semibold text-neutral-900 dark:text-white">Essential Platform Operations</p>
+              <p className="text-xs font-semibold text-neutral-900">Essential Platform Operations</p>
               <p className="text-[11px] text-neutral-500">Required for authentication, RBAC, tenant isolation, and billing.</p>
             </div>
             <Badge variant="secondary" className="text-[10px]">Mandatory</Badge>
           </div>
 
-          <div className="flex items-center justify-between py-2 border-b border-neutral-100 dark:border-neutral-800">
+          <div className="flex items-center justify-between py-2 border-b border-neutral-100">
             <div>
-              <p className="text-xs font-semibold text-neutral-900 dark:text-white">Product Telemetry & Analytics</p>
+              <p className="text-xs font-semibold text-neutral-900">Product Telemetry & Analytics</p>
               <p className="text-[11px] text-neutral-500">Helps us monitor execution latency, error rates, and improve AI model routing.</p>
             </div>
             <Button
               size="sm"
               variant={consent.analyticsConsent ? 'default' : 'outline'}
               onClick={() => handleToggleConsent('analyticsConsent')}
-              className="text-xs h-7 px-3"
+              className={`text-xs h-7 px-3 ${
+                consent.analyticsConsent ? 'bg-neutral-900 text-white hover:bg-neutral-800' : 'border-neutral-200'
+              }`}
             >
               {consent.analyticsConsent ? 'Enabled' : 'Disabled'}
             </Button>
@@ -213,14 +215,16 @@ export default function PrivacySettingsPage() {
 
           <div className="flex items-center justify-between py-2">
             <div>
-              <p className="text-xs font-semibold text-neutral-900 dark:text-white">Marketing & Product Updates</p>
+              <p className="text-xs font-semibold text-neutral-900">Marketing & Product Updates</p>
               <p className="text-[11px] text-neutral-500">Receive notifications regarding new AI models and enterprise features.</p>
             </div>
             <Button
               size="sm"
               variant={consent.marketingConsent ? 'default' : 'outline'}
               onClick={() => handleToggleConsent('marketingConsent')}
-              className="text-xs h-7 px-3"
+              className={`text-xs h-7 px-3 ${
+                consent.marketingConsent ? 'bg-neutral-900 text-white hover:bg-neutral-800' : 'border-neutral-200'
+              }`}
             >
               {consent.marketingConsent ? 'Enabled' : 'Disabled'}
             </Button>
@@ -229,22 +233,22 @@ export default function PrivacySettingsPage() {
       </Card>
 
       {/* Danger Zone: Permanent Deletions */}
-      <Card className="border-red-200 dark:border-red-900/50 bg-red-50/20 dark:bg-red-950/10">
-        <CardHeader className="py-4 border-b border-red-100 dark:border-red-900/30">
+      <Card className="border-neutral-200 bg-neutral-50/50">
+        <CardHeader className="py-4 border-b border-neutral-200">
           <div className="flex items-center gap-2">
-            <AlertTriangle className="h-4 w-4 text-red-600" />
-            <CardTitle className="text-sm font-bold text-red-600 dark:text-red-400">
+            <AlertTriangle className="h-4 w-4 text-neutral-700" />
+            <CardTitle className="text-sm font-bold text-neutral-900">
               Danger Zone (Irreversible Actions)
             </CardTitle>
           </div>
-          <CardDescription className="text-xs">
+          <CardDescription className="text-xs text-neutral-500">
             Permanently delete your personal profile or cascade purge an entire organization.
           </CardDescription>
         </CardHeader>
         <CardContent className="p-4 space-y-4">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 rounded-lg border border-red-200 dark:border-red-900/40 bg-white dark:bg-neutral-900 gap-3">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 rounded-lg border border-neutral-200 bg-white gap-3">
             <div>
-              <h4 className="text-xs font-semibold text-red-600">Delete User Account (Right to be Forgotten)</h4>
+              <h4 className="text-xs font-semibold text-neutral-900">Delete User Account (Right to be Forgotten)</h4>
               <p className="text-[11px] text-neutral-500">Permanently removes your login credentials, active sessions, and personal data.</p>
             </div>
             <Button
@@ -263,9 +267,9 @@ export default function PrivacySettingsPage() {
             </Button>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 rounded-lg border border-red-200 dark:border-red-900/40 bg-white dark:bg-neutral-900 gap-3">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 rounded-lg border border-neutral-200 bg-white gap-3">
             <div>
-              <h4 className="text-xs font-semibold text-red-600">Delete Organization & All Workflows</h4>
+              <h4 className="text-xs font-semibold text-neutral-900">Delete Organization & All Workflows</h4>
               <p className="text-[11px] text-neutral-500">Permanently deletes all workspaces, DAG workflows, executions, knowledge base docs, and API keys.</p>
             </div>
             <Button

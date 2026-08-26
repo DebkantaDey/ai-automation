@@ -78,12 +78,12 @@ function LoginForm() {
   };
 
   return (
-    <Card className="w-full max-w-md shadow-2xl border-neutral-200/80 dark:border-neutral-800/80 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md">
-      <CardHeader className="text-center space-y-2 pb-6 border-b border-neutral-100 dark:border-neutral-800">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/30">
+    <Card className="w-full max-w-md shadow-lg border-neutral-200 bg-white">
+      <CardHeader className="text-center space-y-2 pb-6 border-b border-neutral-100">
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-neutral-900 text-white shadow-none">
           <Cpu className="h-6 w-6" />
         </div>
-        <CardTitle className="text-xl font-bold text-neutral-900 dark:text-white">
+        <CardTitle className="text-xl font-bold text-neutral-900">
           Sign in to AutomaAI
         </CardTitle>
         <CardDescription className="text-xs">
@@ -94,14 +94,14 @@ function LoginForm() {
       <form onSubmit={handleLogin}>
         <CardContent className="space-y-4 pt-5">
           {error && (
-            <div className="flex items-center gap-2 p-3 rounded-lg bg-rose-50 text-rose-700 text-xs border border-rose-200 dark:bg-rose-950/40 dark:text-rose-400 dark:border-rose-900">
+            <div className="flex items-center gap-2 p-3 rounded-lg bg-rose-50 text-rose-700 text-xs border border-rose-200">
               <AlertCircle className="h-4 w-4 shrink-0" />
               <span>{error}</span>
             </div>
           )}
 
           {successNotice && (
-            <div className="flex items-center gap-2 p-3 rounded-lg bg-emerald-50 text-emerald-700 text-xs border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-900">
+            <div className="flex items-center gap-2 p-3 rounded-lg bg-emerald-50 text-emerald-700 text-xs border border-emerald-200">
               <CheckCircle2 className="h-4 w-4 shrink-0" />
               <span>{successNotice}</span>
             </div>
@@ -113,7 +113,7 @@ function LoginForm() {
               type="button"
               variant="outline"
               onClick={handleGoogleLogin}
-              className="w-full text-xs gap-2 border-neutral-200 dark:border-neutral-800 h-9"
+              className="w-full text-xs gap-2 border-neutral-200 h-9 hover:bg-neutral-50"
             >
               <svg className="h-4 w-4" viewBox="0 0 24 24">
                 <path
@@ -140,7 +140,7 @@ function LoginForm() {
               type="button"
               variant="outline"
               onClick={handleMicrosoftLogin}
-              className="w-full text-xs gap-2 border-neutral-200 dark:border-neutral-800 h-9"
+              className="w-full text-xs gap-2 border-neutral-200 h-9 hover:bg-neutral-50"
             >
               <svg className="h-4 w-4" viewBox="0 0 23 23">
                 <path fill="#f35325" d="M1 1h10v10H1z" />
@@ -153,14 +153,14 @@ function LoginForm() {
           </div>
 
           <div className="relative flex items-center justify-center">
-            <div className="border-t border-neutral-200 dark:border-neutral-800 w-full" />
-            <span className="bg-white dark:bg-neutral-900 px-2 text-[10px] text-neutral-400 uppercase tracking-wider absolute font-semibold">
+            <div className="border-t border-neutral-200 w-full" />
+            <span className="bg-white px-2 text-[10px] text-neutral-400 uppercase tracking-wider absolute font-semibold">
               Or with work email
             </span>
           </div>
 
           <div className="space-y-1.5 pt-1">
-            <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+            <label className="text-xs font-semibold text-neutral-700">
               Work Email
             </label>
             <div className="relative">
@@ -178,10 +178,10 @@ function LoginForm() {
 
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+              <label className="text-xs font-semibold text-neutral-700">
                 Password
               </label>
-              <Link href="/forgot-password" className="text-[11px] text-blue-600 dark:text-blue-400 hover:underline">
+              <Link href="/forgot-password" className="text-[11px] text-neutral-700 hover:underline">
                 Forgot password?
               </Link>
             </div>
@@ -204,24 +204,24 @@ function LoginForm() {
               id="rememberMe"
               checked={rememberMe}
               onChange={(e) => setRememberMe(e.target.checked)}
-              className="h-3.5 w-3.5 rounded border-neutral-300 text-blue-600 focus:ring-blue-500"
+              className="h-3.5 w-3.5 rounded border-neutral-300 text-neutral-900 focus:ring-neutral-900"
             />
-            <label htmlFor="rememberMe" className="text-xs text-neutral-600 dark:text-neutral-400 cursor-pointer">
+            <label htmlFor="rememberMe" className="text-xs text-neutral-600 cursor-pointer">
               Remember this device for 30 days
             </label>
           </div>
 
-          <Button type="submit" isLoading={loading} className="w-full bg-blue-600 hover:bg-blue-500 text-xs gap-2 h-9 font-semibold text-white">
+          <Button type="submit" isLoading={loading} className="w-full bg-neutral-900 hover:bg-neutral-800 text-xs gap-2 h-9 font-semibold text-white">
             <span>Sign In</span>
             <ArrowRight className="h-3.5 w-3.5" />
           </Button>
         </CardContent>
       </form>
 
-      <CardFooter className="flex justify-center border-t border-neutral-100 dark:border-neutral-800 pt-4">
+      <CardFooter className="flex justify-center border-t border-neutral-100 pt-4">
         <p className="text-xs text-neutral-500">
           Need an organization account?{' '}
-          <Link href="/register" className="font-semibold text-blue-600 dark:text-blue-400 hover:underline">
+          <Link href="/register" className="font-semibold text-neutral-900 hover:underline">
             Create Tenant
           </Link>
         </p>
@@ -232,7 +232,7 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-neutral-50/80 dark:bg-neutral-950 p-4 bg-canvas-dots">
+    <div className="flex min-h-screen items-center justify-center bg-white p-4 bg-canvas-dots">
       <Suspense fallback={<div className="text-xs text-neutral-400">Loading login form...</div>}>
         <LoginForm />
       </Suspense>

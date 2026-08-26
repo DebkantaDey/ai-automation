@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.JOB_RECORD_AUDIT = exports.JOB_PROCESS_BILLING = exports.JOB_PROCESS_FILE = exports.JOB_EXECUTE_INTEGRATION = exports.JOB_SEND_NOTIFICATION = exports.JOB_SEND_EMAIL = exports.JOB_DISPATCH_WEBHOOK = exports.JOB_PROCESS_AI_TASK = exports.JOB_EXECUTE_WORKFLOW = exports.QUEUE_AUDIT_LOGS = exports.QUEUE_BILLING_EVENTS = exports.QUEUE_FILE_PROCESSING = exports.QUEUE_INTEGRATION_TASKS = exports.QUEUE_NOTIFICATIONS = exports.QUEUE_EMAIL_DISPATCH = exports.QUEUE_WEBHOOK_DISPATCH = exports.QUEUE_AI_TASKS = exports.QUEUE_WORKFLOW_EXECUTION = void 0;
+exports.JOB_REPLAY_DEAD_LETTER = exports.JOB_RECORD_AUDIT = exports.JOB_PROCESS_BILLING = exports.JOB_PROCESS_FILE = exports.JOB_EXECUTE_INTEGRATION = exports.JOB_SEND_NOTIFICATION = exports.JOB_SEND_EMAIL = exports.JOB_DISPATCH_WEBHOOK = exports.JOB_PROCESS_AI_TASK = exports.JOB_EXECUTE_WORKFLOW = exports.QUEUE_DEAD_LETTER = exports.QUEUE_AUDIT_LOGS = exports.QUEUE_BILLING_EVENTS = exports.QUEUE_FILE_PROCESSING = exports.QUEUE_INTEGRATION_TASKS = exports.QUEUE_NOTIFICATIONS = exports.QUEUE_EMAIL_DISPATCH = exports.QUEUE_WEBHOOK_DISPATCH = exports.QUEUE_AI_TASKS = exports.QUEUE_WORKFLOW_EXECUTION = void 0;
 exports.QUEUE_WORKFLOW_EXECUTION = 'workflow-execution';
 exports.QUEUE_AI_TASKS = 'ai-tasks';
 exports.QUEUE_WEBHOOK_DISPATCH = 'webhook-dispatch';
@@ -10,6 +10,7 @@ exports.QUEUE_INTEGRATION_TASKS = 'integration-tasks';
 exports.QUEUE_FILE_PROCESSING = 'file-processing';
 exports.QUEUE_BILLING_EVENTS = 'billing-events';
 exports.QUEUE_AUDIT_LOGS = 'audit-logs';
+exports.QUEUE_DEAD_LETTER = 'dead-letter-queue';
 exports.JOB_EXECUTE_WORKFLOW = 'execute-workflow';
 exports.JOB_PROCESS_AI_TASK = 'process-ai-task';
 exports.JOB_DISPATCH_WEBHOOK = 'dispatch-webhook';
@@ -19,4 +20,5 @@ exports.JOB_EXECUTE_INTEGRATION = 'execute-integration';
 exports.JOB_PROCESS_FILE = 'process-file';
 exports.JOB_PROCESS_BILLING = 'process-billing';
 exports.JOB_RECORD_AUDIT = 'record-audit';
+exports.JOB_REPLAY_DEAD_LETTER = 'replay-dead-letter';
 //# sourceMappingURL=queue.constants.js.map

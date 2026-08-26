@@ -194,10 +194,10 @@ export default function WorkflowsPage() {
   return (
     <div className="space-y-6">
       {/* Top Header */}
-      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between border-b border-neutral-200/80 dark:border-neutral-800/80 pb-5">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between border-b border-neutral-200 pb-5">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-white">
+            <h1 className="text-xl font-bold tracking-tight text-neutral-900">
               Automation Workflows
             </h1>
             <Badge variant="secondary" className="text-[10px] font-mono">
@@ -205,21 +205,21 @@ export default function WorkflowsPage() {
             </Badge>
           </div>
           <p className="text-xs text-neutral-500 mt-1">
-            Build, orchestrate, and observe DAG pipelines powered by BullMQ background queues and LLM agents.
+            Build, orchestrate, and observe DAG pipelines powered by background queues and LLM agents.
           </p>
         </div>
 
         <div className="flex items-center gap-2">
           <Link href={`/${orgSlug}/${wsSlug}/templates`}>
             <Button variant="outline" size="sm" className="gap-1.5 text-xs">
-              <Sparkles className="h-3.5 w-3.5 text-purple-600" />
+              <Sparkles className="h-3.5 w-3.5 text-neutral-700" />
               <span>Use Template</span>
             </Button>
           </Link>
           <Button
             size="sm"
             onClick={() => setShowCreateModal(true)}
-            className="gap-1.5 text-xs bg-blue-600 hover:bg-blue-500 text-white font-semibold"
+            className="gap-1.5 text-xs bg-neutral-900 hover:bg-neutral-800 text-white font-semibold"
           >
             <Plus className="h-3.5 w-3.5" />
             <span>New Workflow</span>
@@ -231,8 +231,8 @@ export default function WorkflowsPage() {
         <div
           className={`flex items-center gap-2 p-3 rounded-lg text-xs border ${
             message.type === 'success'
-              ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-900'
-              : 'bg-red-50 text-red-700 border-red-200 dark:bg-red-950/40 dark:text-red-400 dark:border-red-900'
+              ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+              : 'bg-red-50 text-red-700 border-red-200'
           }`}
         >
           {message.type === 'success' ? <CheckCircle2 className="h-4 w-4" /> : <AlertCircle className="h-4 w-4" />}
@@ -254,8 +254,8 @@ export default function WorkflowsPage() {
               onClick={() => setSelectedFilter(tab.id)}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
                 selectedFilter === tab.id
-                  ? 'bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 shadow-sm'
-                  : 'bg-neutral-100 dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-800'
+                  ? 'bg-neutral-900 text-white shadow-sm'
+                  : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
               }`}
             >
               {tab.label}
@@ -282,11 +282,11 @@ export default function WorkflowsPage() {
       ) : filteredWorkflows.length === 0 ? (
         <Card className="border-dashed border-2 py-16 text-center">
           <CardContent className="space-y-3">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-neutral-100 dark:bg-neutral-900 text-neutral-400">
+            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-neutral-100 text-neutral-400">
               <GitFork className="h-6 w-6" />
             </div>
             <div className="space-y-1 max-w-sm mx-auto">
-              <h3 className="text-sm font-bold text-neutral-900 dark:text-white">No workflows found</h3>
+              <h3 className="text-sm font-bold text-neutral-900">No workflows found</h3>
               <p className="text-xs text-neutral-500">
                 {search ? 'Try adjusting your search query or filter.' : 'Create your first automated workflow pipeline to orchestrate AI tasks and actions.'}
               </p>
@@ -294,7 +294,7 @@ export default function WorkflowsPage() {
             <Button
               size="sm"
               onClick={() => setShowCreateModal(true)}
-              className="bg-blue-600 hover:bg-blue-500 text-xs text-white mt-2"
+              className="bg-neutral-900 hover:bg-neutral-800 text-xs text-white mt-2"
             >
               Create Workflow
             </Button>
@@ -308,7 +308,7 @@ export default function WorkflowsPage() {
             return (
               <Card
                 key={wf._id}
-                className="flex flex-col justify-between hover:border-blue-500/50 hover:shadow-md transition-all group"
+                className="flex flex-col justify-between hover:border-neutral-300 hover:shadow-sm transition-all group"
               >
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
@@ -323,7 +323,7 @@ export default function WorkflowsPage() {
                   </div>
 
                   <Link href={`/${orgSlug}/${wsSlug}/workflows/${wf._id}`}>
-                    <CardTitle className="text-sm font-bold mt-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors line-clamp-1">
+                    <CardTitle className="text-sm font-bold mt-2 hover:underline transition-colors line-clamp-1">
                       {wf.name}
                     </CardTitle>
                   </Link>
@@ -333,27 +333,27 @@ export default function WorkflowsPage() {
                 </CardHeader>
 
                 <CardContent className="pt-0 space-y-3">
-                  <div className="flex items-center gap-3 text-[11px] text-neutral-500 border-t border-neutral-100 dark:border-neutral-800/80 pt-3">
+                  <div className="flex items-center gap-3 text-[11px] text-neutral-500 border-t border-neutral-100 pt-3">
                     <div className="flex items-center gap-1">
                       <GitFork className="h-3.5 w-3.5 text-neutral-400" />
                       <span>{wf.nodes?.length || 0} nodes</span>
                     </div>
                     {aiNodesCount > 0 && (
-                      <div className="flex items-center gap-1 text-purple-600 dark:text-purple-400 font-medium">
-                        <Sparkles className="h-3.5 w-3.5" />
+                      <div className="flex items-center gap-1 text-neutral-700 font-medium">
+                        <Sparkles className="h-3.5 w-3.5 text-neutral-500" />
                         <span>{aiNodesCount} AI steps</span>
                       </div>
                     )}
                     <div className="flex items-center gap-1 capitalize text-neutral-400 font-mono ml-auto">
-                      <Zap className="h-3.5 w-3.5 text-amber-500" />
+                      <Zap className="h-3.5 w-3.5 text-neutral-600" />
                       <span>{wf.triggerType}</span>
                     </div>
                   </div>
 
-                  <div className="border-t border-neutral-100 dark:border-neutral-800/80 pt-3 flex items-center justify-between">
+                  <div className="border-t border-neutral-100 pt-3 flex items-center justify-between">
                     <Link
                       href={`/${orgSlug}/${wsSlug}/workflows/${wf._id}`}
-                      className="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-500 font-semibold flex items-center gap-1"
+                      className="text-xs text-neutral-900 hover:underline font-semibold flex items-center gap-1"
                     >
                       <span>Open Canvas</span>
                       <ArrowRight className="h-3 w-3" />
@@ -364,9 +364,9 @@ export default function WorkflowsPage() {
                       variant="outline"
                       isLoading={executingId === wf._id}
                       onClick={() => handleTriggerRun(wf._id)}
-                      className="h-7 px-2.5 text-xs gap-1 hover:border-blue-500/50 hover:text-blue-600"
+                      className="h-7 px-2.5 text-xs gap-1 hover:bg-neutral-100"
                     >
-                      <Play className="h-3 w-3 text-blue-600 fill-blue-600" />
+                      <Play className="h-3 w-3 text-neutral-700 fill-neutral-700" />
                       <span>{executingId === wf._id ? 'Queuing' : 'Run'}</span>
                     </Button>
                   </div>
@@ -379,18 +379,18 @@ export default function WorkflowsPage() {
 
       {/* Create Workflow Modal */}
       {showCreateModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-          <div className="bg-white dark:bg-neutral-900 rounded-2xl shadow-2xl max-w-md w-full p-6 space-y-4 border border-neutral-200 dark:border-neutral-800 animate-in fade-in-0 zoom-in-95">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 space-y-4 border border-neutral-200 animate-in fade-in-0 zoom-in-95">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="p-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/50 text-blue-600">
+                <div className="p-1.5 rounded-lg bg-neutral-100 text-neutral-800">
                   <GitFork className="h-4 w-4" />
                 </div>
-                <h2 className="text-sm font-bold text-neutral-900 dark:text-white">Create Automation Pipeline</h2>
+                <h2 className="text-sm font-bold text-neutral-900">Create Automation Pipeline</h2>
               </div>
               <button
                 onClick={() => setShowCreateModal(false)}
-                className="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 text-sm cursor-pointer"
+                className="text-neutral-400 hover:text-neutral-600 text-sm cursor-pointer"
               >
                 ✕
               </button>
@@ -398,7 +398,7 @@ export default function WorkflowsPage() {
 
             <form onSubmit={handleCreateWorkflow} className="space-y-4">
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                <label className="text-xs font-semibold text-neutral-700">
                   Pipeline Name *
                 </label>
                 <Input
@@ -411,7 +411,7 @@ export default function WorkflowsPage() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                <label className="text-xs font-semibold text-neutral-700">
                   Description
                 </label>
                 <Input
@@ -423,13 +423,13 @@ export default function WorkflowsPage() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                <label className="text-xs font-semibold text-neutral-700">
                   Trigger Mechanism
                 </label>
                 <select
                   value={newWfTrigger}
                   onChange={(e) => setNewWfTrigger(e.target.value)}
-                  className="w-full h-8.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 px-3 text-xs text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                  className="w-full h-8.5 rounded-lg border border-neutral-200 bg-white px-3 text-xs text-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-400"
                 >
                   <option value="manual">Manual Trigger (Dashboard / API Run)</option>
                   <option value="webhook">Inbound Webhook (REST API)</option>
@@ -438,7 +438,7 @@ export default function WorkflowsPage() {
                 </select>
               </div>
 
-              <div className="flex justify-end gap-2 pt-2 border-t border-neutral-100 dark:border-neutral-800">
+              <div className="flex justify-end gap-2 pt-2 border-t border-neutral-100">
                 <Button
                   type="button"
                   variant="outline"
@@ -452,7 +452,7 @@ export default function WorkflowsPage() {
                   isLoading={isCreating}
                   disabled={!newWfName.trim()}
                   size="sm"
-                  className="bg-blue-600 hover:bg-blue-500 text-white"
+                  className="bg-neutral-900 hover:bg-neutral-800 text-white"
                 >
                   Create & Open Canvas
                 </Button>

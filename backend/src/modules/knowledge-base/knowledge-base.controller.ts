@@ -98,6 +98,22 @@ export class KnowledgeBaseController {
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard, PermissionsGuard)
   @RequireTenant()
+  @Post(':id/search')
+  @RequirePermissions(Permission.WORKFLOW_READ)
+  @ApiOperation({ summary: 'Perform semantic vector similarity search across knowledge base chunks' })
+  async vectorSearch(
+    @Param('id') id: string,
+    @CurrentOrganizationId() orgId: string,
+    @CurrentWorkspaceId() wsId: string,
+    @Body('query') query: string,
+    @Body('topK') topK?: number,
+  ) {
+    return this.kbService.vectorSearch(id, orgId, wsId, query, topK || 4);
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, PermissionsGuard)
+  @RequireTenant()
   @Post(':id/query')
   @RequirePermissions(Permission.WORKFLOW_READ)
   @ApiOperation({ summary: 'Ask question with vector similarity retrieval and RAG synthesis' })

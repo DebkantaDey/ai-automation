@@ -125,11 +125,11 @@ export default function ApiKeysSettingsPage() {
 
   return (
     <div className="space-y-6 max-w-5xl">
-      <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+      <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between border-b border-neutral-200 pb-5">
         <div>
           <div className="flex items-center gap-2">
-            <Key className="h-5 w-5 text-blue-600" />
-            <h1 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">
+            <Key className="h-5 w-5 text-neutral-800" />
+            <h1 className="text-xl font-bold tracking-tight text-neutral-900">
               API Keys & Developer Access
             </h1>
           </div>
@@ -141,7 +141,7 @@ export default function ApiKeysSettingsPage() {
         <Button
           size="sm"
           onClick={() => setShowCreateModal(true)}
-          className="gap-1.5 text-xs bg-blue-600 hover:bg-blue-700 text-white"
+          className="gap-1.5 text-xs bg-neutral-900 hover:bg-neutral-800 text-white"
         >
           <Plus className="h-3.5 w-3.5" />
           <span>Create New Key</span>
@@ -152,8 +152,8 @@ export default function ApiKeysSettingsPage() {
         <div
           className={`p-3 rounded-lg text-xs flex items-center gap-2 border ${
             message.type === 'success'
-              ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400'
-              : 'bg-red-50 text-red-700 border-red-200 dark:bg-red-950/40 dark:text-red-400'
+              ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+              : 'bg-red-50 text-red-700 border-red-200'
           }`}
         >
           {message.type === 'success' ? <CheckCircle2 className="h-4 w-4" /> : <AlertCircle className="h-4 w-4" />}
@@ -163,12 +163,12 @@ export default function ApiKeysSettingsPage() {
 
       {/* Secret Key Display Modal */}
       {newKeyResult && (
-        <Card className="border-amber-300 dark:border-amber-800 bg-amber-50/40 dark:bg-amber-950/20 p-5 space-y-3">
-          <div className="flex items-center gap-2 text-amber-700 dark:text-amber-400 font-bold text-xs">
-            <ShieldAlert className="h-4 w-4" />
+        <Card className="border-neutral-200 bg-neutral-50 p-5 space-y-3 shadow-none">
+          <div className="flex items-center gap-2 text-neutral-900 font-bold text-xs">
+            <ShieldAlert className="h-4 w-4 text-neutral-700" />
             <span>Copy your Secret API Key</span>
           </div>
-          <p className="text-xs text-neutral-600 dark:text-neutral-300">
+          <p className="text-xs text-neutral-600">
             Please copy this secret key now. For security purposes, it will <strong>never be shown again</strong>.
           </p>
 
@@ -176,12 +176,12 @@ export default function ApiKeysSettingsPage() {
             <Input
               readOnly
               value={newKeyResult.secretKey}
-              className="font-mono text-xs bg-white dark:bg-neutral-900 border-amber-300"
+              className="font-mono text-xs bg-white border-neutral-200"
             />
             <Button
               size="sm"
               onClick={() => copyToClipboard(newKeyResult.secretKey)}
-              className="text-xs bg-amber-600 hover:bg-amber-700 text-white shrink-0 gap-1"
+              className="text-xs bg-neutral-900 hover:bg-neutral-800 text-white shrink-0 gap-1"
             >
               {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
               <span>{copied ? 'Copied!' : 'Copy Key'}</span>
@@ -190,7 +190,7 @@ export default function ApiKeysSettingsPage() {
               size="sm"
               variant="outline"
               onClick={() => setNewKeyResult(null)}
-              className="text-xs"
+              className="text-xs border-neutral-200"
             >
               Done
             </Button>
@@ -199,9 +199,9 @@ export default function ApiKeysSettingsPage() {
       )}
 
       {/* API Keys Table */}
-      <Card className="border-neutral-200 dark:border-neutral-800">
-        <CardHeader className="py-3 px-4 border-b border-neutral-100 dark:border-neutral-800">
-          <CardTitle className="text-xs font-bold text-neutral-900 dark:text-white">
+      <Card className="border-neutral-200">
+        <CardHeader className="py-3 px-4 border-b border-neutral-100">
+          <CardTitle className="text-xs font-bold text-neutral-900">
             Active Workspace API Keys ({keys.length})
           </CardTitle>
         </CardHeader>
@@ -213,7 +213,7 @@ export default function ApiKeysSettingsPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="border-b border-neutral-100 dark:border-neutral-800 text-neutral-400 font-medium bg-neutral-50/50 dark:bg-neutral-900/50">
+                  <tr className="border-b border-neutral-100 text-neutral-400 font-medium bg-neutral-50">
                     <th className="py-2.5 px-4">Name</th>
                     <th className="py-2.5 px-4">Key Prefix</th>
                     <th className="py-2.5 px-4">Scopes</th>
@@ -223,15 +223,15 @@ export default function ApiKeysSettingsPage() {
                     <th className="py-2.5 px-4 text-right">Action</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
+                <tbody className="divide-y divide-neutral-100">
                   {keys.map((k) => (
-                    <tr key={k._id} className="hover:bg-neutral-50/50 dark:hover:bg-neutral-900/50">
-                      <td className="py-2.5 px-4 font-semibold text-neutral-900 dark:text-white">{k.name}</td>
+                    <tr key={k._id} className="hover:bg-neutral-50">
+                      <td className="py-2.5 px-4 font-semibold text-neutral-900">{k.name}</td>
                       <td className="py-2.5 px-4 font-mono text-neutral-500">{k.keyPrefix}</td>
                       <td className="py-2.5 px-4">
                         <div className="flex flex-wrap gap-1">
                           {k.scopes?.map((s: string) => (
-                            <span key={s} className="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded font-mono text-neutral-600 dark:text-neutral-300">
+                            <span key={s} className="text-[10px] bg-neutral-100 px-1.5 py-0.5 rounded font-mono text-neutral-700">
                               {s}
                             </span>
                           ))}
@@ -252,7 +252,7 @@ export default function ApiKeysSettingsPage() {
                             size="sm"
                             variant="ghost"
                             onClick={() => handleRevoke(k._id)}
-                            className="h-7 px-2 text-xs text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950/30 gap-1"
+                            className="h-7 px-2 text-xs text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 gap-1"
                           >
                             <Trash2 className="h-3 w-3" />
                             <span>Revoke</span>
@@ -270,28 +270,28 @@ export default function ApiKeysSettingsPage() {
 
       {/* Create Key Modal */}
       {showCreateModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-xl max-w-md w-full p-6 space-y-4 border border-neutral-200 dark:border-neutral-800">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4 backdrop-blur-sm">
+          <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-6 space-y-4 border border-neutral-200">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Key className="h-5 w-5 text-blue-600" />
-                <h2 className="text-base font-bold text-neutral-900 dark:text-white">Generate API Key</h2>
+                <Key className="h-5 w-5 text-neutral-800" />
+                <h2 className="text-base font-bold text-neutral-900">Generate API Key</h2>
               </div>
-              <button onClick={() => setShowCreateModal(false)} className="text-neutral-400 hover:text-neutral-600 text-sm">✕</button>
+              <button onClick={() => setShowCreateModal(false)} className="text-neutral-400 hover:text-neutral-600 text-sm cursor-pointer">✕</button>
             </div>
 
             <form onSubmit={handleCreateKey} className="space-y-3.5">
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">Key Name / Description</label>
+                <label className="text-xs font-semibold text-neutral-700">Key Name / Description</label>
                 <Input required placeholder="e.g. Production CI/CD Runner" value={name} onChange={(e) => setName(e.target.value)} className="text-xs" />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">Expiration</label>
+                <label className="text-xs font-semibold text-neutral-700">Expiration</label>
                 <select
                   value={expiresInDays}
                   onChange={(e) => setExpiresInDays(Number(e.target.value))}
-                  className="w-full h-9 rounded-md border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 px-2 text-xs"
+                  className="w-full h-9 rounded-md border border-neutral-200 bg-white px-2 text-xs text-neutral-900"
                 >
                   <option value={30}>30 Days</option>
                   <option value={60}>60 Days</option>
@@ -302,18 +302,18 @@ export default function ApiKeysSettingsPage() {
               </div>
 
               <div className="space-y-2 pt-1">
-                <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">Allowed Scopes</label>
+                <label className="text-xs font-semibold text-neutral-700">Allowed Scopes</label>
                 <div className="space-y-1.5">
                   {SCOPES_OPTIONS.map((opt) => (
-                    <label key={opt.id} className="flex items-center gap-2 text-xs text-neutral-700 dark:text-neutral-300 cursor-pointer p-2 rounded border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-900">
+                    <label key={opt.id} className="flex items-center gap-2 text-xs text-neutral-700 cursor-pointer p-2 rounded border border-neutral-200 hover:bg-neutral-50">
                       <input
                         type="checkbox"
                         checked={selectedScopes.includes(opt.id)}
                         onChange={() => toggleScope(opt.id)}
-                        className="rounded text-blue-600"
+                        className="rounded text-neutral-900 focus:ring-neutral-900"
                       />
                       <div>
-                        <p className="font-semibold text-xs text-neutral-900 dark:text-white">{opt.label}</p>
+                        <p className="font-semibold text-xs text-neutral-900">{opt.label}</p>
                         <p className="text-[10px] text-neutral-500">{opt.desc}</p>
                       </div>
                     </label>
@@ -322,8 +322,8 @@ export default function ApiKeysSettingsPage() {
               </div>
 
               <div className="flex justify-end gap-2 pt-2">
-                <Button type="button" variant="outline" size="sm" onClick={() => setShowCreateModal(false)} className="text-xs">Cancel</Button>
-                <Button type="submit" disabled={isSubmitting} size="sm" className="text-xs bg-blue-600 hover:bg-blue-700 text-white">
+                <Button type="button" variant="outline" size="sm" onClick={() => setShowCreateModal(false)} className="text-xs border-neutral-200">Cancel</Button>
+                <Button type="submit" disabled={isSubmitting} size="sm" className="text-xs bg-neutral-900 hover:bg-neutral-800 text-white">
                   {isSubmitting ? 'Generating...' : 'Generate Key'}
                 </Button>
               </div>

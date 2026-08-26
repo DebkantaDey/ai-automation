@@ -70,22 +70,22 @@ export function OrgSwitcher() {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full items-center justify-between gap-2 rounded-lg border border-neutral-200/90 dark:border-neutral-800/90 bg-white dark:bg-neutral-900 px-2.5 py-1.5 text-left hover:border-neutral-300 dark:hover:border-neutral-700 shadow-sm transition-all"
+        className="flex w-full items-center justify-between gap-2 rounded-lg border border-neutral-200 bg-white px-2.5 py-1.5 text-left hover:border-neutral-300 shadow-none transition-all cursor-pointer"
       >
         <div className="flex items-center gap-2 min-w-0">
-          <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-gradient-to-br from-blue-600 to-indigo-600 font-bold text-white text-[11px] shadow-sm">
+          <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-neutral-900 font-bold text-white text-[11px]">
             {currentOrganization?.name?.charAt(0) || 'O'}
           </div>
           <div className="min-w-0 flex-1">
-            <p className="truncate text-xs font-semibold text-neutral-900 dark:text-white leading-tight">
+            <p className="truncate text-xs font-semibold text-neutral-900 leading-tight">
               {currentOrganization?.name || 'Select Organization'}
             </p>
             <div className="flex items-center gap-1 mt-0.5">
               <span className="text-[10px] text-neutral-400 font-mono capitalize">
                 {currentOrganization?.role || 'Tenant'}
               </span>
-              <span className="text-[10px] text-neutral-300 dark:text-neutral-700">•</span>
-              <span className="text-[10px] text-blue-600 dark:text-blue-400 font-mono uppercase font-semibold">
+              <span className="text-[10px] text-neutral-300">•</span>
+              <span className="text-[10px] text-neutral-700 font-mono uppercase font-semibold">
                 {currentOrganization?.plan || 'Free'}
               </span>
             </div>
@@ -97,7 +97,7 @@ export function OrgSwitcher() {
       {isOpen && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
-          <div className="absolute left-0 top-full z-50 mt-1 w-64 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-1.5 shadow-xl animate-in fade-in-0 zoom-in-95">
+          <div className="absolute left-0 top-full z-50 mt-1 w-64 rounded-xl border border-neutral-200 bg-white p-1.5 shadow-xl animate-in fade-in-0 zoom-in-95">
             <div className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-neutral-400">
               Organizations ({userOrganizations.length})
             </div>
@@ -112,14 +112,14 @@ export function OrgSwitcher() {
                   <button
                     key={org.id || org.slug}
                     onClick={() => handleSelectOrg(org)}
-                    className={`flex w-full items-center justify-between rounded-lg px-2.5 py-1.5 text-left text-xs transition-colors ${
+                    className={`flex w-full items-center justify-between rounded-lg px-2.5 py-1.5 text-left text-xs transition-colors cursor-pointer ${
                       isSelected
-                        ? 'bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-300 font-medium'
-                        : 'hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300'
+                        ? 'bg-neutral-100 text-neutral-900 font-semibold'
+                        : 'hover:bg-neutral-50 text-neutral-700'
                     }`}
                   >
                     <div className="flex items-center gap-2 min-w-0">
-                      <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-neutral-200 dark:bg-neutral-800 font-bold text-[10px]">
+                      <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-neutral-200 font-bold text-[10px] text-neutral-800">
                         {org.name.charAt(0)}
                       </div>
                       <div className="truncate">
@@ -127,17 +127,17 @@ export function OrgSwitcher() {
                         <p className="text-[10px] text-neutral-400 capitalize font-mono">{org.role || 'Member'}</p>
                       </div>
                     </div>
-                    {isSelected && <Check className="h-3.5 w-3.5 text-blue-600 shrink-0" />}
+                    {isSelected && <Check className="h-3.5 w-3.5 text-neutral-900 shrink-0" />}
                   </button>
                 );
               })}
             </div>
 
-            <div className="border-t border-neutral-100 dark:border-neutral-800 mt-1 pt-1">
+            <div className="border-t border-neutral-100 mt-1 pt-1">
               <Link
                 href="/create-organization"
                 onClick={() => setIsOpen(false)}
-                className="flex w-full items-center gap-1.5 rounded-lg px-2 py-1.5 text-xs text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/40 font-semibold transition-colors"
+                className="flex w-full items-center gap-1.5 rounded-lg px-2 py-1.5 text-xs text-neutral-900 hover:bg-neutral-100 font-semibold transition-colors"
               >
                 <Plus className="h-3.5 w-3.5" />
                 <span>New Organization</span>

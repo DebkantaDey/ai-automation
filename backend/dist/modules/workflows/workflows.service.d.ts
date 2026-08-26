@@ -6,6 +6,7 @@ import { WorkflowExecution, WorkflowExecutionDocument } from './schemas/workflow
 import { CreateWorkflowDto, TriggerExecutionDto } from './dto/create-workflow.dto';
 import { PaginationQueryDto } from '../../core/common/dto/pagination.dto';
 import { WorkflowEngineService } from './engine/workflow-engine.service';
+import { DeadLetterQueueService } from './services/dead-letter-queue.service';
 import { SubscriptionAccessService } from '../billing/services/subscription-access.service';
 import { AiGatewayService } from '../../integrations/ai/ai-gateway.service';
 export declare class WorkflowsService {
@@ -15,10 +16,12 @@ export declare class WorkflowsService {
     private readonly executionQueue;
     private readonly workflowEngine;
     private readonly aiGateway;
+    private readonly deadLetterService?;
     private readonly subscriptionAccess?;
     private readonly usageService?;
     private readonly logger;
-    constructor(workflowModel: Model<WorkflowDocument>, versionModel: Model<WorkflowVersionDocument>, executionModel: Model<WorkflowExecutionDocument>, executionQueue: Queue, workflowEngine: WorkflowEngineService, aiGateway: AiGatewayService, subscriptionAccess?: SubscriptionAccessService, usageService?: any);
+    constructor(workflowModel: Model<WorkflowDocument>, versionModel: Model<WorkflowVersionDocument>, executionModel: Model<WorkflowExecutionDocument>, executionQueue: Queue, workflowEngine: WorkflowEngineService, aiGateway: AiGatewayService, deadLetterService?: DeadLetterQueueService, subscriptionAccess?: SubscriptionAccessService, usageService?: any);
+    getDeadLetterQueueService(): DeadLetterQueueService | undefined;
     private toObjectId;
     create(organizationId: string, workspaceId: string, userId: string, dto: CreateWorkflowDto): Promise<WorkflowDocument>;
     list(organizationId: string, workspaceId: string, pagination: PaginationQueryDto): Promise<{

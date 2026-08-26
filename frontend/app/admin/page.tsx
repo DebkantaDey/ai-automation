@@ -74,17 +74,17 @@ export default function SuperAdminPage() {
   }, [loadAdminData]);
 
   return (
-    <div className="min-h-screen bg-neutral-50/80 dark:bg-neutral-950 p-6 space-y-6 max-w-7xl mx-auto">
-      <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between border-b pb-4 border-neutral-200/80 dark:border-neutral-800/80">
+    <div className="min-h-screen bg-white p-6 space-y-6 max-w-7xl mx-auto">
+      <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between border-b pb-4 border-neutral-200">
         <div>
           <div className="flex items-center gap-2">
-            <div className="p-1.5 rounded-lg bg-rose-600 text-white">
+            <div className="p-1.5 rounded-lg bg-neutral-900 text-white">
               <ShieldAlert className="h-5 w-5" />
             </div>
-            <h1 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">
+            <h1 className="text-2xl font-bold tracking-tight text-neutral-900">
               Platform SuperAdmin Control Center
             </h1>
-            <Badge variant="destructive" className="text-[10px] uppercase font-mono ml-2">
+            <Badge variant="outline" className="text-[10px] uppercase font-mono ml-2 border-neutral-300 text-neutral-800">
               System Level Access
             </Badge>
           </div>
@@ -98,7 +98,7 @@ export default function SuperAdminPage() {
           variant="outline"
           isLoading={loading}
           onClick={loadAdminData}
-          className="gap-1.5 text-xs h-8.5"
+          className="gap-1.5 text-xs h-8.5 border-neutral-200"
         >
           <RefreshCw className="h-3.5 w-3.5" />
           <span>Refresh Telemetry</span>
@@ -106,7 +106,7 @@ export default function SuperAdminPage() {
       </div>
 
       {error && (
-        <Card className="border-rose-300 dark:border-rose-900 bg-rose-50/50 dark:bg-rose-950/20 p-4 text-xs text-rose-700 dark:text-rose-400 flex items-center gap-2">
+        <Card className="border-rose-200 bg-rose-50/50 p-4 text-xs text-rose-700 flex items-center gap-2">
           <Lock className="h-4 w-4 shrink-0" />
           <span>{error}</span>
         </Card>
@@ -115,52 +115,52 @@ export default function SuperAdminPage() {
       {/* Global Overview KPI Cards */}
       {overview && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-          <Card className="p-4 border-neutral-200/80 dark:border-neutral-800/80">
+          <Card className="p-4 border-neutral-200 bg-white">
             <div className="flex items-center justify-between text-neutral-500 text-xs font-semibold">
               <span>Total Users</span>
-              <Users className="h-4 w-4 text-blue-600" />
+              <Users className="h-4 w-4 text-neutral-700" />
             </div>
-            <p className="text-2xl font-bold font-mono mt-2 text-neutral-900 dark:text-white">
+            <p className="text-2xl font-bold font-mono mt-2 text-neutral-900">
               {overview.users?.total || 0}
             </p>
           </Card>
 
-          <Card className="p-4 border-neutral-200/80 dark:border-neutral-800/80">
+          <Card className="p-4 border-neutral-200 bg-white">
             <div className="flex items-center justify-between text-neutral-500 text-xs font-semibold">
               <span>Organizations</span>
-              <Building className="h-4 w-4 text-purple-600" />
+              <Building className="h-4 w-4 text-neutral-700" />
             </div>
-            <p className="text-2xl font-bold font-mono mt-2 text-neutral-900 dark:text-white">
+            <p className="text-2xl font-bold font-mono mt-2 text-neutral-900">
               {overview.organizations?.total || 0}
             </p>
           </Card>
 
-          <Card className="p-4 border-neutral-200/80 dark:border-neutral-800/80">
+          <Card className="p-4 border-neutral-200 bg-white">
             <div className="flex items-center justify-between text-neutral-500 text-xs font-semibold">
               <span>Active Subscriptions</span>
-              <CreditCard className="h-4 w-4 text-emerald-600" />
+              <CreditCard className="h-4 w-4 text-neutral-700" />
             </div>
-            <p className="text-2xl font-bold font-mono mt-2 text-neutral-900 dark:text-white">
+            <p className="text-2xl font-bold font-mono mt-2 text-neutral-900">
               {overview.subscriptions?.active || 0}
             </p>
           </Card>
 
-          <Card className="p-4 border-neutral-200/80 dark:border-neutral-800/80">
+          <Card className="p-4 border-neutral-200 bg-white">
             <div className="flex items-center justify-between text-neutral-500 text-xs font-semibold">
               <span>Total Workflows</span>
-              <Layers className="h-4 w-4 text-amber-600" />
+              <Layers className="h-4 w-4 text-neutral-700" />
             </div>
-            <p className="text-2xl font-bold font-mono mt-2 text-neutral-900 dark:text-white">
+            <p className="text-2xl font-bold font-mono mt-2 text-neutral-900">
               {overview.workflows?.total || 0}
             </p>
           </Card>
 
-          <Card className="p-4 border-neutral-200/80 dark:border-neutral-800/80">
+          <Card className="p-4 border-neutral-200 bg-white">
             <div className="flex items-center justify-between text-neutral-500 text-xs font-semibold">
               <span>Success Rate</span>
-              <Zap className="h-4 w-4 text-emerald-600" />
+              <Zap className="h-4 w-4 text-neutral-700" />
             </div>
-            <p className="text-2xl font-bold font-mono mt-2 text-emerald-600">
+            <p className="text-2xl font-bold font-mono mt-2 text-neutral-900">
               {overview.executions?.successRate || 100}%
             </p>
           </Card>
@@ -168,7 +168,7 @@ export default function SuperAdminPage() {
       )}
 
       {/* Admin Tabs */}
-      <div className="flex items-center gap-2 border-b border-neutral-200/80 dark:border-neutral-800/80">
+      <div className="flex items-center gap-2 border-b border-neutral-200">
         {[
           { id: 'health', label: 'System Health Diagnostics', icon: Activity },
           { id: 'organizations', label: 'Organizations Directory', icon: Building },
@@ -182,8 +182,8 @@ export default function SuperAdminPage() {
               onClick={() => loadTabContent(tab.id)}
               className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold border-b-2 transition-colors -mb-px cursor-pointer ${
                 activeTab === tab.id
-                  ? 'border-rose-600 text-rose-600 dark:text-rose-400'
-                  : 'border-transparent text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300'
+                  ? 'border-neutral-900 text-neutral-900 font-bold'
+                  : 'border-transparent text-neutral-500 hover:text-neutral-700'
               }`}
             >
               <Icon className="h-3.5 w-3.5" />
@@ -196,10 +196,10 @@ export default function SuperAdminPage() {
       {/* Tab 1: System Health Diagnostics */}
       {activeTab === 'health' && health && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Card className="p-4 border-neutral-200/80 dark:border-neutral-800/80 space-y-3">
+          <Card className="p-4 border-neutral-200 bg-white space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-neutral-900 dark:text-white flex items-center gap-2">
-                <Database className="h-4 w-4 text-emerald-600" />
+              <span className="text-xs font-bold text-neutral-900 flex items-center gap-2">
+                <Database className="h-4 w-4 text-neutral-700" />
                 MongoDB Atlas Cluster
               </span>
               <Badge variant="success" className="text-[9px] uppercase font-mono" dot>
@@ -207,15 +207,15 @@ export default function SuperAdminPage() {
               </Badge>
             </div>
             <p className="text-xs text-neutral-500">Engine: MongoDB Atlas Replication</p>
-            <p className="text-xs font-mono text-neutral-700 dark:text-neutral-300">
+            <p className="text-xs font-mono text-neutral-700">
               Ping Latency: <strong>{health.components?.database?.latencyMs || 2}ms</strong>
             </p>
           </Card>
 
-          <Card className="p-4 border-neutral-200/80 dark:border-neutral-800/80 space-y-3">
+          <Card className="p-4 border-neutral-200 bg-white space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-neutral-900 dark:text-white flex items-center gap-2">
-                <Server className="h-4 w-4 text-blue-600" />
+              <span className="text-xs font-bold text-neutral-900 flex items-center gap-2">
+                <Server className="h-4 w-4 text-neutral-700" />
                 Redis & BullMQ Queues
               </span>
               <Badge variant="success" className="text-[9px] uppercase font-mono" dot>
@@ -223,15 +223,15 @@ export default function SuperAdminPage() {
               </Badge>
             </div>
             <p className="text-xs text-neutral-500">Active Workers: {health.components?.queues?.activeWorkers || 8}</p>
-            <p className="text-xs font-mono text-neutral-700 dark:text-neutral-300">
+            <p className="text-xs font-mono text-neutral-700">
               DLQ Failed Executions: <strong>{health.components?.queues?.failedJobsDlq || 0}</strong>
             </p>
           </Card>
 
-          <Card className="p-4 border-neutral-200/80 dark:border-neutral-800/80 space-y-3">
+          <Card className="p-4 border-neutral-200 bg-white space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-neutral-900 dark:text-white flex items-center gap-2">
-                <Zap className="h-4 w-4 text-purple-600" />
+              <span className="text-xs font-bold text-neutral-900 flex items-center gap-2">
+                <Zap className="h-4 w-4 text-neutral-700" />
                 AI Gateways
               </span>
               <Badge variant="success" className="text-[9px] uppercase font-mono" dot>
@@ -239,7 +239,7 @@ export default function SuperAdminPage() {
               </Badge>
             </div>
             <p className="text-xs text-neutral-500">Connected: OpenAI, Google Gemini, Anthropic</p>
-            <p className="text-xs font-mono text-neutral-700 dark:text-neutral-300">
+            <p className="text-xs font-mono text-neutral-700">
               Payments: Webhooks Active
             </p>
           </Card>
@@ -248,21 +248,21 @@ export default function SuperAdminPage() {
 
       {/* Tab 2: Organizations Directory */}
       {activeTab === 'organizations' && (
-        <Card className="border-neutral-200/80 dark:border-neutral-800/80">
+        <Card className="border-neutral-200 bg-white">
           <CardContent className="p-0">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="border-b border-neutral-100 dark:border-neutral-800 text-neutral-400 font-medium bg-neutral-50/60 dark:bg-neutral-900/50">
+                  <tr className="border-b border-neutral-100 text-neutral-400 font-medium bg-neutral-50">
                     <th className="py-3 px-5">Organization</th>
                     <th className="py-3 px-5">Slug</th>
                     <th className="py-3 px-5">Created Date</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
+                <tbody className="divide-y divide-neutral-100">
                   {orgs.map((o) => (
-                    <tr key={o._id} className="hover:bg-neutral-50/80 dark:hover:bg-neutral-900/60">
-                      <td className="py-3 px-5 font-semibold text-neutral-900 dark:text-white">{o.name}</td>
+                    <tr key={o._id} className="hover:bg-neutral-50">
+                      <td className="py-3 px-5 font-semibold text-neutral-900">{o.name}</td>
                       <td className="py-3 px-5 font-mono text-neutral-500">{o.slug}</td>
                       <td suppressHydrationWarning className="py-3 px-5 text-neutral-400 text-[11px] font-mono">{new Date(o.createdAt).toLocaleDateString()}</td>
                     </tr>
@@ -276,12 +276,12 @@ export default function SuperAdminPage() {
 
       {/* Tab 3: Global Audit Logs */}
       {activeTab === 'audit' && (
-        <Card className="border-neutral-200/80 dark:border-neutral-800/80">
+        <Card className="border-neutral-200 bg-white">
           <CardContent className="p-0">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="border-b border-neutral-100 dark:border-neutral-800 text-neutral-400 font-medium bg-neutral-50/60 dark:bg-neutral-900/50">
+                  <tr className="border-b border-neutral-100 text-neutral-400 font-medium bg-neutral-50">
                     <th className="py-3 px-5">Action</th>
                     <th className="py-3 px-5">Entity</th>
                     <th className="py-3 px-5">User</th>
@@ -289,11 +289,11 @@ export default function SuperAdminPage() {
                     <th className="py-3 px-5">Timestamp</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
+                <tbody className="divide-y divide-neutral-100">
                   {auditLogs.map((log) => (
-                    <tr key={log._id} className="hover:bg-neutral-50/80 dark:hover:bg-neutral-900/60 font-mono">
-                      <td className="py-3 px-5 font-semibold text-blue-600 dark:text-blue-400">{log.action}</td>
-                      <td className="py-3 px-5 text-neutral-600 dark:text-neutral-300">{log.entityType}</td>
+                    <tr key={log._id} className="hover:bg-neutral-50 font-mono">
+                      <td className="py-3 px-5 font-semibold text-neutral-900">{log.action}</td>
+                      <td className="py-3 px-5 text-neutral-700">{log.entityType}</td>
                       <td className="py-3 px-5 text-neutral-500">{log.userId?.email || 'System'}</td>
                       <td className="py-3 px-5 text-neutral-500">{log.organizationId?.name || 'N/A'}</td>
                       <td suppressHydrationWarning className="py-3 px-5 text-neutral-400 text-[11px]">{new Date(log.createdAt).toLocaleString()}</td>
@@ -308,7 +308,7 @@ export default function SuperAdminPage() {
 
       {/* Tab 4: Dead Letter Queue (DLQ) */}
       {activeTab === 'dlq' && (
-        <Card className="border-neutral-200/80 dark:border-neutral-800/80">
+        <Card className="border-neutral-200 bg-white">
           <CardContent className="p-0">
             {dlqJobs.length === 0 ? (
               <p className="text-xs text-neutral-400 text-center py-12">No failed jobs in the Dead Letter Queue. All BullMQ workers are executing cleanly.</p>
@@ -316,17 +316,17 @@ export default function SuperAdminPage() {
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs">
                   <thead>
-                    <tr className="border-b border-neutral-100 dark:border-neutral-800 text-neutral-400 font-medium bg-neutral-50/60 dark:bg-neutral-900/50">
+                    <tr className="border-b border-neutral-100 text-neutral-400 font-medium bg-neutral-50">
                       <th className="py-3 px-5">Workflow</th>
                       <th className="py-3 px-5">Organization</th>
                       <th className="py-3 px-5">Error Message</th>
                       <th className="py-3 px-5">Failed At</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
+                  <tbody className="divide-y divide-neutral-100">
                     {dlqJobs.map((job) => (
-                      <tr key={job._id} className="hover:bg-neutral-50/80 dark:hover:bg-neutral-900/60">
-                        <td className="py-3 px-5 font-semibold text-neutral-900 dark:text-white">{job.workflowId?.name || 'Workflow'}</td>
+                      <tr key={job._id} className="hover:bg-neutral-50">
+                        <td className="py-3 px-5 font-semibold text-neutral-900">{job.workflowId?.name || 'Workflow'}</td>
                         <td className="py-3 px-5 text-neutral-500">{job.organizationId?.name || 'Org'}</td>
                         <td className="py-3 px-5 text-rose-600 font-mono text-[11px]">{job.error || 'Execution failed'}</td>
                         <td suppressHydrationWarning className="py-3 px-5 text-neutral-400 text-[11px] font-mono">{new Date(job.createdAt).toLocaleString()}</td>

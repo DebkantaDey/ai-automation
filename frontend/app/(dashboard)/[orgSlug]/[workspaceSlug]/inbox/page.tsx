@@ -129,13 +129,13 @@ export default function UnifiedInboxPage() {
   return (
     <div className="space-y-6">
       {/* Top Header */}
-      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between border-b border-neutral-200/80 dark:border-neutral-800/80 pb-5">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between border-b border-neutral-200 pb-5">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-white">
+            <h1 className="text-xl font-bold tracking-tight text-neutral-900">
               Unified Omnichannel Inbox
             </h1>
-            <Badge variant="emerald" className="text-[10px] font-mono">
+            <Badge variant="default" className="text-[10px] font-mono">
               WhatsApp & Email Live
             </Badge>
           </div>
@@ -144,19 +144,19 @@ export default function UnifiedInboxPage() {
           </p>
         </div>
 
-        <div className="flex items-center gap-1.5 rounded-lg border border-neutral-200 dark:border-neutral-800 p-0.5 bg-neutral-50 dark:bg-neutral-900">
+        <div className="flex items-center gap-1.5 rounded-lg border border-neutral-200 p-0.5 bg-neutral-50">
           <button
             onClick={() => setChannelFilter('all')}
-            className={`px-2.5 py-1 rounded-md text-xs font-semibold transition-colors ${
-              channelFilter === 'all' ? 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white shadow-sm' : 'text-neutral-500'
+            className={`px-2.5 py-1 rounded-md text-xs font-semibold transition-colors cursor-pointer ${
+              channelFilter === 'all' ? 'bg-white text-neutral-900 shadow-sm' : 'text-neutral-500'
             }`}
           >
             All ({conversations.length})
           </button>
           <button
             onClick={() => setChannelFilter('whatsapp')}
-            className={`px-2.5 py-1 rounded-md text-xs font-semibold transition-colors flex items-center gap-1 ${
-              channelFilter === 'whatsapp' ? 'bg-emerald-600 text-white shadow-sm' : 'text-neutral-500 hover:text-neutral-900'
+            className={`px-2.5 py-1 rounded-md text-xs font-semibold transition-colors flex items-center gap-1 cursor-pointer ${
+              channelFilter === 'whatsapp' ? 'bg-neutral-900 text-white shadow-sm' : 'text-neutral-500 hover:text-neutral-900'
             }`}
           >
             <MessageSquare className="h-3 w-3" />
@@ -164,8 +164,8 @@ export default function UnifiedInboxPage() {
           </button>
           <button
             onClick={() => setChannelFilter('email')}
-            className={`px-2.5 py-1 rounded-md text-xs font-semibold transition-colors flex items-center gap-1 ${
-              channelFilter === 'email' ? 'bg-blue-600 text-white shadow-sm' : 'text-neutral-500 hover:text-neutral-900'
+            className={`px-2.5 py-1 rounded-md text-xs font-semibold transition-colors flex items-center gap-1 cursor-pointer ${
+              channelFilter === 'email' ? 'bg-neutral-900 text-white shadow-sm' : 'text-neutral-500 hover:text-neutral-900'
             }`}
           >
             <Mail className="h-3 w-3" />
@@ -198,37 +198,33 @@ export default function UnifiedInboxPage() {
                   onClick={() => setSelectedConv(conv)}
                   className={`p-3 cursor-pointer transition-all border ${
                     isSelected
-                      ? 'border-blue-600 ring-2 ring-blue-600/30 bg-white dark:bg-neutral-900 shadow-sm'
-                      : 'border-neutral-200/80 dark:border-neutral-800/80 hover:border-neutral-300'
+                      ? 'border-neutral-900 ring-2 ring-neutral-900/10 bg-white shadow-sm'
+                      : 'border-neutral-200 hover:border-neutral-300'
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <div
-                        className={`p-1.5 rounded-md ${
-                          conv.channel === 'whatsapp'
-                            ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/50'
-                            : 'bg-blue-50 text-blue-600 dark:bg-blue-950/50'
-                        }`}
+                        className="p-1.5 rounded-md bg-neutral-100 text-neutral-800"
                       >
                         {conv.channel === 'whatsapp' ? <MessageSquare className="h-3.5 w-3.5" /> : <Mail className="h-3.5 w-3.5" />}
                       </div>
-                      <span className="font-bold text-xs text-neutral-900 dark:text-white">{conv.contactName}</span>
+                      <span className="font-bold text-xs text-neutral-900">{conv.contactName}</span>
                     </div>
                     <span className="text-[10px] text-neutral-400 font-mono">{conv.lastMessageTime}</span>
                   </div>
 
                   <p className="text-[11px] text-neutral-500 line-clamp-1 mt-1.5">{conv.lastMessage}</p>
 
-                  <div className="flex items-center justify-between pt-2 mt-2 border-t border-neutral-100 dark:border-neutral-800 text-[10px]">
+                  <div className="flex items-center justify-between pt-2 mt-2 border-t border-neutral-100 text-[10px]">
                     <span className="text-neutral-400">{conv.company}</span>
                     {conv.isAiHandled ? (
-                      <span className="flex items-center gap-1 text-purple-600 dark:text-purple-400 font-mono font-medium">
+                      <span className="flex items-center gap-1 text-neutral-700 font-mono font-medium">
                         <Bot className="h-3 w-3" />
                         AI Handled
                       </span>
                     ) : (
-                      <span className="flex items-center gap-1 text-blue-600 dark:text-blue-400 font-mono font-medium">
+                      <span className="flex items-center gap-1 text-neutral-700 font-mono font-medium">
                         <UserCheck className="h-3 w-3" />
                         Human Agent
                       </span>
@@ -243,12 +239,12 @@ export default function UnifiedInboxPage() {
         {/* Center: Active Chat Feed */}
         <div className="lg:col-span-8 flex flex-col">
           {selectedConv ? (
-            <Card className="border-neutral-200/80 dark:border-neutral-800/80 flex-1 flex flex-col">
+            <Card className="border-neutral-200 flex-1 flex flex-col">
               {/* Chat Header */}
-              <CardHeader className="py-3 px-5 border-b border-neutral-100 dark:border-neutral-800 flex flex-row items-center justify-between">
+              <CardHeader className="py-3 px-5 border-b border-neutral-100 flex flex-row items-center justify-between">
                 <div>
                   <div className="flex items-center gap-2">
-                    <CardTitle className="text-sm font-bold text-neutral-900 dark:text-white">
+                    <CardTitle className="text-sm font-bold text-neutral-900">
                       {selectedConv.contactName}
                     </CardTitle>
                     <Badge variant={selectedConv.channel === 'whatsapp' ? 'success' : 'default'} className="text-[9px] uppercase font-mono">
@@ -264,7 +260,7 @@ export default function UnifiedInboxPage() {
                     variant={selectedConv.isAiHandled ? 'outline' : 'default'}
                     onClick={toggleAiTakeover}
                     className={`h-7 px-2.5 text-xs gap-1 font-semibold ${
-                      selectedConv.isAiHandled ? 'text-purple-600 border-purple-300' : 'bg-blue-600 text-white'
+                      selectedConv.isAiHandled ? 'text-neutral-800 border-neutral-300' : 'bg-neutral-900 text-white'
                     }`}
                   >
                     {selectedConv.isAiHandled ? <UserCheck className="h-3 w-3" /> : <Bot className="h-3 w-3" />}
@@ -274,7 +270,7 @@ export default function UnifiedInboxPage() {
               </CardHeader>
 
               {/* Chat Message Scroll */}
-              <CardContent className="p-5 flex-1 overflow-y-auto space-y-3 bg-neutral-50/50 dark:bg-neutral-950/40 min-h-[340px]">
+              <CardContent className="p-5 flex-1 overflow-y-auto space-y-3 bg-neutral-50/50 min-h-[340px]">
                 {selectedConv.messages.map((msg) => {
                   const isUser = msg.sender === 'customer';
                   const isAi = msg.sender === 'ai';
@@ -284,10 +280,10 @@ export default function UnifiedInboxPage() {
                       <div
                         className={`max-w-[75%] rounded-2xl p-3.5 text-xs space-y-1 ${
                           isUser
-                            ? 'bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-neutral-900 dark:text-white rounded-tl-sm'
+                            ? 'bg-white border border-neutral-200 text-neutral-900 rounded-tl-sm'
                             : isAi
-                            ? 'bg-purple-600 text-white shadow-sm rounded-tr-sm'
-                            : 'bg-blue-600 text-white shadow-sm rounded-tr-sm'
+                            ? 'bg-neutral-900 text-white shadow-none rounded-tr-sm'
+                            : 'bg-neutral-800 text-white shadow-none rounded-tr-sm'
                         }`}
                       >
                         <div className="flex items-center justify-between gap-4 text-[10px] opacity-80 font-mono">
@@ -302,15 +298,15 @@ export default function UnifiedInboxPage() {
               </CardContent>
 
               {/* Reply Form & AI Suggestion */}
-              <div className="p-4 border-t border-neutral-100 dark:border-neutral-800 bg-white dark:bg-neutral-900 space-y-2">
+              <div className="p-4 border-t border-neutral-100 bg-white space-y-2">
                 <div className="flex items-center justify-between text-[11px] text-neutral-400">
-                  <span className="flex items-center gap-1 text-purple-600 dark:text-purple-400 font-medium">
-                    <Sparkles className="h-3 w-3" />
+                  <span className="flex items-center gap-1 text-neutral-700 font-medium">
+                    <Sparkles className="h-3 w-3 text-neutral-600" />
                     AI Suggestion: "I have booked your demo for tomorrow at 2:00 PM with our Solutions Architect."
                   </span>
                   <button
                     onClick={() => setReplyText('I have booked your demo for tomorrow at 2:00 PM with our Solutions Architect. You will receive calendar invite shortly.')}
-                    className="text-blue-600 dark:text-blue-400 hover:underline font-semibold cursor-pointer"
+                    className="text-neutral-900 hover:underline font-semibold cursor-pointer"
                   >
                     Insert
                   </button>
@@ -323,7 +319,7 @@ export default function UnifiedInboxPage() {
                     onChange={(e) => setReplyText(e.target.value)}
                     className="text-xs h-9"
                   />
-                  <Button type="submit" size="sm" className="bg-blue-600 hover:bg-blue-500 text-white font-semibold gap-1.5 px-4 h-9">
+                  <Button type="submit" size="sm" className="bg-neutral-900 hover:bg-neutral-800 text-white font-semibold gap-1.5 px-4 h-9">
                     <Send className="h-3 w-3" />
                     <span>Send</span>
                   </Button>

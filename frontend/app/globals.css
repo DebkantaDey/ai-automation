@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8fafc;
+  --background: #ffffff;
   --foreground: #09090b;
   --card: #ffffff;
   --card-foreground: #09090b;
-  --border: #e2e8f0;
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
-  --primary: #2563eb;
+  --border: #e4e4e7;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --primary: #18181b;
   --primary-foreground: #ffffff;
-  --accent: #eff6ff;
-  --accent-foreground: #1d4ed8;
+  --accent: #f4f4f5;
+  --accent-foreground: #18181b;
   --radius: 0.75rem;
 }
 
@@ -31,28 +31,12 @@
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #09090b;
-    --foreground: #f8fafc;
-    --card: #121215;
-    --card-foreground: #f8fafc;
-    --border: #27272a;
-    --muted: #18181b;
-    --muted-foreground: #a1a1aa;
-    --primary: #3b82f6;
-    --primary-foreground: #ffffff;
-    --accent: #1e293b;
-    --accent-foreground: #60a5fa;
-  }
-}
-
 * {
   border-color: var(--border);
 }
 
 body {
-  background: var(--background);
+  background: #ffffff;
   color: var(--foreground);
   font-feature-settings: "rlig" 1, "calt" 1, "tnum" 1;
   -webkit-font-smoothing: antialiased;
@@ -80,27 +64,16 @@ body {
 
 /* Canvas Dot Pattern Background */
 .bg-canvas-dots {
-  background-image: radial-gradient(rgba(148, 163, 184, 0.35) 1px, transparent 1px);
-  background-size: 20px 20px;
-}
-
-@media (prefers-color-scheme: dark) {
-  .bg-canvas-dots {
-    background-image: radial-gradient(rgba(82, 82, 91, 0.4) 1px, transparent 1px);
-  }
+  background-color: #ffffff;
+  background-image: radial-gradient(rgba(228, 228, 231, 0.7) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
 /* Glassmorphism Surface */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-}
-
-@media (prefers-color-scheme: dark) {
-  .glass-panel {
-    background: rgba(18, 18, 21, 0.75);
-  }
 }
 
 /* Subtle Shimmer & Pulse Utilities */

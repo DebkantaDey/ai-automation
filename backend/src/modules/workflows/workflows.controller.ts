@@ -301,4 +301,67 @@ export class WorkflowsController {
   ) {
     return this.workflowsService.triggerByWebhook(webhookId, payload);
   }
+
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, PermissionsGuard)
+  @RequireTenant()
+  @Get('dlq/jobs')
+  @RequirePermissions(Permission.WORKFLOW_READ)
+  @ApiOperation({ summary: 'List dead letter queue failed executions' })
+  async listDeadLetterJobs(
+    @CurrentOrganizationId() orgId: string,
+    @Query('status') status?: string,
+    @Query('workflowId') workflowId?: string,
+    @Query('page') page?: number,
+    @Query('limit') limit?: number,
+  ) {
+    return this.workflowsService.getDeadLetterQueueService()?.listDeadLetterJobs(orgId, {
+      status,
+      workflowId,
+      page: page ? Number(page) : 1,
+      limit: limit ? Number(limit) : 20,
+    });
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, PermissionsGuard)
+  @RequireTenant()
+  @Get('dlq/jobs/:id')
+  @RequirePermissions(Permission.WORKFLOW_READ)
+  @ApiOperation({ summary: 'Get details of dead letter queue job' })
+  async getDeadLetterJob(
+    @CurrentOrganizationId() orgId: string,
+    @Param('id') id: string,
+  ) {
+    return this.workflowsService.getDeadLetterQueueService()?.getDeadLetterJob(orgId, id);
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, PermissionsGuard)
+  @RequireTenant()
+  @Post('dlq/jobs/:id/replay')
+  @RequirePermissions(Permission.WORKFLOW_EXECUTE)
+  @ApiOperation({ summary: 'Replay dead letter job via BullMQ' })
+  async replayDeadLetterJob(
+    @CurrentOrganizationId() orgId: string,
+    @CurrentUser('id') userId: string,
+    @Param('id') id: string,
+    @Body('customPayload') customPayload?: Record<string, any>,
+  ) {
+    return this.workflowsService.getDeadLetterQueueService()?.replayJob(orgId, id, userId, customPayload);
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, PermissionsGuard)
+  @RequireTenant()
+  @Post('dlq/jobs/:id/dismiss')
+  @RequirePermissions(Permission.WORKFLOW_UPDATE)
+  @ApiOperation({ summary: 'Dismiss dead letter job' })
+  async dismissDeadLetterJob(
+    @CurrentOrganizationId() orgId: string,
+    @CurrentUser('id') userId: string,
+    @Param('id') id: string,
+  ) {
+    return this.workflowsService.getDeadLetterQueueService()?.dismissJob(orgId, id, userId);
+  }
 }

@@ -158,20 +158,20 @@ export default function TeamManagementPage() {
 
   return (
     <div className="max-w-5xl space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between border-b border-neutral-200 pb-5">
         <div>
           <div className="flex items-center gap-2.5">
-            <Users className="h-5 w-5 text-blue-600" />
-            <h1 className="text-xl font-bold text-neutral-900 dark:text-white">Team & Access Control</h1>
+            <Users className="h-5 w-5 text-neutral-800" />
+            <h1 className="text-xl font-bold text-neutral-900">Team & Access Control</h1>
           </div>
-          <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+          <p className="text-xs text-neutral-500 mt-1">
             Manage organization members, send invitations, and configure role-based permissions (RBAC).
           </p>
         </div>
 
         <Button
           onClick={() => setShowInviteModal(true)}
-          className="bg-blue-600 hover:bg-blue-700 text-xs gap-1.5"
+          className="bg-neutral-900 hover:bg-neutral-800 text-white text-xs gap-1.5"
         >
           <UserPlus className="h-4 w-4" />
           <span>Invite Member</span>
@@ -179,27 +179,27 @@ export default function TeamManagementPage() {
       </div>
 
       {error && (
-        <div className="flex items-center gap-2 p-3 rounded-lg bg-red-50 text-red-700 text-xs border border-red-200 dark:bg-red-950/40 dark:text-red-400 dark:border-red-900">
+        <div className="flex items-center gap-2 p-3 rounded-lg bg-red-50 text-red-700 text-xs border border-red-200">
           <AlertCircle className="h-4 w-4 shrink-0" />
           <span>{error}</span>
         </div>
       )}
 
       {success && (
-        <div className="flex items-center gap-2 p-3 rounded-lg bg-emerald-50 text-emerald-700 text-xs border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-900">
+        <div className="flex items-center gap-2 p-3 rounded-lg bg-emerald-50 text-emerald-700 text-xs border border-emerald-200">
           <CheckCircle2 className="h-4 w-4 shrink-0" />
           <span>{success}</span>
         </div>
       )}
 
       {/* Tabs */}
-      <div className="flex border-b border-neutral-200 dark:border-neutral-800 gap-4 text-xs font-semibold">
+      <div className="flex border-b border-neutral-200 gap-4 text-xs font-semibold">
         <button
           onClick={() => setActiveTab('members')}
-          className={`pb-2.5 transition-colors border-b-2 ${
+          className={`pb-2.5 transition-colors border-b-2 cursor-pointer ${
             activeTab === 'members'
-              ? 'border-blue-600 text-blue-600'
-              : 'border-transparent text-neutral-500 hover:text-neutral-900 dark:hover:text-white'
+              ? 'border-neutral-900 text-neutral-900'
+              : 'border-transparent text-neutral-500 hover:text-neutral-900'
           }`}
         >
           Active Members ({members.length})
@@ -207,10 +207,10 @@ export default function TeamManagementPage() {
 
         <button
           onClick={() => setActiveTab('invitations')}
-          className={`pb-2.5 transition-colors border-b-2 ${
+          className={`pb-2.5 transition-colors border-b-2 cursor-pointer ${
             activeTab === 'invitations'
-              ? 'border-blue-600 text-blue-600'
-              : 'border-transparent text-neutral-500 hover:text-neutral-900 dark:hover:text-white'
+              ? 'border-neutral-900 text-neutral-900'
+              : 'border-transparent text-neutral-500 hover:text-neutral-900'
           }`}
         >
           Pending Invitations ({invitations.length})
@@ -218,10 +218,10 @@ export default function TeamManagementPage() {
 
         <button
           onClick={() => setActiveTab('roles')}
-          className={`pb-2.5 transition-colors border-b-2 ${
+          className={`pb-2.5 transition-colors border-b-2 cursor-pointer ${
             activeTab === 'roles'
-              ? 'border-blue-600 text-blue-600'
-              : 'border-transparent text-neutral-500 hover:text-neutral-900 dark:hover:text-white'
+              ? 'border-neutral-900 text-neutral-900'
+              : 'border-transparent text-neutral-500 hover:text-neutral-900'
           }`}
         >
           Roles & Permissions ({roles.length})
@@ -230,22 +230,22 @@ export default function TeamManagementPage() {
 
       {/* Tab 1: Active Members */}
       {activeTab === 'members' && (
-        <Card className="border-neutral-200 dark:border-neutral-800">
+        <Card className="border-neutral-200">
           <CardContent className="p-0">
-            <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
+            <div className="divide-y divide-neutral-100">
               {members.map((member) => (
-                <div key={member.id} className="p-4 flex items-center justify-between hover:bg-neutral-50/50 dark:hover:bg-neutral-900/30 transition-colors">
+                <div key={member.id} className="p-4 flex items-center justify-between hover:bg-neutral-50 transition-colors">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300 font-bold text-xs">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-neutral-900 text-white font-bold text-xs">
                       {member.firstName?.charAt(0) || 'U'}
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <p className="text-xs font-semibold text-neutral-900 dark:text-white">
+                        <p className="text-xs font-semibold text-neutral-900">
                           {member.fullName || `${member.firstName || ''} ${member.lastName || ''}`}
                         </p>
                         {member.isOwner && (
-                          <Badge variant="outline" className="text-[9px] text-amber-600 border-amber-300 dark:border-amber-800 font-mono">
+                          <Badge variant="outline" className="text-[9px] text-neutral-800 border-neutral-300 font-mono">
                             Owner
                           </Badge>
                         )}
@@ -259,7 +259,7 @@ export default function TeamManagementPage() {
                       value={member.role}
                       disabled={member.isOwner}
                       onChange={(e) => handleRoleChange(member.id, e.target.value)}
-                      className="h-8 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 px-2 text-xs capitalize disabled:opacity-75 disabled:cursor-not-allowed"
+                      className="h-8 rounded-md border border-neutral-300 bg-white px-2 text-xs capitalize disabled:opacity-75 disabled:cursor-not-allowed text-neutral-900"
                     >
                       <option value="owner">Owner</option>
                       <option value="admin">Admin</option>
@@ -274,7 +274,7 @@ export default function TeamManagementPage() {
                       size="sm"
                       disabled={member.isOwner}
                       onClick={() => handleRemoveMember(member.id, member.fullName || member.email)}
-                      className="text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950/40 p-1.5 h-8 w-8 disabled:opacity-30 disabled:cursor-not-allowed"
+                      className="text-neutral-500 hover:text-red-700 hover:bg-red-50 p-1.5 h-8 w-8 disabled:opacity-30 disabled:cursor-not-allowed"
                       title={member.isOwner ? 'Cannot remove organization owner' : 'Remove member'}
                     >
                       <Trash2 className="h-4 w-4" />
@@ -289,22 +289,22 @@ export default function TeamManagementPage() {
 
       {/* Tab 2: Pending Invitations */}
       {activeTab === 'invitations' && (
-        <Card className="border-neutral-200 dark:border-neutral-800">
+        <Card className="border-neutral-200">
           <CardContent className="p-0">
             {invitations.length === 0 ? (
               <div className="p-8 text-center text-xs text-neutral-500">
                 No pending invitations. Click &quot;Invite Member&quot; to add team members.
               </div>
             ) : (
-              <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
+              <div className="divide-y divide-neutral-100">
                 {invitations.map((inv) => (
                   <div key={inv.id} className="p-4 flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300 text-xs">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-100 text-neutral-700 text-xs">
                         <Mail className="h-4 w-4" />
                       </div>
                       <div>
-                        <p className="text-xs font-semibold text-neutral-900 dark:text-white">{inv.email}</p>
+                        <p className="text-xs font-semibold text-neutral-900">{inv.email}</p>
                         <div className="flex items-center gap-2 text-[11px] text-neutral-500">
                           <span>Invited by {inv.invitedBy}</span>
                           <span>•</span>
@@ -324,7 +324,7 @@ export default function TeamManagementPage() {
                         variant="outline"
                         size="sm"
                         onClick={() => handleRevokeInvite(inv.id)}
-                        className="text-xs text-red-600 hover:bg-red-50 dark:hover:bg-red-950/40 h-7 px-2.5"
+                        className="text-xs text-neutral-700 hover:bg-neutral-100 h-7 px-2.5 border-neutral-200"
                       >
                         Revoke
                       </Button>
@@ -341,14 +341,14 @@ export default function TeamManagementPage() {
       {activeTab === 'roles' && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {roles.map((role) => (
-            <Card key={role.id || role.slug} className="border-neutral-200 dark:border-neutral-800">
+            <Card key={role.id || role.slug} className="border-neutral-200">
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
-                    <Shield className="h-4 w-4 text-blue-600" />
+                    <Shield className="h-4 w-4 text-neutral-700" />
                     <span>{role.name}</span>
                   </CardTitle>
-                  <Badge variant={role.isSystemRole ? 'outline' : 'success'} className="text-[10px] font-mono">
+                  <Badge variant={role.isSystemRole ? 'outline' : 'default'} className="text-[10px] font-mono">
                     {role.isSystemRole ? 'System' : 'Custom'}
                   </Badge>
                 </div>
@@ -375,14 +375,14 @@ export default function TeamManagementPage() {
 
       {/* Invite Member Modal */}
       {showInviteModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <Card className="w-full max-w-md shadow-2xl border-neutral-200 dark:border-neutral-800">
-            <CardHeader className="flex flex-row items-center justify-between pb-3 border-b border-neutral-100 dark:border-neutral-900">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4 backdrop-blur-sm">
+          <Card className="w-full max-w-md shadow-xl border-neutral-200">
+            <CardHeader className="flex flex-row items-center justify-between pb-3 border-b border-neutral-100">
               <CardTitle className="text-sm font-bold flex items-center gap-2">
-                <UserPlus className="h-4 w-4 text-blue-600" />
+                <UserPlus className="h-4 w-4 text-neutral-800" />
                 <span>Invite Team Member</span>
               </CardTitle>
-              <button onClick={() => setShowInviteModal(false)} className="text-neutral-400 hover:text-neutral-600">
+              <button onClick={() => setShowInviteModal(false)} className="text-neutral-400 hover:text-neutral-600 cursor-pointer">
                 <X className="h-4 w-4" />
               </button>
             </CardHeader>
@@ -390,7 +390,7 @@ export default function TeamManagementPage() {
             <form onSubmit={handleSendInvite}>
               <CardContent className="space-y-4 pt-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                  <label className="text-xs font-semibold text-neutral-700">
                     Work Email *
                   </label>
                   <div className="relative">
@@ -407,13 +407,13 @@ export default function TeamManagementPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                  <label className="text-xs font-semibold text-neutral-700">
                     Role & Permissions *
                   </label>
                   <select
                     value={inviteRole}
                     onChange={(e) => setInviteRole(e.target.value)}
-                    className="w-full h-9 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 px-3 text-xs capitalize shadow-sm"
+                    className="w-full h-9 rounded-md border border-neutral-300 bg-white px-3 text-xs capitalize shadow-none text-neutral-900"
                   >
                     <option value="admin">Admin — Team, workflow & integration configuration</option>
                     <option value="manager">Manager — Build, configure & delete workflows/AI</option>
@@ -424,19 +424,19 @@ export default function TeamManagementPage() {
                 </div>
               </CardContent>
 
-              <div className="flex justify-end gap-2 p-4 border-t border-neutral-100 dark:border-neutral-900">
+              <div className="flex justify-end gap-2 p-4 border-t border-neutral-100">
                 <Button
                   type="button"
                   variant="outline"
                   onClick={() => setShowInviteModal(false)}
-                  className="text-xs"
+                  className="text-xs border-neutral-200"
                 >
                   Cancel
                 </Button>
                 <Button
                   type="submit"
                   disabled={sendingInvite}
-                  className="bg-blue-600 hover:bg-blue-700 text-xs gap-1.5"
+                  className="bg-neutral-900 hover:bg-neutral-800 text-white text-xs gap-1.5"
                 >
                   <Send className="h-3.5 w-3.5" />
                   <span>{sendingInvite ? 'Sending...' : 'Send Invitation'}</span>

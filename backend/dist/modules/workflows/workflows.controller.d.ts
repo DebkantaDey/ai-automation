@@ -59,4 +59,20 @@ export declare class WorkflowsController {
     duplicate(id: string, orgId: string, wsId: string, userId: string, name?: string): Promise<import("./schemas/workflow.schema").WorkflowDocument>;
     execute(id: string, orgId: string, wsId: string, userId: string, dto: TriggerExecutionDto): Promise<import("./schemas/workflow-execution.schema").WorkflowExecutionDocument>;
     triggerByWebhook(webhookId: string, payload: Record<string, any>): Promise<import("./schemas/workflow-execution.schema").WorkflowExecutionDocument>;
+    listDeadLetterJobs(orgId: string, status?: string, workflowId?: string, page?: number, limit?: number): Promise<{
+        data: (import("mongoose").Document<unknown, {}, import("./schemas/dead-letter-job.schema").DeadLetterJobDocument, {}, {}> & import("./schemas/dead-letter-job.schema").DeadLetterJob & import("mongoose").Document<import("mongoose").Types.ObjectId, any, any, Record<string, any>, {}> & Required<{
+            _id: import("mongoose").Types.ObjectId;
+        }> & {
+            __v: number;
+        })[];
+        pagination: {
+            page: number;
+            limit: number;
+            total: number;
+            totalPages: number;
+        };
+    }>;
+    getDeadLetterJob(orgId: string, id: string): Promise<import("./schemas/dead-letter-job.schema").DeadLetterJobDocument>;
+    replayDeadLetterJob(orgId: string, userId: string, id: string, customPayload?: Record<string, any>): Promise<import("./schemas/dead-letter-job.schema").DeadLetterJobDocument>;
+    dismissDeadLetterJob(orgId: string, userId: string, id: string): Promise<import("./schemas/dead-letter-job.schema").DeadLetterJobDocument>;
 }

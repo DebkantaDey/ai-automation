@@ -79,22 +79,22 @@ export default function RegisterPage() {
 
   if (success) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-neutral-50 dark:bg-neutral-950 p-4">
-        <Card className="w-full max-w-md shadow-xl border-neutral-200 dark:border-neutral-800 text-center p-6">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400 mb-4">
+      <div className="flex min-h-screen items-center justify-center bg-white p-4">
+        <Card className="w-full max-w-md shadow-lg border-neutral-200 text-center p-6 bg-white">
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-neutral-100 text-neutral-900 mb-4">
             <CheckCircle2 className="h-6 w-6" />
           </div>
-          <CardTitle className="text-xl font-bold text-neutral-900 dark:text-white">
+          <CardTitle className="text-xl font-bold text-neutral-900">
             Verify your email address
           </CardTitle>
-          <CardDescription className="text-xs text-neutral-600 dark:text-neutral-400 mt-2">
-            We sent a verification link to <span className="font-semibold text-neutral-900 dark:text-neutral-100">{formData.email}</span>.
+          <CardDescription className="text-xs text-neutral-600 mt-2">
+            We sent a verification link to <span className="font-semibold text-neutral-900">{formData.email}</span>.
             Please check your inbox to activate your organization and start automating.
           </CardDescription>
 
           <div className="mt-6 flex flex-col gap-2">
             <Link href="/login">
-              <Button variant="default" className="w-full bg-blue-600 hover:bg-blue-700 text-xs">
+              <Button variant="default" className="w-full bg-neutral-900 hover:bg-neutral-800 text-white text-xs">
                 Back to Sign In
               </Button>
             </Link>
@@ -105,13 +105,13 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-neutral-50 dark:bg-neutral-950 p-4">
-      <Card className="w-full max-w-md shadow-xl border-neutral-200 dark:border-neutral-800">
+    <div className="flex min-h-screen items-center justify-center bg-white p-4">
+      <Card className="w-full max-w-md shadow-lg border-neutral-200 bg-white">
         <CardHeader className="text-center space-y-2 pb-4">
-          <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-white shadow-md shadow-blue-500/30">
+          <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-900 text-white shadow-none">
             <Cpu className="h-6 w-6" />
           </div>
-          <CardTitle className="text-xl font-bold text-neutral-900 dark:text-white">
+          <CardTitle className="text-xl font-bold text-neutral-900">
             Create Organization Tenant
           </CardTitle>
           <CardDescription className="text-xs">
@@ -122,7 +122,7 @@ export default function RegisterPage() {
         <form onSubmit={handleRegister}>
           <CardContent className="space-y-3.5">
             {error && (
-              <div className="flex items-center gap-2 p-3 rounded-lg bg-red-50 text-red-700 text-xs border border-red-200 dark:bg-red-950/40 dark:text-red-400 dark:border-red-900">
+              <div className="flex items-center gap-2 p-3 rounded-lg bg-red-50 text-red-700 text-xs border border-red-200">
                 <AlertCircle className="h-4 w-4 shrink-0" />
                 <span>{error}</span>
               </div>
@@ -134,7 +134,7 @@ export default function RegisterPage() {
                 type="button"
                 variant="outline"
                 onClick={handleGoogleSignup}
-                className="w-full text-xs gap-2 border-neutral-200 dark:border-neutral-800"
+                className="w-full text-xs gap-2 border-neutral-200 hover:bg-neutral-50"
               >
                 <svg className="h-4 w-4" viewBox="0 0 24 24">
                   <path
@@ -161,7 +161,7 @@ export default function RegisterPage() {
                 type="button"
                 variant="outline"
                 onClick={handleMicrosoftSignup}
-                className="w-full text-xs gap-2 border-neutral-200 dark:border-neutral-800"
+                className="w-full text-xs gap-2 border-neutral-200 hover:bg-neutral-50"
               >
                 <svg className="h-4 w-4" viewBox="0 0 23 23">
                   <path fill="#f35325" d="M1 1h10v10H1z" />
@@ -174,14 +174,14 @@ export default function RegisterPage() {
             </div>
 
             <div className="relative flex items-center justify-center my-1">
-              <div className="border-t border-neutral-200 dark:border-neutral-800 w-full" />
-              <span className="bg-white dark:bg-neutral-900 px-2 text-[10px] text-neutral-400 uppercase tracking-wider absolute font-semibold">
+              <div className="border-t border-neutral-200 w-full" />
+              <span className="bg-white px-2 text-[10px] text-neutral-400 uppercase tracking-wider absolute font-semibold">
                 Or fill details
               </span>
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+              <label className="text-xs font-semibold text-neutral-700">
                 Organization / Company Name
               </label>
               <div className="relative">
@@ -198,7 +198,7 @@ export default function RegisterPage() {
 
             <div className="grid grid-cols-2 gap-2">
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                <label className="text-xs font-semibold text-neutral-700">
                   First Name
                 </label>
                 <div className="relative">
@@ -213,7 +213,7 @@ export default function RegisterPage() {
                 </div>
               </div>
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                <label className="text-xs font-semibold text-neutral-700">
                   Last Name
                 </label>
                 <Input
@@ -226,7 +226,7 @@ export default function RegisterPage() {
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+              <label className="text-xs font-semibold text-neutral-700">
                 Work Email
               </label>
               <div className="relative">
@@ -243,7 +243,7 @@ export default function RegisterPage() {
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+              <label className="text-xs font-semibold text-neutral-700">
                 Password
               </label>
               <div className="relative">
@@ -261,14 +261,14 @@ export default function RegisterPage() {
                 <div className="space-y-1 pt-1">
                   <div className="flex items-center justify-between text-[10px] text-neutral-500">
                     <span>Password strength:</span>
-                    <span className="font-semibold">{strengthLabels[strength - 1] || 'Weak'}</span>
+                    <span className="font-semibold text-neutral-900">{strengthLabels[strength - 1] || 'Weak'}</span>
                   </div>
-                  <div className="h-1.5 w-full bg-neutral-200 dark:bg-neutral-800 rounded-full overflow-hidden flex gap-0.5">
+                  <div className="h-1.5 w-full bg-neutral-200 rounded-full overflow-hidden flex gap-0.5">
                     {[1, 2, 3, 4].map((level) => (
                       <div
                         key={level}
                         className={`h-full flex-1 transition-all ${
-                          strength >= level ? strengthColors[strength - 1] : 'bg-transparent'
+                          strength >= level ? 'bg-neutral-900' : 'bg-transparent'
                         }`}
                       />
                     ))}
@@ -278,7 +278,7 @@ export default function RegisterPage() {
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+              <label className="text-xs font-semibold text-neutral-700">
                 Confirm Password
               </label>
               <div className="relative">
@@ -300,10 +300,10 @@ export default function RegisterPage() {
                 id="terms"
                 checked={agreeTerms}
                 onChange={(e) => setAgreeTerms(e.target.checked)}
-                className="mt-0.5 h-3.5 w-3.5 rounded border-neutral-300 text-blue-600 focus:ring-blue-500"
+                className="mt-0.5 h-3.5 w-3.5 rounded border-neutral-300 text-neutral-900 focus:ring-neutral-900"
                 required
               />
-              <label htmlFor="terms" className="text-[11px] text-neutral-600 dark:text-neutral-400">
+              <label htmlFor="terms" className="text-[11px] text-neutral-600">
                 I agree to the Enterprise Master Services Agreement and Privacy Policy.
               </label>
             </div>
@@ -311,7 +311,7 @@ export default function RegisterPage() {
             <Button
               type="submit"
               disabled={loading || !agreeTerms}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-xs gap-2 mt-2"
+              className="w-full bg-neutral-900 hover:bg-neutral-800 text-white text-xs gap-2 mt-2"
             >
               <span>{loading ? 'Creating Tenant...' : 'Create Account & Organization'}</span>
               <ArrowRight className="h-3.5 w-3.5" />
@@ -319,10 +319,10 @@ export default function RegisterPage() {
           </CardContent>
         </form>
 
-        <CardFooter className="flex justify-center border-t border-neutral-100 dark:border-neutral-900 pt-4">
+        <CardFooter className="flex justify-center border-t border-neutral-100 pt-4">
           <p className="text-xs text-neutral-500">
             Already have an account?{' '}
-            <Link href="/login" className="font-semibold text-blue-600 hover:underline">
+            <Link href="/login" className="font-semibold text-neutral-900 hover:underline">
               Sign In
             </Link>
           </p>

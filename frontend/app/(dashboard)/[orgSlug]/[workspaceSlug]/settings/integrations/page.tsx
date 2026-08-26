@@ -157,15 +157,15 @@ export default function IntegrationsSettingsPage() {
   return (
     <div className="space-y-6">
       {/* Top Header */}
-      <div className="border-b border-neutral-200/80 dark:border-neutral-800/80 pb-5">
+      <div className="border-b border-neutral-200 pb-5">
         <div className="flex items-center gap-2">
-          <div className="p-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/50 text-blue-600">
+          <div className="p-1.5 rounded-lg bg-neutral-100 text-neutral-800">
             <Plug className="h-5 w-5" />
           </div>
-          <h1 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-white">
+          <h1 className="text-xl font-bold tracking-tight text-neutral-900">
             App Integrations & Connectors
           </h1>
-          <Badge variant="success" className="text-[10px] font-mono" dot>
+          <Badge variant="default" className="text-[10px] font-mono">
             AES-256 Vault
           </Badge>
         </div>
@@ -178,8 +178,8 @@ export default function IntegrationsSettingsPage() {
         <div
           className={`p-3 rounded-lg text-xs flex items-center gap-2 border ${
             message.type === 'success'
-              ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400'
-              : 'bg-red-50 text-red-700 border-red-200 dark:bg-red-950/40 dark:text-red-400'
+              ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+              : 'bg-red-50 text-red-700 border-red-200'
           }`}
         >
           {message.type === 'success' ? <CheckCircle2 className="h-4 w-4" /> : <AlertCircle className="h-4 w-4" />}
@@ -190,7 +190,7 @@ export default function IntegrationsSettingsPage() {
       {/* Active Connections */}
       <div className="space-y-3">
         <div className="flex items-center justify-between">
-          <h2 className="text-xs font-bold text-neutral-900 dark:text-white uppercase tracking-wider font-mono">
+          <h2 className="text-xs font-bold text-neutral-900 uppercase tracking-wider font-mono">
             Active Workspace Connections ({connections.length})
           </h2>
         </div>
@@ -205,14 +205,14 @@ export default function IntegrationsSettingsPage() {
               const Icon = ICONS_MAP[conn.provider] || Plug;
 
               return (
-                <Card key={conn._id} className="p-4 flex items-center justify-between border-neutral-200/80 dark:border-neutral-800/80 hover:border-neutral-300">
+                <Card key={conn._id} className="p-4 flex items-center justify-between border-neutral-200 hover:border-neutral-300">
                   <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300">
-                      <Icon className="h-5 w-5 text-blue-600" />
+                    <div className="p-2 rounded-lg bg-neutral-100 text-neutral-800">
+                      <Icon className="h-5 w-5 text-neutral-800" />
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-bold text-neutral-900 dark:text-white">{conn.name}</span>
+                        <span className="text-xs font-bold text-neutral-900">{conn.name}</span>
                         <Badge
                           variant={conn.status === 'connected' ? 'success' : 'destructive'}
                           className="text-[9px] uppercase font-mono"
@@ -233,7 +233,7 @@ export default function IntegrationsSettingsPage() {
                       variant="outline"
                       isLoading={testingId === conn._id}
                       onClick={() => handleTestConnection(conn._id)}
-                      className="h-7 px-2 text-xs gap-1"
+                      className="h-7 px-2 text-xs gap-1 border-neutral-200"
                     >
                       <RefreshCw className="h-3 w-3" />
                       <span>Test</span>
@@ -242,7 +242,7 @@ export default function IntegrationsSettingsPage() {
                       size="sm"
                       variant="outline"
                       onClick={() => handleDisconnect(conn._id)}
-                      className="h-7 px-2 text-xs text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40 border-rose-200"
+                      className="h-7 px-2 text-xs text-neutral-700 hover:bg-neutral-100 border-neutral-200"
                     >
                       <Trash2 className="h-3 w-3" />
                     </Button>
@@ -256,7 +256,7 @@ export default function IntegrationsSettingsPage() {
 
       {/* Available Marketplace Catalog */}
       <div className="space-y-3 pt-4">
-        <h2 className="text-xs font-bold text-neutral-900 dark:text-white uppercase tracking-wider font-mono">
+        <h2 className="text-xs font-bold text-neutral-900 uppercase tracking-wider font-mono">
           Available Connectors Marketplace
         </h2>
 
@@ -265,28 +265,28 @@ export default function IntegrationsSettingsPage() {
             const Icon = ICONS_MAP[connector.id] || Plug;
 
             return (
-              <Card key={connector.id} className="flex flex-col justify-between p-4 hover:border-blue-500/50 hover:shadow-md transition-all">
+              <Card key={connector.id} className="flex flex-col justify-between p-4 border-neutral-200 hover:border-neutral-300 hover:shadow-none transition-all">
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <div className="p-2 rounded-lg bg-blue-50 dark:bg-blue-950/50 text-blue-600">
+                    <div className="p-2 rounded-lg bg-neutral-100 text-neutral-800">
                       <Icon className="h-5 w-5" />
                     </div>
                     <Badge variant="secondary" className="text-[10px]">
                       {connector.category}
                     </Badge>
                   </div>
-                  <h3 className="text-sm font-bold text-neutral-900 dark:text-white">{connector.name}</h3>
+                  <h3 className="text-sm font-bold text-neutral-900">{connector.name}</h3>
                   <p className="text-xs text-neutral-500 line-clamp-2">{connector.description}</p>
                 </div>
 
-                <div className="pt-4 border-t border-neutral-100 dark:border-neutral-800/80 mt-3">
+                <div className="pt-4 border-t border-neutral-100 mt-3">
                   <Button
                     size="sm"
                     onClick={() => {
                       setSelectedConnector(connector);
                       setConnNameInput(connector.name);
                     }}
-                    className="w-full text-xs bg-blue-600 hover:bg-blue-500 text-white font-semibold"
+                    className="w-full text-xs bg-neutral-900 hover:bg-neutral-800 text-white font-semibold"
                   >
                     <Plus className="h-3.5 w-3.5 mr-1" />
                     <span>Connect</span>
@@ -300,20 +300,20 @@ export default function IntegrationsSettingsPage() {
 
       {/* Connect Modal */}
       {selectedConnector && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-          <div className="bg-white dark:bg-neutral-900 rounded-2xl shadow-2xl max-w-md w-full p-6 space-y-4 border border-neutral-200 dark:border-neutral-800 animate-in fade-in-0 zoom-in-95">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
+          <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 space-y-4 border border-neutral-200 animate-in fade-in-0 zoom-in-95">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="p-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600">
+                <div className="p-1.5 rounded-lg bg-neutral-100 text-neutral-800">
                   <ShieldCheck className="h-4 w-4" />
                 </div>
-                <h2 className="text-sm font-bold text-neutral-900 dark:text-white">
+                <h2 className="text-sm font-bold text-neutral-900">
                   Connect {selectedConnector.name}
                 </h2>
               </div>
               <button
                 onClick={() => setSelectedConnector(null)}
-                className="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 text-sm cursor-pointer"
+                className="text-neutral-400 hover:text-neutral-600 text-sm cursor-pointer"
               >
                 ✕
               </button>
@@ -321,7 +321,7 @@ export default function IntegrationsSettingsPage() {
 
             <form onSubmit={handleConnectApiKey} className="space-y-4">
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                <label className="text-xs font-semibold text-neutral-700">
                   Connection Name *
                 </label>
                 <Input
@@ -335,7 +335,7 @@ export default function IntegrationsSettingsPage() {
 
               {selectedConnector.id === 'discord' || selectedConnector.authType === 'webhook_url' ? (
                 <div className="space-y-1">
-                  <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                  <label className="text-xs font-semibold text-neutral-700">
                     Webhook URL *
                   </label>
                   <Input
@@ -348,7 +348,7 @@ export default function IntegrationsSettingsPage() {
                 </div>
               ) : (
                 <div className="space-y-1">
-                  <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                  <label className="text-xs font-semibold text-neutral-700">
                     API Token / Secret Key *
                   </label>
                   <Input
@@ -362,11 +362,11 @@ export default function IntegrationsSettingsPage() {
                 </div>
               )}
 
-              <div className="rounded-lg bg-blue-50/70 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900 p-2.5 text-[11px] text-blue-800 dark:text-blue-300">
+              <div className="rounded-lg bg-neutral-50 border border-neutral-200 p-2.5 text-[11px] text-neutral-700">
                 Credentials are encrypted at rest using AES-256 envelope encryption.
               </div>
 
-              <div className="flex justify-end gap-2 pt-2 border-t border-neutral-100 dark:border-neutral-800">
+              <div className="flex justify-end gap-2 pt-2 border-t border-neutral-100">
                 <Button
                   type="button"
                   variant="outline"
@@ -379,7 +379,7 @@ export default function IntegrationsSettingsPage() {
                   type="submit"
                   isLoading={isConnecting}
                   size="sm"
-                  className="bg-blue-600 hover:bg-blue-500 text-white font-semibold"
+                  className="bg-neutral-900 hover:bg-neutral-800 text-white font-semibold"
                 >
                   Save & Encrypt
                 </Button>

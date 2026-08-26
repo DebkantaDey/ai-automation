@@ -13,10 +13,12 @@ const bullmq_1 = require("@nestjs/bullmq");
 const workflows_controller_1 = require("./workflows.controller");
 const workflows_service_1 = require("./workflows.service");
 const workflow_engine_service_1 = require("./engine/workflow-engine.service");
+const dead_letter_queue_service_1 = require("./services/dead-letter-queue.service");
 const workflow_execution_processor_1 = require("./processors/workflow-execution.processor");
 const workflow_schema_1 = require("./schemas/workflow.schema");
 const workflow_version_schema_1 = require("./schemas/workflow-version.schema");
 const workflow_execution_schema_1 = require("./schemas/workflow-execution.schema");
+const dead_letter_job_schema_1 = require("./schemas/dead-letter-job.schema");
 const queue_constants_1 = require("../../core/queue/queue.constants");
 const ai_module_1 = require("../../integrations/ai/ai.module");
 const events_module_1 = require("../../core/events/events.module");
@@ -32,6 +34,7 @@ exports.WorkflowsModule = WorkflowsModule = __decorate([
                 { name: workflow_schema_1.Workflow.name, schema: workflow_schema_1.WorkflowSchema },
                 { name: workflow_version_schema_1.WorkflowVersion.name, schema: workflow_version_schema_1.WorkflowVersionSchema },
                 { name: workflow_execution_schema_1.WorkflowExecution.name, schema: workflow_execution_schema_1.WorkflowExecutionSchema },
+                { name: dead_letter_job_schema_1.DeadLetterJob.name, schema: dead_letter_job_schema_1.DeadLetterJobSchema },
             ]),
             bullmq_1.BullModule.registerQueue({
                 name: queue_constants_1.QUEUE_WORKFLOW_EXECUTION,
@@ -41,8 +44,18 @@ exports.WorkflowsModule = WorkflowsModule = __decorate([
             integrations_module_1.IntegrationsModule,
         ],
         controllers: [workflows_controller_1.WorkflowsController],
-        providers: [workflows_service_1.WorkflowsService, workflow_engine_service_1.WorkflowEngineService, workflow_execution_processor_1.WorkflowExecutionProcessor],
-        exports: [workflows_service_1.WorkflowsService, workflow_engine_service_1.WorkflowEngineService, mongoose_1.MongooseModule],
+        providers: [
+            workflows_service_1.WorkflowsService,
+            workflow_engine_service_1.WorkflowEngineService,
+            dead_letter_queue_service_1.DeadLetterQueueService,
+            workflow_execution_processor_1.WorkflowExecutionProcessor,
+        ],
+        exports: [
+            workflows_service_1.WorkflowsService,
+            workflow_engine_service_1.WorkflowEngineService,
+            dead_letter_queue_service_1.DeadLetterQueueService,
+            mongoose_1.MongooseModule,
+        ],
     })
 ], WorkflowsModule);
 //# sourceMappingURL=workflows.module.js.map

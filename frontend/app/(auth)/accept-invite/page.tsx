@@ -76,8 +76,8 @@ function AcceptInviteContent() {
 
   if (loading) {
     return (
-      <Card className="w-full max-w-md shadow-xl border-neutral-200 dark:border-neutral-800 text-center p-8">
-        <RefreshCw className="h-8 w-8 text-blue-600 animate-spin mx-auto mb-3" />
+      <Card className="w-full max-w-md shadow-lg border-neutral-200 text-center p-8 bg-white">
+        <RefreshCw className="h-8 w-8 text-neutral-800 animate-spin mx-auto mb-3" />
         <p className="text-xs text-neutral-500">Validating your invitation token...</p>
       </Card>
     );
@@ -85,19 +85,19 @@ function AcceptInviteContent() {
 
   if (error) {
     return (
-      <Card className="w-full max-w-md shadow-xl border-neutral-200 dark:border-neutral-800 text-center p-6">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-red-600 dark:bg-red-950/60 dark:text-red-400 mb-4">
+      <Card className="w-full max-w-md shadow-lg border-neutral-200 text-center p-6 bg-white">
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-red-600 mb-4">
           <AlertCircle className="h-6 w-6" />
         </div>
-        <CardTitle className="text-lg font-bold text-neutral-900 dark:text-white">
+        <CardTitle className="text-lg font-bold text-neutral-900">
           Invitation Expired or Invalid
         </CardTitle>
-        <CardDescription className="text-xs text-neutral-600 dark:text-neutral-400 mt-2">
+        <CardDescription className="text-xs text-neutral-600 mt-2">
           {error}
         </CardDescription>
         <div className="mt-6">
           <Link href="/login">
-            <Button variant="outline" className="w-full text-xs">
+            <Button variant="outline" className="w-full text-xs border-neutral-200">
               Go to Sign In
             </Button>
           </Link>
@@ -108,15 +108,15 @@ function AcceptInviteContent() {
 
   if (success) {
     return (
-      <Card className="w-full max-w-md shadow-xl border-neutral-200 dark:border-neutral-800 text-center p-6">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400 mb-4">
+      <Card className="w-full max-w-md shadow-lg border-neutral-200 text-center p-6 bg-white">
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-neutral-100 text-neutral-900 mb-4">
           <CheckCircle2 className="h-6 w-6" />
         </div>
-        <CardTitle className="text-lg font-bold text-neutral-900 dark:text-white">
+        <CardTitle className="text-lg font-bold text-neutral-900">
           Welcome to the Team!
         </CardTitle>
-        <CardDescription className="text-xs text-neutral-600 dark:text-neutral-400 mt-2">
-          You have successfully joined <span className="font-semibold text-neutral-900 dark:text-white">{inviteData?.organization?.name}</span> as <span className="font-semibold capitalize text-blue-600">{inviteData?.role}</span>.
+        <CardDescription className="text-xs text-neutral-600 mt-2">
+          You have successfully joined <span className="font-semibold text-neutral-900">{inviteData?.organization?.name}</span> as <span className="font-semibold capitalize text-neutral-900">{inviteData?.role}</span>.
         </CardDescription>
         <p className="text-[11px] text-neutral-400 mt-4">Redirecting to your workspace...</p>
       </Card>
@@ -124,12 +124,12 @@ function AcceptInviteContent() {
   }
 
   return (
-    <Card className="w-full max-w-md shadow-xl border-neutral-200 dark:border-neutral-800 text-center">
-      <CardHeader className="space-y-2 pb-4 border-b border-neutral-100 dark:border-neutral-900">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-500/30">
+    <Card className="w-full max-w-md shadow-lg border-neutral-200 bg-white text-center">
+      <CardHeader className="space-y-2 pb-4 border-b border-neutral-100">
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-neutral-900 text-white shadow-none">
           <Users className="h-6 w-6" />
         </div>
-        <CardTitle className="text-xl font-bold text-neutral-900 dark:text-white">
+        <CardTitle className="text-xl font-bold text-neutral-900">
           You&apos;ve Been Invited!
         </CardTitle>
         <CardDescription className="text-xs">
@@ -138,24 +138,24 @@ function AcceptInviteContent() {
       </CardHeader>
 
       <CardContent className="space-y-4 pt-6 text-left">
-        <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60 p-4 space-y-3">
+        <div className="rounded-xl border border-neutral-200 bg-neutral-50 p-4 space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-xs text-neutral-500">Organization:</span>
-            <span className="text-xs font-bold text-neutral-900 dark:text-white">
+            <span className="text-xs font-bold text-neutral-900">
               {inviteData?.organization?.name}
             </span>
           </div>
 
           <div className="flex items-center justify-between">
             <span className="text-xs text-neutral-500">Assigned Role:</span>
-            <Badge variant="outline" className="capitalize text-xs font-semibold">
+            <Badge variant="outline" className="capitalize text-xs font-semibold border-neutral-300 text-neutral-800">
               {inviteData?.role}
             </Badge>
           </div>
 
           <div className="flex items-center justify-between">
             <span className="text-xs text-neutral-500">Invited Email:</span>
-            <span className="text-xs font-mono text-neutral-700 dark:text-neutral-300">
+            <span className="text-xs font-mono text-neutral-700">
               {inviteData?.email}
             </span>
           </div>
@@ -164,15 +164,15 @@ function AcceptInviteContent() {
         <Button
           onClick={handleAccept}
           disabled={submitting}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-xs gap-2 py-2.5"
+          className="w-full bg-neutral-900 hover:bg-neutral-800 text-white text-xs gap-2 py-2.5"
         >
           <span>{submitting ? 'Joining Team...' : 'Accept Invitation & Join Team'}</span>
           <ArrowRight className="h-4 w-4" />
         </Button>
       </CardContent>
 
-      <CardFooter className="flex justify-center border-t border-neutral-100 dark:border-neutral-900 pt-4">
-        <Link href="/login" className="text-xs text-neutral-500 hover:text-blue-600">
+      <CardFooter className="flex justify-center border-t border-neutral-100 pt-4">
+        <Link href="/login" className="text-xs text-neutral-500 hover:text-neutral-900">
           Sign in with a different account
         </Link>
       </CardFooter>
@@ -182,7 +182,7 @@ function AcceptInviteContent() {
 
 export default function AcceptInvitePage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-neutral-50 dark:bg-neutral-950 p-4">
+    <div className="flex min-h-screen items-center justify-center bg-white p-4">
       <Suspense fallback={<div>Loading invitation...</div>}>
         <AcceptInviteContent />
       </Suspense>

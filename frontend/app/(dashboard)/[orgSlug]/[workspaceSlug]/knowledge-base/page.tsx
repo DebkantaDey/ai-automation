@@ -219,13 +219,13 @@ export default function KnowledgeBasePage() {
   return (
     <div className="space-y-6">
       {/* Top Header */}
-      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between border-b border-neutral-200/80 dark:border-neutral-800/80 pb-5">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between border-b border-neutral-200 pb-5">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-white">
+            <h1 className="text-xl font-bold tracking-tight text-neutral-900">
               Vector Knowledge Base & RAG
             </h1>
-            <Badge variant="emerald" className="text-[10px] font-mono">
+            <Badge variant="default" className="text-[10px] font-mono">
               Dense Embeddings
             </Badge>
           </div>
@@ -237,7 +237,7 @@ export default function KnowledgeBasePage() {
         <Button
           size="sm"
           onClick={() => setShowCreateKbModal(true)}
-          className="gap-1.5 text-xs bg-emerald-600 hover:bg-emerald-500 text-white font-semibold shadow-sm"
+          className="gap-1.5 text-xs bg-neutral-900 hover:bg-neutral-800 text-white font-semibold shadow-none"
         >
           <Plus className="h-3.5 w-3.5" />
           <span>New Collection</span>
@@ -248,8 +248,8 @@ export default function KnowledgeBasePage() {
         <div
           className={`p-3 rounded-lg text-xs flex items-center gap-2 border ${
             message.type === 'success'
-              ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400'
-              : 'bg-red-50 text-red-700 border-red-200 dark:bg-red-950/40 dark:text-red-400'
+              ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+              : 'bg-red-50 text-red-700 border-red-200'
           }`}
         >
           {message.type === 'success' ? <CheckCircle2 className="h-4 w-4" /> : <AlertCircle className="h-4 w-4" />}
@@ -280,13 +280,13 @@ export default function KnowledgeBasePage() {
                       onClick={() => setSelectedKb(kb)}
                       className={`cursor-pointer p-3.5 transition-all border ${
                         isSelected
-                          ? 'border-emerald-600 ring-2 ring-emerald-600/30 shadow-md bg-white dark:bg-neutral-900'
-                          : 'border-neutral-200/80 dark:border-neutral-800/80 hover:border-neutral-300 bg-white/90 dark:bg-neutral-900/90'
+                          ? 'border-neutral-900 ring-2 ring-neutral-900/10 shadow-sm bg-white'
+                          : 'border-neutral-200 hover:border-neutral-300 bg-white'
                       }`}
                     >
                       <div className="flex items-center justify-between">
                         <div className="space-y-0.5">
-                          <h3 className="text-xs font-bold text-neutral-900 dark:text-white">{kb.name}</h3>
+                          <h3 className="text-xs font-bold text-neutral-900">{kb.name}</h3>
                           <p className="text-[11px] text-neutral-500 line-clamp-1">{kb.description || 'No description'}</p>
                         </div>
                         <Badge variant="secondary" className="text-[10px] font-mono">
@@ -302,10 +302,10 @@ export default function KnowledgeBasePage() {
 
           {/* Indexed Documents Table */}
           {selectedKb && (
-            <Card className="border-neutral-200/80 dark:border-neutral-800/80">
-              <CardHeader className="py-3 px-4 flex flex-row items-center justify-between border-b border-neutral-100 dark:border-neutral-800">
+            <Card className="border-neutral-200">
+              <CardHeader className="py-3 px-4 flex flex-row items-center justify-between border-b border-neutral-100">
                 <div>
-                  <CardTitle className="text-xs font-bold text-neutral-900 dark:text-white">
+                  <CardTitle className="text-xs font-bold text-neutral-900">
                     Indexed Documents
                   </CardTitle>
                   <CardDescription className="text-[11px]">
@@ -327,13 +327,13 @@ export default function KnowledgeBasePage() {
                 {documents.length === 0 ? (
                   <p className="text-xs text-neutral-400 text-center py-8">No documents indexed in this collection yet.</p>
                 ) : (
-                  <div className="divide-y divide-neutral-100 dark:divide-neutral-800 text-xs">
+                  <div className="divide-y divide-neutral-100 text-xs">
                     {documents.map((doc) => (
                       <div key={doc._id} className="p-3 flex items-center justify-between">
                         <div className="space-y-0.5">
                           <div className="flex items-center gap-2">
-                            <FileText className="h-3.5 w-3.5 text-blue-500" />
-                            <span className="font-semibold text-neutral-900 dark:text-white text-xs">{doc.name}</span>
+                            <FileText className="h-3.5 w-3.5 text-neutral-700" />
+                            <span className="font-semibold text-neutral-900 text-xs">{doc.name}</span>
                           </div>
                           <p className="text-[10px] text-neutral-400 font-mono">
                             {doc.chunksCount || 0} vector chunks • {(doc.sizeBytes / 1024).toFixed(1)} KB
@@ -358,10 +358,10 @@ export default function KnowledgeBasePage() {
         {/* Right: RAG Q&A Assistant */}
         <div className="lg:col-span-7">
           {selectedKb ? (
-            <Card className="border-neutral-200/80 dark:border-neutral-800/80 flex flex-col h-full">
-              <CardHeader className="py-3 px-5 border-b border-neutral-100 dark:border-neutral-800">
-                <CardTitle className="text-sm font-bold text-neutral-900 dark:text-white flex items-center gap-2">
-                  <Sparkles className="h-4 w-4 text-emerald-600" />
+            <Card className="border-neutral-200 flex flex-col h-full">
+              <CardHeader className="py-3 px-5 border-b border-neutral-100">
+                <CardTitle className="text-sm font-bold text-neutral-900 flex items-center gap-2">
+                  <Sparkles className="h-4 w-4 text-neutral-700" />
                   <span>RAG Q&A Assistant ({selectedKb.name})</span>
                 </CardTitle>
                 <CardDescription className="text-xs">
@@ -382,7 +382,7 @@ export default function KnowledgeBasePage() {
                     <Button
                       type="submit"
                       disabled={isQuerying || !queryInput.trim()}
-                      className="text-xs bg-emerald-600 hover:bg-emerald-500 text-white gap-1.5 font-semibold shrink-0"
+                      className="text-xs bg-neutral-900 hover:bg-neutral-800 text-white gap-1.5 font-semibold shrink-0"
                     >
                       <Send className="h-3 w-3" />
                       <span>{isQuerying ? 'Searching...' : 'Ask RAG'}</span>
@@ -390,16 +390,16 @@ export default function KnowledgeBasePage() {
                   </div>
                 </form>
 
-                <div className="flex-1 min-h-[380px] rounded-xl border border-neutral-200/80 dark:border-neutral-800/80 bg-neutral-50/50 dark:bg-neutral-950 p-4 space-y-4 overflow-y-auto">
+                <div className="flex-1 min-h-[380px] rounded-xl border border-neutral-200 bg-neutral-50 p-4 space-y-4 overflow-y-auto">
                   {!queryResult && !isQuerying && (
                     <div className="h-full flex flex-col items-center justify-center text-neutral-400 text-xs py-20">
-                      <Database className="h-8 w-8 mb-2 opacity-40 text-emerald-500" />
+                      <Database className="h-8 w-8 mb-2 opacity-40 text-neutral-500" />
                       <p>Type a question above to synthesize answers from your vector indexed documents.</p>
                     </div>
                   )}
 
                   {isQuerying && (
-                    <div className="flex items-center gap-2 text-xs text-emerald-600 dark:text-emerald-400 py-10 justify-center animate-pulse">
+                    <div className="flex items-center gap-2 text-xs text-neutral-600 py-10 justify-center animate-pulse">
                       <span>Computing embeddings & retrieving top vector matches...</span>
                     </div>
                   )}
@@ -407,10 +407,10 @@ export default function KnowledgeBasePage() {
                   {queryResult && (
                     <div className="space-y-4">
                       {/* Synthesized Answer */}
-                      <div className="p-4 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 space-y-2 shadow-sm">
+                      <div className="p-4 rounded-xl bg-white border border-neutral-200 space-y-2 shadow-none">
                         <div className="flex items-center justify-between">
-                          <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider flex items-center gap-1 font-mono">
-                            <Sparkles className="h-3.5 w-3.5" />
+                          <span className="text-xs font-bold text-neutral-900 uppercase tracking-wider flex items-center gap-1 font-mono">
+                            <Sparkles className="h-3.5 w-3.5 text-neutral-700" />
                             Synthesized Resolution:
                           </span>
                           <button
@@ -419,13 +419,13 @@ export default function KnowledgeBasePage() {
                               setCopiedAnswer(true);
                               setTimeout(() => setCopiedAnswer(false), 2000);
                             }}
-                            className="text-[10px] text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 flex items-center gap-1 font-mono cursor-pointer"
+                            className="text-[10px] text-neutral-500 hover:text-neutral-900 flex items-center gap-1 font-mono cursor-pointer"
                           >
-                            {copiedAnswer ? <Check className="h-3 w-3 text-emerald-600" /> : <Copy className="h-3 w-3" />}
+                            {copiedAnswer ? <Check className="h-3 w-3 text-emerald-600" /> : <Copy className="h-3 w-3 text-neutral-600" />}
                             <span>{copiedAnswer ? 'Copied' : 'Copy'}</span>
                           </button>
                         </div>
-                        <p className="text-xs text-neutral-800 dark:text-neutral-200 leading-relaxed whitespace-pre-wrap">
+                        <p className="text-xs text-neutral-800 leading-relaxed whitespace-pre-wrap">
                           {queryResult.answer}
                         </p>
                       </div>
@@ -440,13 +440,13 @@ export default function KnowledgeBasePage() {
                             {queryResult.sources.map((src: any, i: number) => (
                               <div
                                 key={i}
-                                className="p-3 rounded-lg bg-neutral-100 dark:bg-neutral-900 border text-[11px] font-mono space-y-1"
+                                className="p-3 rounded-lg bg-white border border-neutral-200 text-[11px] font-mono space-y-1"
                               >
                                 <div className="flex justify-between text-neutral-500 text-[10px]">
                                   <span>Source #{i + 1} ({src.metadata?.documentName || 'Document'})</span>
-                                  <span className="text-emerald-600 font-bold">Similarity: {(src.score * 100).toFixed(1)}%</span>
+                                  <span className="text-neutral-900 font-bold">Similarity: {(src.score * 100).toFixed(1)}%</span>
                                 </div>
-                                <p className="text-neutral-700 dark:text-neutral-300 font-sans text-xs italic">
+                                <p className="text-neutral-700 font-sans text-xs italic">
                                   "{src.text}"
                                 </p>
                               </div>
@@ -469,24 +469,24 @@ export default function KnowledgeBasePage() {
 
       {/* Create KB Modal */}
       {showCreateKbModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-          <div className="bg-white dark:bg-neutral-900 rounded-2xl shadow-2xl max-w-md w-full p-6 space-y-4 border border-neutral-200 dark:border-neutral-800 animate-in fade-in-0 zoom-in-95">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 space-y-4 border border-neutral-200 animate-in fade-in-0 zoom-in-95">
             <div className="flex items-center justify-between">
-              <h2 className="text-sm font-bold text-neutral-900 dark:text-white">Create Knowledge Collection</h2>
+              <h2 className="text-sm font-bold text-neutral-900">Create Knowledge Collection</h2>
               <button onClick={() => setShowCreateKbModal(false)} className="text-neutral-400 hover:text-neutral-600 text-sm cursor-pointer">✕</button>
             </div>
             <form onSubmit={handleCreateKb} className="space-y-3.5">
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">Collection Name *</label>
+                <label className="text-xs font-semibold text-neutral-700">Collection Name *</label>
                 <Input required placeholder="e.g. Product Knowledge Base" value={kbName} onChange={(e) => setKbName(e.target.value)} className="text-xs" />
               </div>
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">Description</label>
+                <label className="text-xs font-semibold text-neutral-700">Description</label>
                 <Input placeholder="Documentation, customer policies, and internal guides" value={kbDesc} onChange={(e) => setKbDesc(e.target.value)} className="text-xs" />
               </div>
-              <div className="flex justify-end gap-2 pt-2 border-t border-neutral-100 dark:border-neutral-800">
+              <div className="flex justify-end gap-2 pt-2 border-t border-neutral-100">
                 <Button type="button" variant="outline" size="sm" onClick={() => setShowCreateKbModal(false)}>Cancel</Button>
-                <Button type="submit" isLoading={isSubmitting} size="sm" className="bg-emerald-600 hover:bg-emerald-500 text-white">
+                <Button type="submit" isLoading={isSubmitting} size="sm" className="bg-neutral-900 hover:bg-neutral-800 text-white">
                   Create Collection
                 </Button>
               </div>
@@ -497,31 +497,31 @@ export default function KnowledgeBasePage() {
 
       {/* Add Document Modal */}
       {showUploadModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-          <div className="bg-white dark:bg-neutral-900 rounded-2xl shadow-2xl max-w-lg w-full p-6 space-y-4 border border-neutral-200 dark:border-neutral-800 animate-in fade-in-0 zoom-in-95">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 space-y-4 border border-neutral-200 animate-in fade-in-0 zoom-in-95">
             <div className="flex items-center justify-between">
-              <h2 className="text-sm font-bold text-neutral-900 dark:text-white">Add Document to {selectedKb?.name}</h2>
+              <h2 className="text-sm font-bold text-neutral-900">Add Document to {selectedKb?.name}</h2>
               <button onClick={() => setShowUploadModal(false)} className="text-neutral-400 hover:text-neutral-600 text-sm cursor-pointer">✕</button>
             </div>
             <form onSubmit={handleAddDocument} className="space-y-3.5">
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">Document Title *</label>
+                <label className="text-xs font-semibold text-neutral-700">Document Title *</label>
                 <Input required placeholder="e.g. Terms of Service & SLA Guide v2.1" value={docName} onChange={(e) => setDocName(e.target.value)} className="text-xs" />
               </div>
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">Document Text Content *</label>
+                <label className="text-xs font-semibold text-neutral-700">Document Text Content *</label>
                 <textarea
                   required
                   rows={8}
                   placeholder="Paste documentation text, markdown, policy notes, or FAQs here..."
                   value={docText}
                   onChange={(e) => setDocText(e.target.value)}
-                  className="w-full rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 p-2.5 text-xs text-neutral-900 dark:text-white focus:outline-none focus:border-emerald-500 font-mono leading-relaxed"
+                  className="w-full rounded-lg border border-neutral-200 bg-white p-2.5 text-xs text-neutral-900 focus:outline-none focus:border-neutral-900 font-mono leading-relaxed"
                 />
               </div>
-              <div className="flex justify-end gap-2 pt-2 border-t border-neutral-100 dark:border-neutral-800">
+              <div className="flex justify-end gap-2 pt-2 border-t border-neutral-100">
                 <Button type="button" variant="outline" size="sm" onClick={() => setShowUploadModal(false)}>Cancel</Button>
-                <Button type="submit" isLoading={isSubmitting} size="sm" className="bg-emerald-600 hover:bg-emerald-500 text-white">
+                <Button type="submit" isLoading={isSubmitting} size="sm" className="bg-neutral-900 hover:bg-neutral-800 text-white">
                   Upload & Generate Embeddings
                 </Button>
               </div>

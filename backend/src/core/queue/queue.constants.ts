@@ -8,6 +8,7 @@ export const QUEUE_INTEGRATION_TASKS = 'integration-tasks';
 export const QUEUE_FILE_PROCESSING = 'file-processing';
 export const QUEUE_BILLING_EVENTS = 'billing-events';
 export const QUEUE_AUDIT_LOGS = 'audit-logs';
+export const QUEUE_DEAD_LETTER = 'dead-letter-queue';
 
 // Job Names
 export const JOB_EXECUTE_WORKFLOW = 'execute-workflow';
@@ -19,3 +20,4 @@ export const JOB_EXECUTE_INTEGRATION = 'execute-integration';
 export const JOB_PROCESS_FILE = 'process-file';
 export const JOB_PROCESS_BILLING = 'process-billing';
 export const JOB_RECORD_AUDIT = 'record-audit';
+export const JOB_REPLAY_DEAD_LETTER = 'replay-dead-letter';

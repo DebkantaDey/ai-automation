@@ -29,6 +29,14 @@ let HealthController = class HealthController {
             () => this.memory.checkHeap('memory_heap', 300 * 1024 * 1024),
         ]);
     }
+    liveness() {
+        return { status: 'ok', timestamp: new Date().toISOString() };
+    }
+    readiness() {
+        return this.health.check([
+            () => this.mongooseIndicator.pingCheck('mongodb'),
+        ]);
+    }
 };
 exports.HealthController = HealthController;
 __decorate([
@@ -40,6 +48,23 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], HealthController.prototype, "check", null);
+__decorate([
+    (0, tenant_decorators_1.Public)(),
+    (0, common_1.Get)('liveness'),
+    (0, swagger_1.ApiOperation)({ summary: 'Kubernetes/Docker liveness probe' }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], HealthController.prototype, "liveness", null);
+__decorate([
+    (0, tenant_decorators_1.Public)(),
+    (0, common_1.Get)('readiness'),
+    (0, terminus_1.HealthCheck)(),
+    (0, swagger_1.ApiOperation)({ summary: 'Kubernetes/Docker readiness probe' }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], HealthController.prototype, "readiness", null);
 exports.HealthController = HealthController = __decorate([
     (0, swagger_1.ApiTags)('Health'),
     (0, common_1.Controller)('health'),

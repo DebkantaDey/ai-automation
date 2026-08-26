@@ -7,7 +7,7 @@ import { CurrentOrganizationId, CurrentWorkspaceId, CurrentUser, RequireTenant }
 import { RequirePermissions } from '../../core/auth/decorators/permissions.decorator';
 import { Permission } from '../../core/common/enums/permission.enum';
 
-@ApiTags('Automation Templates')
+@ApiTags('Automation & Vertical Templates')
 @Controller('templates')
 export class TemplatesController {
   constructor(private readonly templatesService: TemplatesService) {}
@@ -18,6 +18,37 @@ export class TemplatesController {
   @ApiOperation({ summary: 'List pre-built automation workflow templates' })
   listTemplates() {
     return this.templatesService.listTemplates();
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, PermissionsGuard)
+  @Get('verticals')
+  @ApiOperation({ summary: 'List industry-specific business vertical blueprints (Real Estate, Healthcare, Coaching, Salons, Contractors)' })
+  listVerticals() {
+    return this.templatesService.listVerticals();
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, PermissionsGuard)
+  @Get('verticals/:slug')
+  @ApiOperation({ summary: 'Get complete vertical blueprint specifications' })
+  getVerticalBySlug(@Param('slug') slug: string) {
+    return this.templatesService.getVerticalBySlug(slug);
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, PermissionsGuard)
+  @RequireTenant()
+  @Post('verticals/:slug/instantiate')
+  @RequirePermissions(Permission.WORKSPACE_UPDATE)
+  @ApiOperation({ summary: '1-Click instantiate vertical blueprint (Configures CRM, AI Agent, Workflows, Services, and sample Invoices)' })
+  async instantiateVertical(
+    @Param('slug') slug: string,
+    @CurrentOrganizationId() orgId: string,
+    @CurrentWorkspaceId() wsId: string,
+    @CurrentUser('id') userId: string,
+  ) {
+    return this.templatesService.instantiateVertical(slug, orgId, wsId, userId);
   }
 
   @ApiBearerAuth()

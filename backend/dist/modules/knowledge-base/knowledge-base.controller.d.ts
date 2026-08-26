@@ -28,6 +28,12 @@ export declare class KnowledgeBaseController {
         limit: number;
         totalPages: number;
     }>;
+    vectorSearch(id: string, orgId: string, wsId: string, query: string, topK?: number): Promise<{
+        chunkId: string;
+        text: string;
+        score: number;
+        metadata: any;
+    }[]>;
     askQuestion(id: string, orgId: string, wsId: string, question: string): Promise<{
         answer: string;
         sources: {

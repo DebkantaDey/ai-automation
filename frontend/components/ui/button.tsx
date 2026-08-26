@@ -4,27 +4,27 @@ import { Loader2 } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-lg text-xs font-semibold transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 disabled:pointer-events-none disabled:opacity-50 cursor-pointer active:scale-[0.98]',
+  'inline-flex items-center justify-center whitespace-nowrap rounded-lg text-xs font-semibold transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 disabled:pointer-events-none disabled:opacity-50 cursor-pointer active:scale-[0.98]',
   {
     variants: {
       variant: {
         default:
-          'bg-blue-600 text-white shadow-sm shadow-blue-500/25 hover:bg-blue-500 hover:shadow-md hover:shadow-blue-500/30 border border-blue-500/30',
+          'bg-neutral-900 text-white shadow-sm hover:bg-neutral-800 border border-neutral-900',
         destructive:
-          'bg-rose-600 text-white shadow-sm shadow-rose-500/25 hover:bg-rose-500 hover:shadow-md hover:shadow-rose-500/30 border border-rose-500/30',
+          'bg-rose-600 text-white shadow-sm hover:bg-rose-500 border border-rose-600',
         outline:
-          'border border-neutral-200/80 bg-white/80 text-neutral-800 shadow-sm hover:bg-neutral-100/80 hover:text-neutral-900 hover:border-neutral-300 dark:border-neutral-800 dark:bg-neutral-900/80 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:hover:text-white dark:hover:border-neutral-700',
+          'border border-neutral-200 bg-white text-neutral-800 shadow-sm hover:bg-neutral-50 hover:text-neutral-900 hover:border-neutral-300',
         secondary:
-          'bg-neutral-100 text-neutral-800 shadow-sm hover:bg-neutral-200/80 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700/80',
+          'bg-neutral-100 text-neutral-800 shadow-sm hover:bg-neutral-200/80',
         ghost:
-          'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-800/80 dark:hover:text-neutral-100',
-        link: 'text-blue-600 dark:text-blue-400 underline-offset-4 hover:underline p-0 h-auto',
+          'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900',
+        link: 'text-neutral-900 underline-offset-4 hover:underline p-0 h-auto font-medium',
         gradient:
-          'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-sm shadow-indigo-500/25 hover:from-blue-500 hover:to-indigo-500 hover:shadow-md hover:shadow-indigo-500/30 border border-indigo-400/20',
+          'bg-neutral-900 text-white shadow-sm hover:bg-neutral-800 border border-neutral-900',
         emerald:
-          'bg-emerald-600 text-white shadow-sm shadow-emerald-500/25 hover:bg-emerald-500 hover:shadow-md hover:shadow-emerald-500/30 border border-emerald-500/30',
+          'bg-neutral-900 text-white shadow-sm hover:bg-neutral-800 border border-neutral-900',
         purple:
-          'bg-purple-600 text-white shadow-sm shadow-purple-500/25 hover:bg-purple-500 hover:shadow-md hover:shadow-purple-500/30 border border-purple-500/30',
+          'bg-neutral-900 text-white shadow-sm hover:bg-neutral-800 border border-neutral-900',
       },
       size: {
         default: 'h-8.5 px-3.5 py-1.5 gap-1.5',

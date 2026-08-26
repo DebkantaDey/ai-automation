@@ -118,13 +118,13 @@ export default function LeadsScoringPage() {
   return (
     <div className="space-y-6">
       {/* Top Header */}
-      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between border-b border-neutral-200/80 dark:border-neutral-800/80 pb-5">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between border-b border-neutral-200 pb-5">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-white">
+            <h1 className="text-xl font-bold tracking-tight text-neutral-900">
               Leads & AI Intent Scoring
             </h1>
-            <Badge variant="purple" className="text-[10px] font-mono">
+            <Badge variant="default" className="text-[10px] font-mono">
               Predictive ML
             </Badge>
           </div>
@@ -134,12 +134,12 @@ export default function LeadsScoringPage() {
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="flex items-center rounded-lg border border-neutral-200 dark:border-neutral-800 p-0.5 bg-neutral-50 dark:bg-neutral-900">
+          <div className="flex items-center rounded-lg border border-neutral-200 p-0.5 bg-neutral-50">
             <button
               onClick={() => setViewMode('table')}
-              className={`p-1.5 rounded-md text-xs transition-colors ${
+              className={`p-1.5 rounded-md text-xs transition-colors cursor-pointer ${
                 viewMode === 'table'
-                  ? 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white shadow-sm'
+                  ? 'bg-white text-neutral-900 shadow-sm'
                   : 'text-neutral-500 hover:text-neutral-900'
               }`}
             >
@@ -147,9 +147,9 @@ export default function LeadsScoringPage() {
             </button>
             <button
               onClick={() => setViewMode('kanban')}
-              className={`p-1.5 rounded-md text-xs transition-colors ${
+              className={`p-1.5 rounded-md text-xs transition-colors cursor-pointer ${
                 viewMode === 'kanban'
-                  ? 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white shadow-sm'
+                  ? 'bg-white text-neutral-900 shadow-sm'
                   : 'text-neutral-500 hover:text-neutral-900'
               }`}
             >
@@ -157,7 +157,7 @@ export default function LeadsScoringPage() {
             </button>
           </div>
 
-          <Button size="sm" className="text-xs gap-1.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold">
+          <Button size="sm" className="text-xs gap-1.5 bg-neutral-900 hover:bg-neutral-800 text-white font-semibold">
             <Plus className="h-3.5 w-3.5" />
             <span>Add Lead</span>
           </Button>
@@ -181,10 +181,10 @@ export default function LeadsScoringPage() {
             <button
               key={stage}
               onClick={() => setStatusFilter(stage)}
-              className={`px-3 py-1 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors ${
+              className={`px-3 py-1 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
                 statusFilter === stage
-                  ? 'bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 shadow-sm'
-                  : 'bg-neutral-100 dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200'
+                  ? 'bg-neutral-900 text-white shadow-sm'
+                  : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
               }`}
             >
               {stage}
@@ -195,12 +195,12 @@ export default function LeadsScoringPage() {
 
       {/* Table View */}
       {viewMode === 'table' && (
-        <Card className="border-neutral-200/80 dark:border-neutral-800/80">
+        <Card className="border-neutral-200">
           <CardContent className="p-0">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="border-b border-neutral-100 dark:border-neutral-800 text-neutral-400 font-medium bg-neutral-50/60 dark:bg-neutral-900/50">
+                  <tr className="border-b border-neutral-100 text-neutral-400 font-medium bg-neutral-50">
                     <th className="py-3 px-5">Lead / Contact</th>
                     <th className="py-3 px-5">Company</th>
                     <th className="py-3 px-5">Source</th>
@@ -210,22 +210,22 @@ export default function LeadsScoringPage() {
                     <th className="py-3 px-5 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
+                <tbody className="divide-y divide-neutral-100">
                   {filteredLeads.map((lead) => (
                     <tr
                       key={lead.id}
                       onClick={() => setSelectedLead(lead)}
-                      className="hover:bg-neutral-50/80 dark:hover:bg-neutral-900/60 cursor-pointer transition-colors"
+                      className="hover:bg-neutral-50 cursor-pointer transition-colors"
                     >
                       <td className="py-3 px-5">
-                        <div className="font-semibold text-neutral-900 dark:text-white">{lead.name}</div>
+                        <div className="font-semibold text-neutral-900">{lead.name}</div>
                         <div className="text-[11px] text-neutral-400 font-mono flex items-center gap-2 mt-0.5">
                           <span>{lead.email}</span>
                           <span>•</span>
                           <span>{lead.phone}</span>
                         </div>
                       </td>
-                      <td className="py-3 px-5 font-medium text-neutral-800 dark:text-neutral-200">{lead.company}</td>
+                      <td className="py-3 px-5 font-medium text-neutral-800">{lead.company}</td>
                       <td className="py-3 px-5 text-neutral-500 font-mono">{lead.source}</td>
                       <td className="py-3 px-5">
                         <Badge
@@ -238,13 +238,7 @@ export default function LeadsScoringPage() {
                       <td className="py-3 px-5">
                         <div className="flex items-center gap-2">
                           <span
-                            className={`font-mono font-bold px-2 py-0.5 rounded text-xs ${
-                              lead.leadScore >= 80
-                                ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-400 border border-emerald-200'
-                                : lead.leadScore >= 60
-                                ? 'bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-400 border border-blue-200'
-                                : 'bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400'
-                            }`}
+                            className="font-mono font-bold px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800 border border-neutral-200"
                           >
                             {lead.leadScore}/100
                           </span>
@@ -255,7 +249,7 @@ export default function LeadsScoringPage() {
                         {new Date(lead.createdAt).toLocaleDateString()}
                       </td>
                       <td className="py-3 px-5 text-right">
-                        <Button variant="ghost" size="sm" className="h-6 px-2 text-xs text-blue-600 hover:text-blue-500">
+                        <Button variant="ghost" size="sm" className="h-6 px-2 text-xs text-neutral-700 hover:text-neutral-900">
                           <span>Details</span>
                           <ArrowRight className="h-3 w-3 ml-1" />
                         </Button>
@@ -276,8 +270,8 @@ export default function LeadsScoringPage() {
             const stageLeads = filteredLeads.filter((l) => l.status === stage);
 
             return (
-              <div key={stage} className="rounded-xl border border-neutral-200/80 dark:border-neutral-800/80 bg-neutral-50/50 dark:bg-neutral-900/30 p-2.5 flex flex-col space-y-2.5 min-h-[450px]">
-                <div className="flex items-center justify-between pb-1 border-b border-neutral-200/60 dark:border-neutral-800 text-xs font-bold text-neutral-700 dark:text-neutral-300">
+              <div key={stage} className="rounded-xl border border-neutral-200 bg-neutral-50/50 p-2.5 flex flex-col space-y-2.5 min-h-[450px]">
+                <div className="flex items-center justify-between pb-1 border-b border-neutral-200 text-xs font-bold text-neutral-700">
                   <span>{stage}</span>
                   <Badge variant="secondary" className="text-[9px] font-mono">
                     {stageLeads.length}
@@ -289,11 +283,11 @@ export default function LeadsScoringPage() {
                     <Card
                       key={lead.id}
                       onClick={() => setSelectedLead(lead)}
-                      className="p-3 cursor-pointer hover:border-blue-500/50 hover:shadow-sm transition-all space-y-2"
+                      className="p-3 cursor-pointer hover:border-neutral-300 hover:shadow-sm transition-all space-y-2"
                     >
                       <div className="flex items-center justify-between">
-                        <span className="font-semibold text-xs text-neutral-900 dark:text-white">{lead.name}</span>
-                        <span className="font-mono text-[10px] font-bold text-emerald-600">{lead.leadScore}</span>
+                        <span className="font-semibold text-xs text-neutral-900">{lead.name}</span>
+                        <span className="font-mono text-[10px] font-bold text-neutral-800">{lead.leadScore}</span>
                       </div>
                       <p className="text-[11px] text-neutral-500 truncate">{lead.company}</p>
                       <p className="text-[10px] text-neutral-400 font-mono">{lead.source}</p>
@@ -308,43 +302,43 @@ export default function LeadsScoringPage() {
 
       {/* Lead Score Drawer / Modal */}
       {selectedLead && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-          <div className="bg-white dark:bg-neutral-900 rounded-2xl shadow-2xl max-w-lg w-full p-6 space-y-4 border border-neutral-200 dark:border-neutral-800 animate-in fade-in-0 zoom-in-95">
-            <div className="flex items-center justify-between border-b border-neutral-100 dark:border-neutral-800 pb-3">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 space-y-4 border border-neutral-200 animate-in fade-in-0 zoom-in-95">
+            <div className="flex items-center justify-between border-b border-neutral-100 pb-3">
               <div>
-                <h2 className="text-sm font-bold text-neutral-900 dark:text-white">{selectedLead.name}</h2>
+                <h2 className="text-sm font-bold text-neutral-900">{selectedLead.name}</h2>
                 <p className="text-xs text-neutral-500">{selectedLead.company}</p>
               </div>
               <button onClick={() => setSelectedLead(null)} className="text-neutral-400 hover:text-neutral-600 text-sm cursor-pointer">✕</button>
             </div>
 
-            <div className="p-4 rounded-xl bg-purple-50/60 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-900 space-y-2">
+            <div className="p-4 rounded-xl bg-neutral-50 border border-neutral-200 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-purple-700 dark:text-purple-300 flex items-center gap-1.5">
-                  <Sparkles className="h-4 w-4" />
+                <span className="text-xs font-bold text-neutral-900 flex items-center gap-1.5">
+                  <Sparkles className="h-4 w-4 text-neutral-700" />
                   AI Qualification & Scoring Rationale
                 </span>
-                <span className="text-sm font-bold font-mono text-purple-700 dark:text-purple-300">
+                <span className="text-sm font-bold font-mono text-neutral-900">
                   {selectedLead.leadScore} / 100
                 </span>
               </div>
-              <p className="text-xs text-purple-900 dark:text-purple-200 leading-relaxed">
+              <p className="text-xs text-neutral-700 leading-relaxed">
                 {selectedLead.scoreReason}
               </p>
             </div>
 
-            <div className="space-y-2 text-xs divide-y divide-neutral-100 dark:divide-neutral-800">
+            <div className="space-y-2 text-xs divide-y divide-neutral-100">
               <div className="py-2 flex justify-between">
                 <span className="text-neutral-500">Email</span>
-                <span className="font-semibold text-neutral-900 dark:text-white">{selectedLead.email}</span>
+                <span className="font-semibold text-neutral-900">{selectedLead.email}</span>
               </div>
               <div className="py-2 flex justify-between">
                 <span className="text-neutral-500">Phone</span>
-                <span className="font-semibold text-neutral-900 dark:text-white">{selectedLead.phone}</span>
+                <span className="font-semibold text-neutral-900">{selectedLead.phone}</span>
               </div>
               <div className="py-2 flex justify-between">
                 <span className="text-neutral-500">Inbound Channel</span>
-                <span className="font-mono text-neutral-700 dark:text-neutral-300">{selectedLead.source}</span>
+                <span className="font-mono text-neutral-700">{selectedLead.source}</span>
               </div>
               <div className="py-2 flex justify-between">
                 <span className="text-neutral-500">Stage</span>
@@ -352,10 +346,10 @@ export default function LeadsScoringPage() {
               </div>
             </div>
 
-            <div className="flex justify-end gap-2 pt-2 border-t border-neutral-100 dark:border-neutral-800">
+            <div className="flex justify-end gap-2 pt-2 border-t border-neutral-100">
               <Button size="sm" variant="outline" onClick={() => setSelectedLead(null)}>Close</Button>
               <Link href={`/${orgSlug}/${wsSlug}/inbox`}>
-                <Button size="sm" className="bg-blue-600 hover:bg-blue-500 text-white">Open in Inbox</Button>
+                <Button size="sm" className="bg-neutral-900 hover:bg-neutral-800 text-white">Open in Inbox</Button>
               </Link>
             </div>
           </div>

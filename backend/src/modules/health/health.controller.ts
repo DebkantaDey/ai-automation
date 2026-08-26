@@ -27,4 +27,21 @@ export class HealthController {
       () => this.memory.checkHeap('memory_heap', 300 * 1024 * 1024),
     ]);
   }
+
+  @Public()
+  @Get('liveness')
+  @ApiOperation({ summary: 'Kubernetes/Docker liveness probe' })
+  liveness() {
+    return { status: 'ok', timestamp: new Date().toISOString() };
+  }
+
+  @Public()
+  @Get('readiness')
+  @HealthCheck()
+  @ApiOperation({ summary: 'Kubernetes/Docker readiness probe' })
+  readiness() {
+    return this.health.check([
+      () => this.mongooseIndicator.pingCheck('mongodb'),
+    ]);
+  }
 }

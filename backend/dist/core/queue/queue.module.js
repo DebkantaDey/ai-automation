@@ -43,7 +43,7 @@ exports.QueueModule = QueueModule = __decorate([
                     };
                 },
             }),
-            bullmq_1.BullModule.registerQueue({ name: queue_constants_1.QUEUE_WORKFLOW_EXECUTION }, { name: queue_constants_1.QUEUE_AI_TASKS }, { name: queue_constants_1.QUEUE_WEBHOOK_DISPATCH }, { name: queue_constants_1.QUEUE_EMAIL_DISPATCH }, { name: queue_constants_1.QUEUE_NOTIFICATIONS }, { name: queue_constants_1.QUEUE_INTEGRATION_TASKS }, { name: queue_constants_1.QUEUE_FILE_PROCESSING }, { name: queue_constants_1.QUEUE_BILLING_EVENTS }, { name: queue_constants_1.QUEUE_AUDIT_LOGS }),
+            bullmq_1.BullModule.registerQueue({ name: queue_constants_1.QUEUE_WORKFLOW_EXECUTION }, { name: queue_constants_1.QUEUE_AI_TASKS }, { name: queue_constants_1.QUEUE_WEBHOOK_DISPATCH }, { name: queue_constants_1.QUEUE_EMAIL_DISPATCH }, { name: queue_constants_1.QUEUE_NOTIFICATIONS }, { name: queue_constants_1.QUEUE_INTEGRATION_TASKS }, { name: queue_constants_1.QUEUE_FILE_PROCESSING }, { name: queue_constants_1.QUEUE_BILLING_EVENTS }, { name: queue_constants_1.QUEUE_AUDIT_LOGS }, { name: queue_constants_1.QUEUE_DEAD_LETTER }),
         ],
         exports: [bullmq_1.BullModule],
     })

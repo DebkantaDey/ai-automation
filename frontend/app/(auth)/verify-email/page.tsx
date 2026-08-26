@@ -87,12 +87,12 @@ function VerifyEmailContent() {
   };
 
   return (
-    <Card className="w-full max-w-md shadow-xl border-neutral-200 dark:border-neutral-800 text-center">
+    <Card className="w-full max-w-md shadow-lg border-neutral-200 bg-white text-center">
       <CardHeader className="space-y-2 pb-4">
-        <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-white shadow-md shadow-blue-500/30">
+        <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-900 text-white shadow-none">
           <Cpu className="h-6 w-6" />
         </div>
-        <CardTitle className="text-xl font-bold text-neutral-900 dark:text-white">
+        <CardTitle className="text-xl font-bold text-neutral-900">
           Email Verification
         </CardTitle>
         <CardDescription className="text-xs">
@@ -103,20 +103,20 @@ function VerifyEmailContent() {
       <CardContent className="space-y-4">
         {status === 'verifying' && (
           <div className="py-6 space-y-3">
-            <RefreshCw className="h-8 w-8 text-blue-600 animate-spin mx-auto" />
-            <p className="text-xs text-neutral-600 dark:text-neutral-300">{message}</p>
+            <RefreshCw className="h-8 w-8 text-neutral-800 animate-spin mx-auto" />
+            <p className="text-xs text-neutral-600">{message}</p>
           </div>
         )}
 
         {status === 'success' && (
           <div className="py-4 space-y-3">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400">
+            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-neutral-100 text-neutral-900">
               <CheckCircle2 className="h-6 w-6" />
             </div>
-            <p className="text-xs text-neutral-700 dark:text-neutral-300 font-medium">{message}</p>
+            <p className="text-xs text-neutral-700 font-medium">{message}</p>
             <p className="text-[11px] text-neutral-400">Redirecting to your workspace...</p>
             <Link href="/login?verified=true">
-              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-xs mt-2">
+              <Button className="w-full bg-neutral-900 hover:bg-neutral-800 text-white text-xs mt-2">
                 Continue to Dashboard
               </Button>
             </Link>
@@ -125,13 +125,13 @@ function VerifyEmailContent() {
 
         {status === 'error' && (
           <div className="space-y-4 text-left">
-            <div className="flex items-center gap-2 p-3 rounded-lg bg-red-50 text-red-700 text-xs border border-red-200 dark:bg-red-950/40 dark:text-red-400 dark:border-red-900">
+            <div className="flex items-center gap-2 p-3 rounded-lg bg-red-50 text-red-700 text-xs border border-red-200">
               <AlertCircle className="h-4 w-4 shrink-0" />
               <span>{message}</span>
             </div>
 
-            <div className="border-t border-neutral-100 dark:border-neutral-900 pt-3">
-              <p className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-2">
+            <div className="border-t border-neutral-100 pt-3">
+              <p className="text-xs font-semibold text-neutral-700 mb-2">
                 Resend verification email:
               </p>
               <form onSubmit={handleResend} className="space-y-2">
@@ -146,12 +146,12 @@ function VerifyEmailContent() {
                 <Button
                   type="submit"
                   disabled={resending}
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-xs"
+                  className="w-full bg-neutral-900 hover:bg-neutral-800 text-white text-xs"
                 >
                   {resending ? 'Sending...' : 'Resend Verification Link'}
                 </Button>
                 {resendSuccess && (
-                  <p className="text-[11px] text-emerald-600 dark:text-emerald-400 mt-1">
+                  <p className="text-[11px] text-emerald-600 mt-1">
                     {resendSuccess}
                   </p>
                 )}
@@ -163,7 +163,7 @@ function VerifyEmailContent() {
         {status === 'idle' && (
           <form onSubmit={handleManualVerify} className="space-y-3 text-left">
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+              <label className="text-xs font-semibold text-neutral-700">
                 Account Email
               </label>
               <Input
@@ -176,7 +176,7 @@ function VerifyEmailContent() {
               />
             </div>
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+              <label className="text-xs font-semibold text-neutral-700">
                 Verification Token
               </label>
               <Input
@@ -187,15 +187,15 @@ function VerifyEmailContent() {
                 required
               />
             </div>
-            <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-xs">
+            <Button type="submit" className="w-full bg-neutral-900 hover:bg-neutral-800 text-white text-xs">
               Verify Account
             </Button>
           </form>
         )}
       </CardContent>
 
-      <CardFooter className="flex justify-center border-t border-neutral-100 dark:border-neutral-900 pt-4">
-        <Link href="/login" className="text-xs text-neutral-500 hover:text-blue-600">
+      <CardFooter className="flex justify-center border-t border-neutral-100 pt-4">
+        <Link href="/login" className="text-xs text-neutral-500 hover:text-neutral-900">
           Return to Sign In
         </Link>
       </CardFooter>
@@ -205,7 +205,7 @@ function VerifyEmailContent() {
 
 export default function VerifyEmailPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-neutral-50 dark:bg-neutral-950 p-4">
+    <div className="flex min-h-screen items-center justify-center bg-white p-4">
       <Suspense fallback={<div>Loading verification...</div>}>
         <VerifyEmailContent />
       </Suspense>

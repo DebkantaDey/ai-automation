@@ -29,6 +29,15 @@ let TemplatesController = class TemplatesController {
     listTemplates() {
         return this.templatesService.listTemplates();
     }
+    listVerticals() {
+        return this.templatesService.listVerticals();
+    }
+    getVerticalBySlug(slug) {
+        return this.templatesService.getVerticalBySlug(slug);
+    }
+    async instantiateVertical(slug, orgId, wsId, userId) {
+        return this.templatesService.instantiateVertical(slug, orgId, wsId, userId);
+    }
     getTemplateBySlug(slug) {
         return this.templatesService.getTemplateBySlug(slug);
     }
@@ -46,6 +55,40 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], TemplatesController.prototype, "listTemplates", null);
+__decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, permissions_guard_1.PermissionsGuard),
+    (0, common_1.Get)('verticals'),
+    (0, swagger_1.ApiOperation)({ summary: 'List industry-specific business vertical blueprints (Real Estate, Healthcare, Coaching, Salons, Contractors)' }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], TemplatesController.prototype, "listVerticals", null);
+__decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, permissions_guard_1.PermissionsGuard),
+    (0, common_1.Get)('verticals/:slug'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get complete vertical blueprint specifications' }),
+    __param(0, (0, common_1.Param)('slug')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], TemplatesController.prototype, "getVerticalBySlug", null);
+__decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, permissions_guard_1.PermissionsGuard),
+    (0, tenant_decorators_1.RequireTenant)(),
+    (0, common_1.Post)('verticals/:slug/instantiate'),
+    (0, permissions_decorator_1.RequirePermissions)(permission_enum_1.Permission.WORKSPACE_UPDATE),
+    (0, swagger_1.ApiOperation)({ summary: '1-Click instantiate vertical blueprint (Configures CRM, AI Agent, Workflows, Services, and sample Invoices)' }),
+    __param(0, (0, common_1.Param)('slug')),
+    __param(1, (0, tenant_decorators_1.CurrentOrganizationId)()),
+    __param(2, (0, tenant_decorators_1.CurrentWorkspaceId)()),
+    __param(3, (0, tenant_decorators_1.CurrentUser)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String, String, String]),
+    __metadata("design:returntype", Promise)
+], TemplatesController.prototype, "instantiateVertical", null);
 __decorate([
     (0, swagger_1.ApiBearerAuth)(),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, permissions_guard_1.PermissionsGuard),
@@ -73,7 +116,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], TemplatesController.prototype, "cloneTemplate", null);
 exports.TemplatesController = TemplatesController = __decorate([
-    (0, swagger_1.ApiTags)('Automation Templates'),
+    (0, swagger_1.ApiTags)('Automation & Vertical Templates'),
     (0, common_1.Controller)('templates'),
     __metadata("design:paramtypes", [templates_service_1.TemplatesService])
 ], TemplatesController);

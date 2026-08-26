@@ -99,10 +99,10 @@ export default function Customers360Page() {
   return (
     <div className="space-y-6">
       {/* Top Header */}
-      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between border-b border-neutral-200/80 dark:border-neutral-800/80 pb-5">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between border-b border-neutral-200 pb-5">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-white">
+            <h1 className="text-xl font-bold tracking-tight text-neutral-900">
               360° Customer Profiles
             </h1>
             <Badge variant="default" className="text-[10px] font-mono">
@@ -114,7 +114,7 @@ export default function Customers360Page() {
           </p>
         </div>
 
-        <Button size="sm" className="text-xs gap-1.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold">
+        <Button size="sm" className="text-xs gap-1.5 bg-neutral-900 hover:bg-neutral-800 text-white font-semibold">
           <Plus className="h-3.5 w-3.5" />
           <span>New Customer</span>
         </Button>
@@ -143,17 +143,17 @@ export default function Customers360Page() {
                   onClick={() => setSelectedCustomer(cust)}
                   className={`p-3.5 cursor-pointer transition-all border ${
                     isSelected
-                      ? 'border-blue-600 ring-2 ring-blue-600/30 bg-white dark:bg-neutral-900 shadow-sm'
-                      : 'border-neutral-200/80 dark:border-neutral-800/80 hover:border-neutral-300'
+                      ? 'border-neutral-900 ring-2 ring-neutral-900/10 bg-white shadow-sm'
+                      : 'border-neutral-200 hover:border-neutral-300'
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="text-xs font-bold text-neutral-900 dark:text-white">{cust.name}</h3>
+                      <h3 className="text-xs font-bold text-neutral-900">{cust.name}</h3>
                       <p className="text-[11px] text-neutral-500">{cust.company}</p>
                     </div>
                     <div className="text-right">
-                      <span className="font-mono text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                      <span className="font-mono text-xs font-bold text-neutral-900">
                         ${cust.totalSpend.toLocaleString()}
                       </span>
                       <p className="text-[10px] text-neutral-400 uppercase font-mono">{cust.tier}</p>
@@ -170,14 +170,14 @@ export default function Customers360Page() {
           {selectedCustomer ? (
             <div className="space-y-4">
               {/* Profile Card Header */}
-              <Card className="border-neutral-200/80 dark:border-neutral-800/80 p-5 space-y-4">
+              <Card className="border-neutral-200 p-5 space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white flex items-center justify-center font-bold text-base shadow-sm">
+                    <div className="h-11 w-11 rounded-xl bg-neutral-900 text-white flex items-center justify-center font-bold text-base shadow-sm">
                       {selectedCustomer.name.charAt(0)}
                     </div>
                     <div>
-                      <h2 className="text-base font-bold text-neutral-900 dark:text-white flex items-center gap-2">
+                      <h2 className="text-base font-bold text-neutral-900 flex items-center gap-2">
                         <span>{selectedCustomer.name}</span>
                         <Badge variant="success" className="text-[9px] uppercase font-mono" dot>
                           {selectedCustomer.status}
@@ -189,39 +189,39 @@ export default function Customers360Page() {
 
                   <div className="text-right">
                     <span className="text-xs text-neutral-400">Lifetime Revenue</span>
-                    <p className="text-lg font-bold font-mono text-emerald-600 dark:text-emerald-400">
+                    <p className="text-lg font-bold font-mono text-neutral-900">
                       ${selectedCustomer.totalSpend.toLocaleString()}
                     </p>
                   </div>
                 </div>
 
                 {/* AI Insights Banner */}
-                <div className="p-3.5 rounded-xl bg-purple-50/70 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-900 text-xs space-y-1">
-                  <div className="flex items-center gap-1.5 font-bold text-purple-700 dark:text-purple-300">
-                    <Sparkles className="h-3.5 w-3.5" />
+                <div className="p-3.5 rounded-xl bg-neutral-50 border border-neutral-200 text-xs space-y-1">
+                  <div className="flex items-center gap-1.5 font-bold text-neutral-800">
+                    <Sparkles className="h-3.5 w-3.5 text-neutral-600" />
                     <span>AI Relationship Insights</span>
                   </div>
-                  <p className="text-purple-900 dark:text-purple-200 text-[11px] leading-relaxed">
+                  <p className="text-neutral-700 text-[11px] leading-relaxed">
                     {selectedCustomer.aiInsights}
                   </p>
                 </div>
 
                 {/* Contact Information Grid */}
-                <div className="grid grid-cols-2 gap-3 pt-2 text-xs border-t border-neutral-100 dark:border-neutral-800">
+                <div className="grid grid-cols-2 gap-3 pt-2 text-xs border-t border-neutral-100">
                   <div>
                     <span className="text-neutral-400 text-[11px]">Email Address</span>
-                    <p className="font-semibold text-neutral-900 dark:text-white mt-0.5">{selectedCustomer.email}</p>
+                    <p className="font-semibold text-neutral-900 mt-0.5">{selectedCustomer.email}</p>
                   </div>
                   <div>
                     <span className="text-neutral-400 text-[11px]">Phone / WhatsApp</span>
-                    <p className="font-semibold text-neutral-900 dark:text-white mt-0.5">{selectedCustomer.phone}</p>
+                    <p className="font-semibold text-neutral-900 mt-0.5">{selectedCustomer.phone}</p>
                   </div>
                 </div>
               </Card>
 
               {/* Activity Timeline */}
-              <Card className="border-neutral-200/80 dark:border-neutral-800/80">
-                <CardHeader className="py-3 px-5 border-b border-neutral-100 dark:border-neutral-800">
+              <Card className="border-neutral-200">
+                <CardHeader className="py-3 px-5 border-b border-neutral-100">
                   <CardTitle className="text-xs font-bold uppercase tracking-wider text-neutral-500 font-mono">
                     Activity & Interaction Timeline
                   </CardTitle>
@@ -229,11 +229,11 @@ export default function Customers360Page() {
                 <CardContent className="p-4 space-y-3">
                   {selectedCustomer.recentActivity.map((act, i) => (
                     <div key={i} className="flex items-start gap-3 text-xs">
-                      <div className="p-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 mt-0.5">
+                      <div className="p-1.5 rounded-lg bg-neutral-100 text-neutral-700 mt-0.5">
                         <Activity className="h-3.5 w-3.5" />
                       </div>
                       <div className="flex-1">
-                        <p className="font-semibold text-neutral-900 dark:text-white">{act.title}</p>
+                        <p className="font-semibold text-neutral-900">{act.title}</p>
                         <p suppressHydrationWarning className="text-[10px] text-neutral-400 font-mono mt-0.5">{act.date}</p>
                       </div>
                     </div>

@@ -42,6 +42,9 @@ let KnowledgeBaseController = class KnowledgeBaseController {
     async listDocuments(id, orgId, wsId, pagination) {
         return this.kbService.listDocuments(id, orgId, wsId, pagination);
     }
+    async vectorSearch(id, orgId, wsId, query, topK) {
+        return this.kbService.vectorSearch(id, orgId, wsId, query, topK || 4);
+    }
     async askQuestion(id, orgId, wsId, question) {
         return this.kbService.askQuestion(id, orgId, wsId, question);
     }
@@ -121,6 +124,22 @@ __decorate([
     __metadata("design:paramtypes", [String, String, String, pagination_dto_1.PaginationQueryDto]),
     __metadata("design:returntype", Promise)
 ], KnowledgeBaseController.prototype, "listDocuments", null);
+__decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, permissions_guard_1.PermissionsGuard),
+    (0, tenant_decorators_1.RequireTenant)(),
+    (0, common_1.Post)(':id/search'),
+    (0, permissions_decorator_1.RequirePermissions)(permission_enum_1.Permission.WORKFLOW_READ),
+    (0, swagger_1.ApiOperation)({ summary: 'Perform semantic vector similarity search across knowledge base chunks' }),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, tenant_decorators_1.CurrentOrganizationId)()),
+    __param(2, (0, tenant_decorators_1.CurrentWorkspaceId)()),
+    __param(3, (0, common_1.Body)('query')),
+    __param(4, (0, common_1.Body)('topK')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String, String, String, Number]),
+    __metadata("design:returntype", Promise)
+], KnowledgeBaseController.prototype, "vectorSearch", null);
 __decorate([
     (0, swagger_1.ApiBearerAuth)(),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, permissions_guard_1.PermissionsGuard),

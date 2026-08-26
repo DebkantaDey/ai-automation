@@ -154,11 +154,11 @@ export default function WebhooksSettingsPage() {
 
   return (
     <div className="space-y-6 max-w-6xl">
-      <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+      <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between border-b border-neutral-200 pb-5">
         <div>
           <div className="flex items-center gap-2">
-            <Webhook className="h-5 w-5 text-blue-600" />
-            <h1 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">
+            <Webhook className="h-5 w-5 text-neutral-800" />
+            <h1 className="text-xl font-bold tracking-tight text-neutral-900">
               Outbound Webhooks
             </h1>
           </div>
@@ -170,7 +170,7 @@ export default function WebhooksSettingsPage() {
         <Button
           size="sm"
           onClick={() => setShowCreateModal(true)}
-          className="gap-1.5 text-xs bg-blue-600 hover:bg-blue-700 text-white"
+          className="gap-1.5 text-xs bg-neutral-900 hover:bg-neutral-800 text-white"
         >
           <Plus className="h-3.5 w-3.5" />
           <span>Add Endpoint</span>
@@ -181,8 +181,8 @@ export default function WebhooksSettingsPage() {
         <div
           className={`p-3 rounded-lg text-xs flex items-center gap-2 border ${
             message.type === 'success'
-              ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400'
-              : 'bg-red-50 text-red-700 border-red-200 dark:bg-red-950/40 dark:text-red-400'
+              ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+              : 'bg-red-50 text-red-700 border-red-200'
           }`}
         >
           {message.type === 'success' ? <CheckCircle2 className="h-4 w-4" /> : <AlertCircle className="h-4 w-4" />}
@@ -192,7 +192,7 @@ export default function WebhooksSettingsPage() {
 
       {/* Endpoints List */}
       <div className="space-y-3">
-        <h2 className="text-xs font-bold uppercase tracking-wider text-neutral-400">
+        <h2 className="text-xs font-bold uppercase tracking-wider text-neutral-400 font-mono">
           Configured Webhook Endpoints ({endpoints.length})
         </h2>
 
@@ -203,11 +203,11 @@ export default function WebhooksSettingsPage() {
         ) : (
           <div className="space-y-3">
             {endpoints.map((ep) => (
-              <Card key={ep._id} className="p-4 border-neutral-200 dark:border-neutral-800">
+              <Card key={ep._id} className="p-4 border-neutral-200 bg-white">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <code className="text-xs font-bold font-mono text-neutral-900 dark:text-white bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded">
+                      <code className="text-xs font-bold font-mono text-neutral-900 bg-neutral-100 px-2 py-0.5 rounded">
                         {ep.url}
                       </code>
                       <Badge variant="success" className="text-[9px] uppercase font-mono">
@@ -216,13 +216,13 @@ export default function WebhooksSettingsPage() {
                     </div>
                     <p className="text-xs text-neutral-500">
                       {ep.description || 'Subscribed to events:'}{' '}
-                      <span className="font-mono text-blue-600 dark:text-blue-400">
+                      <span className="font-mono text-neutral-800">
                         {ep.eventTypes?.join(', ') || '*'}
                       </span>
                     </p>
                     <div className="flex items-center gap-2 pt-1">
                       <span className="text-[11px] text-neutral-400">Signing Secret:</span>
-                      <code className="text-[10px] font-mono bg-neutral-50 dark:bg-neutral-950 px-1.5 py-0.5 rounded border">
+                      <code className="text-[10px] font-mono bg-neutral-50 px-1.5 py-0.5 rounded border border-neutral-200 text-neutral-700">
                         {ep.secret}
                       </code>
                       <button
@@ -231,7 +231,7 @@ export default function WebhooksSettingsPage() {
                           setCopiedSecretId(ep._id);
                           setTimeout(() => setCopiedSecretId(null), 2000);
                         }}
-                        className="text-neutral-400 hover:text-neutral-600 text-xs"
+                        className="text-neutral-400 hover:text-neutral-600 text-xs cursor-pointer"
                       >
                         {copiedSecretId === ep._id ? (
                           <Check className="h-3.5 w-3.5 text-emerald-600" />
@@ -248,16 +248,16 @@ export default function WebhooksSettingsPage() {
                       variant="outline"
                       disabled={testingId === ep._id}
                       onClick={() => handleTestPing(ep._id)}
-                      className="h-7 px-2.5 text-xs gap-1"
+                      className="h-7 px-2.5 text-xs gap-1 border-neutral-200"
                     >
-                      <Send className="h-3 w-3 text-blue-600" />
+                      <Send className="h-3 w-3 text-neutral-700" />
                       <span>{testingId === ep._id ? 'Sending...' : 'Test Ping'}</span>
                     </Button>
                     <Button
                       size="sm"
                       variant="outline"
                       onClick={() => handleRotateSecret(ep._id)}
-                      className="h-7 px-2.5 text-xs gap-1"
+                      className="h-7 px-2.5 text-xs gap-1 border-neutral-200"
                     >
                       <KeyRound className="h-3 w-3" />
                       <span>Rotate Secret</span>
@@ -266,7 +266,7 @@ export default function WebhooksSettingsPage() {
                       size="sm"
                       variant="outline"
                       onClick={() => handleDeleteEndpoint(ep._id)}
-                      className="h-7 px-2 text-xs text-red-600 border-red-200 hover:bg-red-50"
+                      className="h-7 px-2 text-xs text-neutral-700 border-neutral-200 hover:bg-neutral-50"
                     >
                       <Trash2 className="h-3 w-3" />
                     </Button>
@@ -280,11 +280,11 @@ export default function WebhooksSettingsPage() {
 
       {/* Delivery Audit Logs */}
       <div className="space-y-3 pt-4">
-        <h2 className="text-xs font-bold uppercase tracking-wider text-neutral-400">
+        <h2 className="text-xs font-bold uppercase tracking-wider text-neutral-400 font-mono">
           Recent Webhook Delivery Logs
         </h2>
 
-        <Card className="border-neutral-200 dark:border-neutral-800">
+        <Card className="border-neutral-200">
           <CardContent className="p-0">
             {deliveries.length === 0 ? (
               <div className="text-center py-8 text-xs text-neutral-500">
@@ -294,7 +294,7 @@ export default function WebhooksSettingsPage() {
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs">
                   <thead>
-                    <tr className="border-b border-neutral-100 dark:border-neutral-800 text-neutral-400 font-medium bg-neutral-50/50 dark:bg-neutral-900/50">
+                    <tr className="border-b border-neutral-100 text-neutral-400 font-medium bg-neutral-50">
                       <th className="py-2.5 px-4">Status</th>
                       <th className="py-2.5 px-4">Event Type</th>
                       <th className="py-2.5 px-4">Event ID</th>
@@ -304,9 +304,9 @@ export default function WebhooksSettingsPage() {
                       <th className="py-2.5 px-4">Timestamp</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
+                  <tbody className="divide-y divide-neutral-100">
                     {deliveries.map((del) => (
-                      <tr key={del._id} className="hover:bg-neutral-50/50 dark:hover:bg-neutral-900/50">
+                      <tr key={del._id} className="hover:bg-neutral-50">
                         <td className="py-2.5 px-4">
                           <Badge
                             variant={
@@ -321,7 +321,7 @@ export default function WebhooksSettingsPage() {
                             {del.status}
                           </Badge>
                         </td>
-                        <td className="py-2.5 px-4 font-mono font-semibold text-blue-600 dark:text-blue-400">
+                        <td className="py-2.5 px-4 font-mono font-semibold text-neutral-900">
                           {del.eventType}
                         </td>
                         <td className="py-2.5 px-4 font-mono text-neutral-500 text-[11px]">{del.eventId}</td>
@@ -329,8 +329,8 @@ export default function WebhooksSettingsPage() {
                           <span
                             className={
                               del.httpStatusCode >= 200 && del.httpStatusCode < 300
-                                ? 'text-emerald-600 font-bold'
-                                : 'text-red-600 font-bold'
+                                ? 'text-neutral-900 font-bold'
+                                : 'text-rose-600 font-bold'
                             }
                           >
                             {del.httpStatusCode || 'ERR'}
@@ -353,15 +353,15 @@ export default function WebhooksSettingsPage() {
 
       {/* Register Endpoint Modal */}
       {showCreateModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-xl max-w-md w-full p-6 space-y-4 border border-neutral-200 dark:border-neutral-800">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4 backdrop-blur-sm">
+          <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-6 space-y-4 border border-neutral-200">
             <div className="flex items-center justify-between">
-              <h2 className="text-base font-bold text-neutral-900 dark:text-white">
+              <h2 className="text-base font-bold text-neutral-900">
                 Register Webhook Endpoint
               </h2>
               <button
                 onClick={() => setShowCreateModal(false)}
-                className="text-neutral-400 hover:text-neutral-600 text-sm"
+                className="text-neutral-400 hover:text-neutral-600 text-sm cursor-pointer"
               >
                 ✕
               </button>
@@ -369,7 +369,7 @@ export default function WebhooksSettingsPage() {
 
             <form onSubmit={handleCreateEndpoint} className="space-y-4">
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                <label className="text-xs font-semibold text-neutral-700">
                   Endpoint Destination URL
                 </label>
                 <Input
@@ -383,7 +383,7 @@ export default function WebhooksSettingsPage() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                <label className="text-xs font-semibold text-neutral-700">
                   Description (Optional)
                 </label>
                 <Input
@@ -395,29 +395,29 @@ export default function WebhooksSettingsPage() {
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                <label className="text-xs font-semibold text-neutral-700">
                   Subscribed Event Types
                 </label>
                 <div className="grid grid-cols-2 gap-2">
-                  <label className="flex items-center gap-2 text-xs text-neutral-700 dark:text-neutral-300 cursor-pointer">
+                  <label className="flex items-center gap-2 text-xs text-neutral-700 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={selectedEvents.includes('*')}
                       onChange={() => toggleEventSelection('*')}
-                      className="rounded text-blue-600"
+                      className="rounded text-neutral-900 focus:ring-neutral-900"
                     />
                     <span className="font-mono font-bold">All Events (*)</span>
                   </label>
                   {SUPPORTED_EVENTS.map((evt) => (
                     <label
                       key={evt.id}
-                      className="flex items-center gap-2 text-xs text-neutral-700 dark:text-neutral-300 cursor-pointer"
+                      className="flex items-center gap-2 text-xs text-neutral-700 cursor-pointer"
                     >
                       <input
                         type="checkbox"
                         checked={selectedEvents.includes(evt.id)}
                         onChange={() => toggleEventSelection(evt.id)}
-                        className="rounded text-blue-600"
+                        className="rounded text-neutral-900 focus:ring-neutral-900"
                       />
                       <span className="font-mono text-[11px]">{evt.label}</span>
                     </label>
@@ -431,7 +431,7 @@ export default function WebhooksSettingsPage() {
                   variant="outline"
                   size="sm"
                   onClick={() => setShowCreateModal(false)}
-                  className="text-xs"
+                  className="text-xs border-neutral-200"
                 >
                   Cancel
                 </Button>
@@ -439,7 +439,7 @@ export default function WebhooksSettingsPage() {
                   type="submit"
                   disabled={isCreating || !newUrl.trim()}
                   size="sm"
-                  className="text-xs bg-blue-600 hover:bg-blue-700 text-white"
+                  className="text-xs bg-neutral-900 hover:bg-neutral-800 text-white"
                 >
                   {isCreating ? 'Registering...' : 'Register Endpoint'}
                 </Button>

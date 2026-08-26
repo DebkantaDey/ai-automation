@@ -29,20 +29,20 @@ export function UserNav() {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 rounded-full p-0.5 hover:ring-2 hover:ring-blue-500/30 transition-all focus:outline-none cursor-pointer"
+        className="flex items-center gap-2 rounded-full p-0.5 hover:ring-2 hover:ring-neutral-300 transition-all focus:outline-none cursor-pointer"
       >
-        <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-neutral-800 to-neutral-950 text-white text-xs font-bold ring-1 ring-white/20 shadow-sm">
+        <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-neutral-900 text-white text-xs font-bold ring-1 ring-neutral-200 shadow-sm">
           {initial}
-          <span className="absolute bottom-0 right-0 h-2 w-2 rounded-full bg-emerald-500 ring-2 ring-white dark:ring-neutral-950" />
+          <span className="absolute bottom-0 right-0 h-2 w-2 rounded-full bg-emerald-500 ring-2 ring-white" />
         </div>
       </button>
 
       {isOpen && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
-          <div className="absolute right-0 top-full z-50 mt-1.5 w-60 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white p-1.5 shadow-xl dark:bg-neutral-900 animate-in fade-in-0 zoom-in-95">
-            <div className="px-3 py-2.5 border-b border-neutral-100 dark:border-neutral-800">
-              <p className="text-xs font-bold text-neutral-900 dark:text-white truncate">{displayName}</p>
+          <div className="absolute right-0 top-full z-50 mt-1.5 w-60 rounded-xl border border-neutral-200 bg-white p-1.5 shadow-xl animate-in fade-in-0 zoom-in-95">
+            <div className="px-3 py-2.5 border-b border-neutral-100">
+              <p className="text-xs font-bold text-neutral-900 truncate">{displayName}</p>
               <p className="text-[11px] text-neutral-400 truncate mt-0.5 font-mono">{displayEmail}</p>
               <div className="mt-2 flex items-center gap-1.5">
                 <Badge variant="default" className="text-[9px] uppercase font-mono py-0">
@@ -60,7 +60,7 @@ export function UserNav() {
                   setIsOpen(false);
                   router.push(`/${orgSlug}/${wsSlug}/settings`);
                 }}
-                className="flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-xs text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800 transition-colors"
+                className="flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-xs text-neutral-700 hover:bg-neutral-100 transition-colors cursor-pointer"
               >
                 <Settings className="h-3.5 w-3.5 text-neutral-400" />
                 <span>Organization Settings</span>
@@ -71,17 +71,17 @@ export function UserNav() {
                   setIsOpen(false);
                   router.push(`/${orgSlug}/${wsSlug}/settings/billing`);
                 }}
-                className="flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-xs text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800 transition-colors"
+                className="flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-xs text-neutral-700 hover:bg-neutral-100 transition-colors cursor-pointer"
               >
                 <CreditCard className="h-3.5 w-3.5 text-neutral-400" />
                 <span>Billing & Subscription</span>
               </button>
             </div>
 
-            <div className="border-t border-neutral-100 dark:border-neutral-800 pt-1">
+            <div className="border-t border-neutral-100 pt-1">
               <button
                 onClick={handleLogout}
-                className="flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-xs text-rose-600 hover:bg-rose-50 dark:text-rose-400 dark:hover:bg-rose-950/40 transition-colors font-medium"
+                className="flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-xs text-rose-600 hover:bg-rose-50 transition-colors font-medium cursor-pointer"
               >
                 <LogOut className="h-3.5 w-3.5" />
                 <span>Sign Out</span>

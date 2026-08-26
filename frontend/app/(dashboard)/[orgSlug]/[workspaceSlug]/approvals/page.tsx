@@ -75,10 +75,10 @@ export default function HumanApprovalGatePage() {
   return (
     <div className="space-y-6">
       {/* Top Header */}
-      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between border-b border-neutral-200/80 dark:border-neutral-800/80 pb-5">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between border-b border-neutral-200 pb-5">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-white">
+            <h1 className="text-xl font-bold tracking-tight text-neutral-900">
               Human-in-the-Loop Approval Gate
             </h1>
             <Badge variant="warning" className="text-[10px] font-mono">
@@ -91,7 +91,7 @@ export default function HumanApprovalGatePage() {
         </div>
 
         <div className="flex items-center gap-2 text-xs font-mono text-neutral-500">
-          <Shield className="h-4 w-4 text-emerald-600" />
+          <Shield className="h-4 w-4 text-neutral-700" />
           <span>RBAC Policy: Manager / Admin Signed</span>
         </div>
       </div>
@@ -100,8 +100,8 @@ export default function HumanApprovalGatePage() {
         <div
           className={`p-3 rounded-lg text-xs flex items-center gap-2 border ${
             message.type === 'success'
-              ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400'
-              : 'bg-red-50 text-red-700 border-red-200 dark:bg-red-950/40 dark:text-red-400'
+              ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+              : 'bg-red-50 text-red-700 border-red-200'
           }`}
         >
           {message.type === 'success' ? <CheckCircle2 className="h-4 w-4" /> : <AlertTriangle className="h-4 w-4" />}
@@ -117,22 +117,22 @@ export default function HumanApprovalGatePage() {
 
         {approvals.length === 0 ? (
           <Card className="p-12 text-center text-xs text-neutral-500 border-dashed">
-            <CheckCircle2 className="h-8 w-8 mx-auto mb-2 text-emerald-500 opacity-60" />
+            <CheckCircle2 className="h-8 w-8 mx-auto mb-2 text-emerald-600 opacity-60" />
             <p>All sensitive actions have been reviewed. No items in approval queue.</p>
           </Card>
         ) : (
           <div className="space-y-3">
             {approvals.map((req) => (
-              <Card key={req.id} className="p-5 border-amber-300 dark:border-amber-900/60 bg-amber-50/20 dark:bg-amber-950/10 space-y-3 shadow-sm">
+              <Card key={req.id} className="p-5 border-neutral-200 bg-white space-y-3 shadow-none">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
-                    <div className="p-2 rounded-lg bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300">
+                    <div className="p-2 rounded-lg bg-neutral-100 text-neutral-800">
                       <AlertTriangle className="h-4 w-4" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-bold text-neutral-900 dark:text-white">{req.title}</h3>
-                      <p className="text-xs text-purple-600 dark:text-purple-400 font-mono flex items-center gap-1 mt-0.5">
-                        <Sparkles className="h-3 w-3" />
+                      <h3 className="text-sm font-bold text-neutral-900">{req.title}</h3>
+                      <p className="text-xs text-neutral-500 font-mono flex items-center gap-1 mt-0.5">
+                        <Sparkles className="h-3 w-3 text-neutral-400" />
                         Initiated by: {req.requestedBy}
                       </p>
                     </div>
@@ -143,7 +143,7 @@ export default function HumanApprovalGatePage() {
                       size="sm"
                       isLoading={actingId === req.id}
                       onClick={() => handleApprove(req.id)}
-                      className="bg-emerald-600 hover:bg-emerald-500 text-white text-xs gap-1 font-semibold"
+                      className="bg-neutral-900 hover:bg-neutral-800 text-white text-xs gap-1 font-semibold"
                     >
                       <Check className="h-3.5 w-3.5" />
                       <span>Authorize Action</span>
@@ -153,7 +153,7 @@ export default function HumanApprovalGatePage() {
                       variant="outline"
                       disabled={actingId === req.id}
                       onClick={() => handleReject(req.id)}
-                      className="text-xs text-rose-600 border-rose-200 hover:bg-rose-50 dark:border-rose-900 gap-1 font-semibold"
+                      className="text-xs text-neutral-700 border-neutral-200 hover:bg-neutral-50 gap-1 font-semibold"
                     >
                       <X className="h-3.5 w-3.5" />
                       <span>Reject</span>
@@ -161,8 +161,8 @@ export default function HumanApprovalGatePage() {
                   </div>
                 </div>
 
-                <div className="p-3 rounded-lg bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 text-xs text-neutral-700 dark:text-neutral-300 space-y-1">
-                  <span className="font-semibold text-neutral-900 dark:text-white">AI Context Rationale:</span>
+                <div className="p-3 rounded-lg bg-neutral-50 border border-neutral-200 text-xs text-neutral-700 space-y-1">
+                  <span className="font-semibold text-neutral-900">AI Context Rationale:</span>
                   <p className="leading-relaxed">{req.reason}</p>
                 </div>
               </Card>

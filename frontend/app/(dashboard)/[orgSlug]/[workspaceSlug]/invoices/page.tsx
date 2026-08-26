@@ -70,13 +70,13 @@ export default function InvoicesPage() {
   return (
     <div className="space-y-6">
       {/* Top Header */}
-      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between border-b border-neutral-200/80 dark:border-neutral-800/80 pb-5">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between border-b border-neutral-200 pb-5">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-white">
+            <h1 className="text-xl font-bold tracking-tight text-neutral-900">
               Invoices & Billing Ledger
             </h1>
-            <Badge variant="emerald" className="text-[10px] font-mono">
+            <Badge variant="default" className="text-[10px] font-mono">
               Stripe & Razorpay
             </Badge>
           </div>
@@ -85,7 +85,7 @@ export default function InvoicesPage() {
           </p>
         </div>
 
-        <Button size="sm" className="text-xs gap-1.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold">
+        <Button size="sm" className="text-xs gap-1.5 bg-neutral-900 hover:bg-neutral-800 text-white font-semibold">
           <Plus className="h-3.5 w-3.5" />
           <span>Create Invoice</span>
         </Button>
@@ -93,50 +93,50 @@ export default function InvoicesPage() {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card className="p-4 border-neutral-200/80 dark:border-neutral-800/80">
+        <Card className="p-4 border-neutral-200">
           <div className="flex items-center justify-between text-neutral-500 text-xs font-semibold">
             <span>Collected Revenue</span>
-            <div className="p-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600">
+            <div className="p-1.5 rounded-lg bg-neutral-100 text-neutral-800">
               <DollarSign className="h-4 w-4" />
             </div>
           </div>
           <div className="mt-3">
-            <span className="text-2xl font-bold font-mono text-neutral-900 dark:text-white">$14,400</span>
-            <p className="text-[11px] text-emerald-600 font-semibold mt-1">Settled to bank account</p>
+            <span className="text-2xl font-bold font-mono text-neutral-900">$14,400</span>
+            <p className="text-[11px] text-neutral-600 font-semibold mt-1">Settled to bank account</p>
           </div>
         </Card>
 
-        <Card className="p-4 border-neutral-200/80 dark:border-neutral-800/80">
+        <Card className="p-4 border-neutral-200">
           <div className="flex items-center justify-between text-neutral-500 text-xs font-semibold">
             <span>Pending Receivables</span>
-            <div className="p-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/50 text-blue-600">
+            <div className="p-1.5 rounded-lg bg-neutral-100 text-neutral-800">
               <Clock className="h-4 w-4" />
             </div>
           </div>
           <div className="mt-3">
-            <span className="text-2xl font-bold font-mono text-neutral-900 dark:text-white">$2,400</span>
+            <span className="text-2xl font-bold font-mono text-neutral-900">$2,400</span>
             <p className="text-[11px] text-neutral-400 mt-1">Due in 5 days</p>
           </div>
         </Card>
 
-        <Card className="p-4 border-neutral-200/80 dark:border-neutral-800/80">
+        <Card className="p-4 border-neutral-200">
           <div className="flex items-center justify-between text-neutral-500 text-xs font-semibold">
             <span>Overdue Amount</span>
-            <div className="p-1.5 rounded-lg bg-red-50 dark:bg-red-950/50 text-red-600">
+            <div className="p-1.5 rounded-lg bg-neutral-100 text-neutral-800">
               <AlertCircle className="h-4 w-4" />
             </div>
           </div>
           <div className="mt-3">
-            <span className="text-2xl font-bold font-mono text-red-600">$7,200</span>
-            <p className="text-[11px] text-red-600 font-semibold mt-1">Automated reminder enqueued</p>
+            <span className="text-2xl font-bold font-mono text-neutral-900">$7,200</span>
+            <p className="text-[11px] text-neutral-600 font-semibold mt-1">Automated reminder enqueued</p>
           </div>
         </Card>
       </div>
 
       {/* Invoice Ledger Table */}
-      <Card className="border-neutral-200/80 dark:border-neutral-800/80">
-        <CardHeader className="py-3 px-5 border-b border-neutral-100 dark:border-neutral-800 flex flex-row items-center justify-between">
-          <CardTitle className="text-sm font-bold text-neutral-900 dark:text-white">
+      <Card className="border-neutral-200">
+        <CardHeader className="py-3 px-5 border-b border-neutral-100 flex flex-row items-center justify-between">
+          <CardTitle className="text-sm font-bold text-neutral-900">
             Customer Invoices ({filteredInvoices.length})
           </CardTitle>
           <div className="w-64">
@@ -153,7 +153,7 @@ export default function InvoicesPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead>
-                <tr className="border-b border-neutral-100 dark:border-neutral-800 text-neutral-400 font-medium bg-neutral-50/60 dark:bg-neutral-900/50">
+                <tr className="border-b border-neutral-100 text-neutral-400 font-medium bg-neutral-50">
                   <th className="py-3 px-5">Invoice #</th>
                   <th className="py-3 px-5">Customer / Client</th>
                   <th className="py-3 px-5">Amount</th>
@@ -163,16 +163,16 @@ export default function InvoicesPage() {
                   <th className="py-3 px-5 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
+              <tbody className="divide-y divide-neutral-100">
                 {filteredInvoices.map((inv) => (
-                  <tr key={inv.id} className="hover:bg-neutral-50/80 dark:hover:bg-neutral-900/60">
-                    <td className="py-3 px-5 font-mono font-semibold text-neutral-900 dark:text-white">
+                  <tr key={inv.id} className="hover:bg-neutral-50">
+                    <td className="py-3 px-5 font-mono font-semibold text-neutral-900">
                       {inv.id}
                     </td>
-                    <td className="py-3 px-5 font-medium text-neutral-800 dark:text-neutral-200">
+                    <td className="py-3 px-5 font-medium text-neutral-800">
                       {inv.customerName}
                     </td>
-                    <td className="py-3 px-5 font-mono font-bold text-neutral-900 dark:text-white">
+                    <td className="py-3 px-5 font-mono font-bold text-neutral-900">
                       ${inv.amount.toLocaleString()} {inv.currency}
                     </td>
                     <td className="py-3 px-5">
@@ -195,7 +195,7 @@ export default function InvoicesPage() {
                     </td>
                     <td className="py-3 px-5 font-mono text-neutral-400 text-[11px]">{inv.provider}</td>
                     <td className="py-3 px-5 text-right">
-                      <Button variant="ghost" size="sm" className="h-6 px-2 text-xs text-blue-600 hover:text-blue-500">
+                      <Button variant="ghost" size="sm" className="h-6 px-2 text-xs text-neutral-700 hover:text-neutral-900">
                         <Download className="h-3 w-3 mr-1" />
                         <span>PDF</span>
                       </Button>

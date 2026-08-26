@@ -159,12 +159,12 @@ export default function OrganizationSettingsPage() {
 
   return (
     <div className="max-w-4xl space-y-6">
-      <div className="border-b border-neutral-200/80 dark:border-neutral-800/80 pb-5">
+      <div className="border-b border-neutral-200 pb-5">
         <div className="flex items-center gap-2.5">
-          <div className="p-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/50 text-blue-600">
+          <div className="p-1.5 rounded-lg bg-neutral-100 text-neutral-800">
             <Building2 className="h-5 w-5" />
           </div>
-          <h1 className="text-xl font-bold text-neutral-900 dark:text-white">Organization Settings</h1>
+          <h1 className="text-xl font-bold text-neutral-900">Organization Settings</h1>
         </div>
         <p className="text-xs text-neutral-500 mt-1">
           Manage tenant configuration, business profile, localization, and team members.
@@ -172,14 +172,14 @@ export default function OrganizationSettingsPage() {
       </div>
 
       {error && (
-        <div className="flex items-center gap-2 p-3 rounded-lg bg-red-50 text-red-700 text-xs border border-red-200 dark:bg-red-950/40 dark:text-red-400 dark:border-red-900">
+        <div className="flex items-center gap-2 p-3 rounded-lg bg-red-50 text-red-700 text-xs border border-red-200">
           <AlertCircle className="h-4 w-4 shrink-0" />
           <span>{error}</span>
         </div>
       )}
 
       {saveSuccess && (
-        <div className="flex items-center gap-2 p-3 rounded-lg bg-emerald-50 text-emerald-700 text-xs border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-900">
+        <div className="flex items-center gap-2 p-3 rounded-lg bg-emerald-50 text-emerald-700 text-xs border border-emerald-200">
           <CheckCircle2 className="h-4 w-4 shrink-0" />
           <span>Organization settings saved successfully!</span>
         </div>
@@ -187,7 +187,7 @@ export default function OrganizationSettingsPage() {
 
       <form onSubmit={handleSaveSettings} className="space-y-6">
         {/* Section 1: General Business Information */}
-        <Card className="border-neutral-200/80 dark:border-neutral-800/80">
+        <Card className="border-neutral-200">
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
@@ -209,7 +209,7 @@ export default function OrganizationSettingsPage() {
           <CardContent className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                <label className="text-xs font-semibold text-neutral-700">
                   Organization Name *
                 </label>
                 <Input
@@ -221,26 +221,26 @@ export default function OrganizationSettingsPage() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                <label className="text-xs font-semibold text-neutral-700">
                   Tenant Slug (Permanent ID)
                 </label>
                 <Input
                   value={formData.slug}
                   disabled
-                  className="text-xs font-mono bg-neutral-50 dark:bg-neutral-900 cursor-not-allowed opacity-75"
+                  className="text-xs font-mono bg-neutral-50 cursor-not-allowed opacity-75"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                <label className="text-xs font-semibold text-neutral-700">
                   Industry
                 </label>
                 <select
                   value={formData.industry}
                   onChange={(e) => setFormData({ ...formData, industry: e.target.value })}
-                  className="w-full h-8.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 px-3 text-xs text-neutral-900 dark:text-white"
+                  className="w-full h-8.5 rounded-lg border border-neutral-200 bg-white px-3 text-xs text-neutral-900"
                 >
                   <option value="Technology">Technology & SaaS</option>
                   <option value="E-Commerce">E-Commerce & Retail</option>
@@ -253,7 +253,7 @@ export default function OrganizationSettingsPage() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                <label className="text-xs font-semibold text-neutral-700">
                   Company Website
                 </label>
                 <div className="relative">
@@ -269,7 +269,7 @@ export default function OrganizationSettingsPage() {
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+              <label className="text-xs font-semibold text-neutral-700">
                 Organization Description
               </label>
               <Input
@@ -283,7 +283,7 @@ export default function OrganizationSettingsPage() {
         </Card>
 
         {/* Section 2: Localization & Regional */}
-        <Card className="border-neutral-200/80 dark:border-neutral-800/80">
+        <Card className="border-neutral-200">
           <CardHeader>
             <CardTitle className="text-sm font-semibold">Localization & Regional</CardTitle>
             <CardDescription className="text-xs">
@@ -292,14 +292,14 @@ export default function OrganizationSettingsPage() {
           </CardHeader>
           <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 flex items-center gap-1.5">
+              <label className="text-xs font-semibold text-neutral-700 flex items-center gap-1.5">
                 <Globe className="h-3.5 w-3.5 text-neutral-400" />
                 <span>Country</span>
               </label>
               <select
                 value={formData.country}
                 onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                className="w-full h-8.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 px-2.5 text-xs text-neutral-900 dark:text-white"
+                className="w-full h-8.5 rounded-lg border border-neutral-200 bg-white px-2.5 text-xs text-neutral-900"
               >
                 <option value="US">United States (US)</option>
                 <option value="GB">United Kingdom (GB)</option>
@@ -312,14 +312,14 @@ export default function OrganizationSettingsPage() {
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 flex items-center gap-1.5">
+              <label className="text-xs font-semibold text-neutral-700 flex items-center gap-1.5">
                 <Clock className="h-3.5 w-3.5 text-neutral-400" />
                 <span>Timezone</span>
               </label>
               <select
                 value={formData.timezone}
                 onChange={(e) => setFormData({ ...formData, timezone: e.target.value })}
-                className="w-full h-8.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 px-2.5 text-xs text-neutral-900 dark:text-white"
+                className="w-full h-8.5 rounded-lg border border-neutral-200 bg-white px-2.5 text-xs text-neutral-900"
               >
                 <option value="UTC">UTC (+00:00)</option>
                 <option value="America/New_York">US Eastern (EST/EDT)</option>
@@ -332,14 +332,14 @@ export default function OrganizationSettingsPage() {
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 flex items-center gap-1.5">
+              <label className="text-xs font-semibold text-neutral-700 flex items-center gap-1.5">
                 <Coins className="h-3.5 w-3.5 text-neutral-400" />
                 <span>Default Currency</span>
               </label>
               <select
                 value={formData.defaultCurrency}
                 onChange={(e) => setFormData({ ...formData, defaultCurrency: e.target.value })}
-                className="w-full h-8.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 px-2.5 text-xs text-neutral-900 dark:text-white"
+                className="w-full h-8.5 rounded-lg border border-neutral-200 bg-white px-2.5 text-xs text-neutral-900"
               >
                 <option value="USD">USD ($)</option>
                 <option value="EUR">EUR (€)</option>
@@ -349,11 +349,11 @@ export default function OrganizationSettingsPage() {
               </select>
             </div>
           </CardContent>
-          <CardFooter className="flex justify-end border-t border-neutral-100 dark:border-neutral-800 pt-4">
+          <CardFooter className="flex justify-end border-t border-neutral-100 pt-4">
             <Button
               type="submit"
               isLoading={saving}
-              className="bg-blue-600 hover:bg-blue-500 text-xs gap-1.5 font-semibold text-white"
+              className="bg-neutral-900 hover:bg-neutral-800 text-xs gap-1.5 font-semibold text-white"
             >
               <Save className="h-3.5 w-3.5" />
               <span>Save Settings</span>
@@ -363,12 +363,12 @@ export default function OrganizationSettingsPage() {
       </form>
 
       {/* Section 3: Organization Team Members */}
-      <Card className="border-neutral-200/80 dark:border-neutral-800/80">
+      <Card className="border-neutral-200">
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
               <CardTitle className="text-sm font-semibold flex items-center gap-1.5">
-                <Users className="h-4 w-4 text-blue-600" />
+                <Users className="h-4 w-4 text-neutral-700" />
                 <span>Team Members ({members.length})</span>
               </CardTitle>
               <CardDescription className="text-xs">
@@ -378,15 +378,15 @@ export default function OrganizationSettingsPage() {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
+          <div className="divide-y divide-neutral-100">
             {members.map((member) => (
               <div key={member.id} className="py-3 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300 font-bold text-xs">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-900 text-white font-bold text-xs">
                     {member.firstName?.charAt(0) || 'U'}
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-neutral-900 dark:text-white">
+                    <p className="text-xs font-semibold text-neutral-900">
                       {member.fullName || `${member.firstName || ''} ${member.lastName || ''}`}
                     </p>
                     <p className="text-[11px] text-neutral-500 font-mono">{member.email}</p>
@@ -407,26 +407,26 @@ export default function OrganizationSettingsPage() {
       </Card>
 
       {/* Section 4: Danger Zone */}
-      <Card className="border-rose-200 dark:border-rose-900/60 bg-rose-50/20 dark:bg-rose-950/10">
+      <Card className="border-neutral-200 bg-neutral-50/50">
         <CardHeader>
-          <CardTitle className="text-sm font-semibold text-rose-700 dark:text-rose-400 flex items-center gap-1.5">
-            <ShieldAlert className="h-4 w-4" />
+          <CardTitle className="text-sm font-semibold text-neutral-900 flex items-center gap-1.5">
+            <ShieldAlert className="h-4 w-4 text-neutral-700" />
             <span>Danger Zone</span>
           </CardTitle>
-          <CardDescription className="text-xs text-rose-600/80 dark:text-rose-400/80">
+          <CardDescription className="text-xs text-neutral-500">
             Deleting this organization permanently disables all workflows, scheduled tasks, AI agents, and tenant data.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-3">
-          <p className="text-xs text-neutral-700 dark:text-neutral-300">
-            To delete this organization, type <span className="font-mono font-bold text-rose-600">{formData.slug}</span> below:
+          <p className="text-xs text-neutral-700">
+            To delete this organization, type <span className="font-mono font-bold text-neutral-900">{formData.slug}</span> below:
           </p>
           <div className="flex gap-2 max-w-md">
             <Input
               value={deleteConfirm}
               onChange={(e) => setDeleteConfirm(e.target.value)}
               placeholder={`Type ${formData.slug} to confirm`}
-              className="text-xs font-mono"
+              className="text-xs font-mono bg-white"
             />
             <Button
               type="button"
@@ -434,7 +434,7 @@ export default function OrganizationSettingsPage() {
               isLoading={deleting}
               disabled={deleteConfirm !== formData.slug}
               onClick={handleDeleteOrg}
-              className="text-xs gap-1.5 shrink-0 bg-rose-600 hover:bg-rose-500"
+              className="text-xs gap-1.5 shrink-0"
             >
               <Trash2 className="h-3.5 w-3.5" />
               <span>Delete Organization</span>
