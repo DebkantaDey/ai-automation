@@ -5,10 +5,6 @@ import Link from 'next/link';
 import {
   Check,
   Zap,
-  Building2,
-  Sparkles,
-  Shield,
-  HelpCircle,
   ArrowRight,
 } from 'lucide-react';
 import { Button } from '../../components/ui/button';
@@ -140,18 +136,18 @@ export default function PricingPage() {
   const [interval, setInterval] = useState<'monthly' | 'yearly'>('monthly');
 
   return (
-    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 py-16 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-neutral-50/80 dark:bg-neutral-950 py-16 px-4 sm:px-6 lg:px-8 bg-canvas-dots">
       <div className="max-w-7xl mx-auto space-y-12">
         {/* Header */}
         <div className="text-center space-y-4">
           <Badge variant="outline" className="text-blue-600 border-blue-300 dark:border-blue-800 text-xs px-3 py-1 font-semibold">
-            Simple, Transparent Pricing
+            Transparent Subscription Plans
           </Badge>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-neutral-900 dark:text-white tracking-tight">
             Scale Your Business Automations Seamlessly
           </h1>
-          <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-            Choose the plan that best matches your workflow volume and team scale. Upgrade, downgrade, or cancel anytime.
+          <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto leading-relaxed">
+            Choose the plan that matches your execution volume and team scale. Upgrade, downgrade, or cancel anytime.
           </p>
 
           {/* Monthly / Yearly Toggle */}
@@ -188,13 +184,13 @@ export default function PricingPage() {
                 key={tier.slug}
                 className={`relative flex flex-col justify-between border transition-all ${
                   tier.isPopular
-                    ? 'border-blue-600 shadow-xl shadow-blue-500/10 ring-2 ring-blue-600 dark:border-blue-500'
-                    : 'border-neutral-200 dark:border-neutral-800'
+                    ? 'border-blue-600 shadow-xl shadow-blue-500/10 ring-2 ring-blue-600/30 dark:border-blue-500 bg-white dark:bg-neutral-900'
+                    : 'border-neutral-200/80 dark:border-neutral-800/80 bg-white/90 dark:bg-neutral-900/90'
                 }`}
               >
                 {tier.isPopular && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <span className="bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow">
+                    <span className="bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">
                       Most Popular
                     </span>
                   </div>
@@ -209,7 +205,7 @@ export default function PricingPage() {
                   </CardDescription>
 
                   <div className="pt-4 flex items-baseline gap-1">
-                    <span className="text-3xl font-extrabold text-neutral-900 dark:text-white">
+                    <span className="text-3xl font-extrabold text-neutral-900 dark:text-white font-mono">
                       ${price}
                     </span>
                     <span className="text-xs text-neutral-500">
@@ -218,14 +214,14 @@ export default function PricingPage() {
                   </div>
                 </CardHeader>
 
-                <CardContent className="space-y-4 pt-2 border-t border-neutral-100 dark:border-neutral-900 flex-1">
+                <CardContent className="space-y-4 pt-2 border-t border-neutral-100 dark:border-neutral-800 flex-1">
                   {/* Limits Breakdown */}
-                  <div className="rounded-lg bg-neutral-100/70 dark:bg-neutral-900/60 p-3 space-y-1.5 text-xs">
+                  <div className="rounded-xl bg-neutral-100/70 dark:bg-neutral-950/60 p-3 space-y-1.5 text-xs border border-neutral-200/50 dark:border-neutral-800/50">
                     <p className="font-semibold text-neutral-800 dark:text-neutral-200 flex items-center gap-1.5 text-[11px]">
                       <Zap className="h-3.5 w-3.5 text-amber-500" />
                       Plan Quotas:
                     </p>
-                    <div className="grid grid-cols-1 gap-1 text-[11px] text-neutral-600 dark:text-neutral-400">
+                    <div className="grid grid-cols-1 gap-1 text-[11px] text-neutral-600 dark:text-neutral-400 font-mono">
                       <div>• {tier.limits.users}</div>
                       <div>• {tier.limits.workspaces}</div>
                       <div>• {tier.limits.workflows}</div>
@@ -237,11 +233,11 @@ export default function PricingPage() {
 
                   {/* Feature Checkmarks */}
                   <div className="space-y-2 pt-2">
-                    <p className="text-[11px] font-semibold uppercase text-neutral-400">Features Included:</p>
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-neutral-400 font-mono">Features Included:</p>
                     <ul className="space-y-2 text-xs text-neutral-700 dark:text-neutral-300">
                       {tier.features.map((feat) => (
                         <li key={feat} className="flex items-start gap-2">
-                          <Check className="h-4 w-4 text-emerald-500 shrink-0 mt-0.5" />
+                          <Check className="h-3.5 w-3.5 text-emerald-500 shrink-0 mt-0.5" />
                           <span>{feat}</span>
                         </li>
                       ))}
@@ -249,12 +245,12 @@ export default function PricingPage() {
                   </div>
                 </CardContent>
 
-                <CardFooter className="pt-4 border-t border-neutral-100 dark:border-neutral-900">
+                <CardFooter className="pt-4 border-t border-neutral-100 dark:border-neutral-800">
                   <Link href={tier.href} className="w-full">
                     <Button
                       variant={tier.isPopular ? 'default' : 'outline'}
-                      className={`w-full text-xs gap-1.5 ${
-                        tier.isPopular ? 'bg-blue-600 hover:bg-blue-700 text-white' : ''
+                      className={`w-full text-xs gap-1.5 h-9 font-semibold ${
+                        tier.isPopular ? 'bg-blue-600 hover:bg-blue-500 text-white' : ''
                       }`}
                     >
                       <span>{tier.cta}</span>

@@ -338,7 +338,7 @@ export default function WebhooksSettingsPage() {
                         </td>
                         <td className="py-2.5 px-4 font-mono text-[11px]">{del.durationMs}ms</td>
                         <td className="py-2.5 px-4 text-neutral-500">{del.attempts}</td>
-                        <td className="py-2.5 px-4 text-neutral-500 text-[11px]">
+                        <td suppressHydrationWarning className="py-2.5 px-4 text-neutral-500 text-[11px]">
                           {new Date(del.createdAt).toLocaleString()}
                         </td>
                       </tr>

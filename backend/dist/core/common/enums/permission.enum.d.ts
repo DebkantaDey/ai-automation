@@ -32,7 +32,19 @@ export declare enum Permission {
     BILLING_MANAGE = "billing.manage",
     API_READ = "api.read",
     API_MANAGE = "api.manage",
-    AUDIT_READ = "audit.read"
+    AUDIT_READ = "audit.read",
+    CRM_READ = "crm.read",
+    CRM_WRITE = "crm.write",
+    CRM_DELETE = "crm.delete",
+    DEALS_MANAGE = "deals.manage",
+    INBOX_READ = "inbox.read",
+    INBOX_WRITE = "inbox.write",
+    CALENDAR_READ = "calendar.read",
+    CALENDAR_WRITE = "calendar.write",
+    TASKS_READ = "tasks.read",
+    TASKS_WRITE = "tasks.write",
+    INVOICES_READ = "invoices.read",
+    INVOICES_WRITE = "invoices.write"
 }
 export declare const ALL_PERMISSIONS: Permission[];
 export interface PermissionDefinition {

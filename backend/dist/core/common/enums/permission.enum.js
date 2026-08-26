@@ -37,6 +37,18 @@ var Permission;
     Permission["API_READ"] = "api.read";
     Permission["API_MANAGE"] = "api.manage";
     Permission["AUDIT_READ"] = "audit.read";
+    Permission["CRM_READ"] = "crm.read";
+    Permission["CRM_WRITE"] = "crm.write";
+    Permission["CRM_DELETE"] = "crm.delete";
+    Permission["DEALS_MANAGE"] = "deals.manage";
+    Permission["INBOX_READ"] = "inbox.read";
+    Permission["INBOX_WRITE"] = "inbox.write";
+    Permission["CALENDAR_READ"] = "calendar.read";
+    Permission["CALENDAR_WRITE"] = "calendar.write";
+    Permission["TASKS_READ"] = "tasks.read";
+    Permission["TASKS_WRITE"] = "tasks.write";
+    Permission["INVOICES_READ"] = "invoices.read";
+    Permission["INVOICES_WRITE"] = "invoices.write";
 })(Permission || (exports.Permission = Permission = {}));
 exports.ALL_PERMISSIONS = Object.values(Permission);
 exports.PERMISSION_DEFINITIONS = [
@@ -74,6 +86,18 @@ exports.PERMISSION_DEFINITIONS = [
     { key: Permission.API_READ, category: 'api', label: 'View API Keys', description: 'View API keys and developer documentation' },
     { key: Permission.API_MANAGE, category: 'api', label: 'Manage API Keys', description: 'Generate and revoke organization API keys' },
     { key: Permission.AUDIT_READ, category: 'audit', label: 'View Audit Logs', description: 'View security audit trails and member activity history' },
+    { key: Permission.CRM_READ, category: 'organization', label: 'View CRM', description: 'View leads, customers, and pipeline deals' },
+    { key: Permission.CRM_WRITE, category: 'organization', label: 'Manage CRM', description: 'Create and update leads, customers, and deals' },
+    { key: Permission.CRM_DELETE, category: 'organization', label: 'Delete CRM Records', description: 'Remove leads, customers, and deals' },
+    { key: Permission.DEALS_MANAGE, category: 'organization', label: 'Manage Deals', description: 'Modify deal pipeline stages and values' },
+    { key: Permission.INBOX_READ, category: 'organization', label: 'View Inbox', description: 'View omnichannel message threads and customer chats' },
+    { key: Permission.INBOX_WRITE, category: 'organization', label: 'Reply in Inbox', description: 'Send messages, take over conversations, and trigger AI drafts' },
+    { key: Permission.CALENDAR_READ, category: 'organization', label: 'View Calendar', description: 'View appointments and booking schedules' },
+    { key: Permission.CALENDAR_WRITE, category: 'organization', label: 'Manage Calendar', description: 'Book, reschedule, and manage appointment slots' },
+    { key: Permission.TASKS_READ, category: 'organization', label: 'View Tasks', description: 'View assigned operational tasks' },
+    { key: Permission.TASKS_WRITE, category: 'organization', label: 'Manage Tasks', description: 'Create, update, and complete operational tasks' },
+    { key: Permission.INVOICES_READ, category: 'billing', label: 'View Invoices', description: 'View customer invoices and payment ledger' },
+    { key: Permission.INVOICES_WRITE, category: 'billing', label: 'Manage Invoices', description: 'Create invoices and process payments' },
 ];
 exports.SystemRolePermissions = {
     owner: ['*'],
@@ -85,6 +109,18 @@ exports.SystemRolePermissions = {
         Permission.WORKSPACE_UPDATE,
         Permission.MEMBERS_READ,
         Permission.ROLES_READ,
+        Permission.CRM_READ,
+        Permission.CRM_WRITE,
+        Permission.CRM_DELETE,
+        Permission.DEALS_MANAGE,
+        Permission.INBOX_READ,
+        Permission.INBOX_WRITE,
+        Permission.CALENDAR_READ,
+        Permission.CALENDAR_WRITE,
+        Permission.TASKS_READ,
+        Permission.TASKS_WRITE,
+        Permission.INVOICES_READ,
+        Permission.INVOICES_WRITE,
         Permission.WORKFLOW_READ,
         Permission.WORKFLOW_CREATE,
         Permission.WORKFLOW_UPDATE,
@@ -104,6 +140,16 @@ exports.SystemRolePermissions = {
         Permission.ORGANIZATION_READ,
         Permission.WORKSPACE_READ,
         Permission.MEMBERS_READ,
+        Permission.CRM_READ,
+        Permission.CRM_WRITE,
+        Permission.DEALS_MANAGE,
+        Permission.INBOX_READ,
+        Permission.INBOX_WRITE,
+        Permission.CALENDAR_READ,
+        Permission.CALENDAR_WRITE,
+        Permission.TASKS_READ,
+        Permission.TASKS_WRITE,
+        Permission.INVOICES_READ,
         Permission.WORKFLOW_READ,
         Permission.WORKFLOW_EXECUTE,
         Permission.INTEGRATION_READ,
@@ -115,6 +161,11 @@ exports.SystemRolePermissions = {
         Permission.ORGANIZATION_READ,
         Permission.WORKSPACE_READ,
         Permission.MEMBERS_READ,
+        Permission.CRM_READ,
+        Permission.INBOX_READ,
+        Permission.CALENDAR_READ,
+        Permission.TASKS_READ,
+        Permission.INVOICES_READ,
         Permission.WORKFLOW_READ,
         Permission.INTEGRATION_READ,
         Permission.AI_READ,
@@ -126,6 +177,16 @@ exports.SystemRolePermissions = {
         Permission.WORKSPACE_READ,
         Permission.WORKSPACE_CREATE,
         Permission.MEMBERS_READ,
+        Permission.CRM_READ,
+        Permission.CRM_WRITE,
+        Permission.DEALS_MANAGE,
+        Permission.INBOX_READ,
+        Permission.INBOX_WRITE,
+        Permission.CALENDAR_READ,
+        Permission.CALENDAR_WRITE,
+        Permission.TASKS_READ,
+        Permission.TASKS_WRITE,
+        Permission.INVOICES_READ,
         Permission.WORKFLOW_READ,
         Permission.WORKFLOW_CREATE,
         Permission.WORKFLOW_UPDATE,

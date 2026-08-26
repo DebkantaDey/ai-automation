@@ -238,7 +238,7 @@ export default function ApiKeysSettingsPage() {
                         </div>
                       </td>
                       <td className="py-2.5 px-4 font-mono text-neutral-500">{k.usageCount || 0} reqs</td>
-                      <td className="py-2.5 px-4 text-neutral-400 text-[11px]">
+                      <td suppressHydrationWarning className="py-2.5 px-4 text-neutral-400 text-[11px]">
                         {k.expiresAt ? new Date(k.expiresAt).toLocaleDateString() : 'Never'}
                       </td>
                       <td className="py-2.5 px-4">

@@ -1,28 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.tenancyPlugin = tenancyPlugin;
-const mongoose_1 = require("mongoose");
 const tenant_context_service_1 = require("../../tenancy/tenant-context.service");
 function tenancyPlugin(schema, options = {}) {
     if (!schema.path('organizationId')) {
-        schema.add({
-            organizationId: {
-                type: mongoose_1.Schema.Types.ObjectId,
-                ref: 'Organization',
-                required: true,
-                index: true,
-            },
-        });
-    }
-    if (!schema.path('workspaceId')) {
-        schema.add({
-            workspaceId: {
-                type: mongoose_1.Schema.Types.ObjectId,
-                ref: 'Workspace',
-                required: !!options.requireWorkspace,
-                index: true,
-            },
-        });
+        return;
     }
     const queryMethods = [
         'countDocuments',
@@ -46,7 +28,7 @@ function tenancyPlugin(schema, options = {}) {
             if (orgId) {
                 this.where({ organizationId: orgId });
             }
-            if (options.requireWorkspace) {
+            if ((options.requireWorkspace || schema.path('workspaceId')) && tenant_context_service_1.TenantContextService.getWorkspaceId()) {
                 const wsId = tenant_context_service_1.TenantContextService.getWorkspaceId();
                 if (wsId) {
                     this.where({ workspaceId: wsId });

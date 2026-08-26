@@ -78,9 +78,9 @@ function LoginForm() {
   };
 
   return (
-    <Card className="w-full max-w-md shadow-xl border-neutral-200 dark:border-neutral-800">
-      <CardHeader className="text-center space-y-2 pb-6">
-        <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-white shadow-md shadow-blue-500/30">
+    <Card className="w-full max-w-md shadow-2xl border-neutral-200/80 dark:border-neutral-800/80 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md">
+      <CardHeader className="text-center space-y-2 pb-6 border-b border-neutral-100 dark:border-neutral-800">
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/30">
           <Cpu className="h-6 w-6" />
         </div>
         <CardTitle className="text-xl font-bold text-neutral-900 dark:text-white">
@@ -92,9 +92,9 @@ function LoginForm() {
       </CardHeader>
 
       <form onSubmit={handleLogin}>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4 pt-5">
           {error && (
-            <div className="flex items-center gap-2 p-3 rounded-lg bg-red-50 text-red-700 text-xs border border-red-200 dark:bg-red-950/40 dark:text-red-400 dark:border-red-900">
+            <div className="flex items-center gap-2 p-3 rounded-lg bg-rose-50 text-rose-700 text-xs border border-rose-200 dark:bg-rose-950/40 dark:text-rose-400 dark:border-rose-900">
               <AlertCircle className="h-4 w-4 shrink-0" />
               <span>{error}</span>
             </div>
@@ -113,7 +113,7 @@ function LoginForm() {
               type="button"
               variant="outline"
               onClick={handleGoogleLogin}
-              className="w-full text-xs gap-2 border-neutral-200 dark:border-neutral-800"
+              className="w-full text-xs gap-2 border-neutral-200 dark:border-neutral-800 h-9"
             >
               <svg className="h-4 w-4" viewBox="0 0 24 24">
                 <path
@@ -140,7 +140,7 @@ function LoginForm() {
               type="button"
               variant="outline"
               onClick={handleMicrosoftLogin}
-              className="w-full text-xs gap-2 border-neutral-200 dark:border-neutral-800"
+              className="w-full text-xs gap-2 border-neutral-200 dark:border-neutral-800 h-9"
             >
               <svg className="h-4 w-4" viewBox="0 0 23 23">
                 <path fill="#f35325" d="M1 1h10v10H1z" />
@@ -164,13 +164,13 @@ function LoginForm() {
               Work Email
             </label>
             <div className="relative">
-              <Mail className="absolute left-2.5 top-2.5 h-4 w-4 text-neutral-400" />
+              <Mail className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-neutral-400" />
               <Input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@company.com"
-                className="pl-9 text-xs"
+                className="pl-8 text-xs h-9"
                 required
               />
             </div>
@@ -181,18 +181,18 @@ function LoginForm() {
               <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
                 Password
               </label>
-              <Link href="/forgot-password" className="text-[11px] text-blue-600 hover:underline">
+              <Link href="/forgot-password" className="text-[11px] text-blue-600 dark:text-blue-400 hover:underline">
                 Forgot password?
               </Link>
             </div>
             <div className="relative">
-              <Lock className="absolute left-2.5 top-2.5 h-4 w-4 text-neutral-400" />
+              <Lock className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-neutral-400" />
               <Input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="pl-9 text-xs"
+                className="pl-8 text-xs h-9"
                 required
               />
             </div>
@@ -211,17 +211,17 @@ function LoginForm() {
             </label>
           </div>
 
-          <Button type="submit" disabled={loading} className="w-full bg-blue-600 hover:bg-blue-700 text-xs gap-2">
-            <span>{loading ? 'Authenticating...' : 'Sign In'}</span>
+          <Button type="submit" isLoading={loading} className="w-full bg-blue-600 hover:bg-blue-500 text-xs gap-2 h-9 font-semibold text-white">
+            <span>Sign In</span>
             <ArrowRight className="h-3.5 w-3.5" />
           </Button>
         </CardContent>
       </form>
 
-      <CardFooter className="flex justify-center border-t border-neutral-100 dark:border-neutral-900 pt-4">
+      <CardFooter className="flex justify-center border-t border-neutral-100 dark:border-neutral-800 pt-4">
         <p className="text-xs text-neutral-500">
           Need an organization account?{' '}
-          <Link href="/register" className="font-semibold text-blue-600 hover:underline">
+          <Link href="/register" className="font-semibold text-blue-600 dark:text-blue-400 hover:underline">
             Create Tenant
           </Link>
         </p>
@@ -232,8 +232,8 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-neutral-50 dark:bg-neutral-950 p-4">
-      <Suspense fallback={<div>Loading login form...</div>}>
+    <div className="flex min-h-screen items-center justify-center bg-neutral-50/80 dark:bg-neutral-950 p-4 bg-canvas-dots">
+      <Suspense fallback={<div className="text-xs text-neutral-400">Loading login form...</div>}>
         <LoginForm />
       </Suspense>
     </div>

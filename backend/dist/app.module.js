@@ -37,6 +37,11 @@ const integrations_module_1 = require("./modules/integrations/integrations.modul
 const webhooks_module_1 = require("./modules/webhooks/webhooks.module");
 const audit_logs_module_1 = require("./modules/audit-logs/audit-logs.module");
 const health_module_1 = require("./modules/health/health.module");
+const crm_module_1 = require("./modules/crm/crm.module");
+const inbox_module_1 = require("./modules/inbox/inbox.module");
+const calendar_module_1 = require("./modules/calendar/calendar.module");
+const tasks_module_1 = require("./modules/tasks/tasks.module");
+const invoices_module_1 = require("./modules/invoices/invoices.module");
 const env_validation_1 = require("./core/config/env-validation");
 let AppModule = class AppModule {
 };
@@ -77,6 +82,11 @@ exports.AppModule = AppModule = __decorate([
             webhooks_module_1.WebhooksModule,
             audit_logs_module_1.AuditLogsModule,
             health_module_1.HealthModule,
+            crm_module_1.CrmModule,
+            inbox_module_1.InboxModule,
+            calendar_module_1.CalendarModule,
+            tasks_module_1.TasksModule,
+            invoices_module_1.InvoicesModule,
         ],
     })
 ], AppModule);

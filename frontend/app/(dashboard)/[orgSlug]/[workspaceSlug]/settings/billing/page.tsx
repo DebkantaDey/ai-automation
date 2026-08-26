@@ -160,7 +160,7 @@ export default function BillingSettingsPage() {
               <p className="text-xs font-bold text-amber-900 dark:text-amber-200">
                 Subscription Cancellation Scheduled
               </p>
-              <p className="text-[11px] text-amber-700 dark:text-amber-400">
+              <p suppressHydrationWarning className="text-[11px] text-amber-700 dark:text-amber-400">
                 Your plan will remain active until{' '}
                 {new Date(subscription.currentPeriodEnd).toLocaleDateString()}, after which your organization will revert to the Free tier.
               </p>
@@ -212,7 +212,7 @@ export default function BillingSettingsPage() {
               <Clock className="h-3.5 w-3.5" />
               Billing Interval: <strong className="text-neutral-900 dark:text-white capitalize">{subscription?.billingInterval || 'Monthly'}</strong>
             </span>
-            <span>
+            <span suppressHydrationWarning>
               Renewal / End Date: <strong className="text-neutral-900 dark:text-white">{subscription?.currentPeriodEnd ? new Date(subscription.currentPeriodEnd).toLocaleDateString() : 'N/A'}</strong>
             </span>
           </div>
@@ -437,7 +437,7 @@ export default function BillingSettingsPage() {
                 <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
                   {invoices.map((inv) => (
                     <tr key={inv._id || inv.providerInvoiceId} className="hover:bg-neutral-50/50 dark:hover:bg-neutral-900/50">
-                      <td className="py-3 text-neutral-600 dark:text-neutral-300">
+                      <td suppressHydrationWarning className="py-3 text-neutral-600 dark:text-neutral-300">
                         {new Date(inv.issueDate || inv.createdAt).toLocaleDateString()}
                       </td>
                       <td className="py-3 font-mono font-medium text-neutral-900 dark:text-white">

@@ -7,12 +7,22 @@ import { Sparkles, Clock, AlertTriangle, ArrowRight, X } from 'lucide-react';
 import { apiClient } from '../../lib/api-client';
 import { Button } from '../ui/button';
 
+interface SubscriptionStatusDetails {
+  isTrial?: boolean;
+  state?: string;
+  trialRemainingDays?: number;
+  trialRemainingHours?: number;
+  isTrialExpired?: boolean;
+  isInGracePeriod?: boolean;
+  graceRemainingDays?: number;
+}
+
 export function TrialBanner() {
   const params = useParams();
   const orgSlug = params?.orgSlug as string;
   const wsSlug = (params?.workspaceSlug as string) || 'default';
 
-  const [statusDetails, setStatusDetails] = useState<any>(null);
+  const [statusDetails, setStatusDetails] = useState<SubscriptionStatusDetails | null>(null);
   const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
@@ -38,7 +48,7 @@ export function TrialBanner() {
   // 1. Trial Expired Banner (Critical - Non-dismissible)
   if (statusDetails.isTrialExpired || statusDetails.state === 'trial_expired') {
     return (
-      <div className="bg-red-600 text-white px-4 py-2 text-xs flex items-center justify-between shadow-md">
+      <div className="bg-gradient-to-r from-rose-600 to-red-600 text-white px-4 py-2 text-xs flex items-center justify-between shadow-md">
         <div className="flex items-center gap-2 font-medium">
           <AlertTriangle className="h-4 w-4 shrink-0 animate-bounce" />
           <span>
@@ -46,7 +56,7 @@ export function TrialBanner() {
           </span>
         </div>
         <Link href={billingUrl}>
-          <Button size="sm" className="bg-white text-red-700 hover:bg-neutral-100 text-xs font-bold h-7 px-3 gap-1 shadow-sm">
+          <Button size="sm" className="bg-white text-rose-700 hover:bg-neutral-100 font-bold h-7 px-3 gap-1 shadow-sm">
             <span>Upgrade Plan</span>
             <ArrowRight className="h-3 w-3" />
           </Button>
@@ -58,7 +68,7 @@ export function TrialBanner() {
   // 2. Grace Period Warning
   if (statusDetails.isInGracePeriod || statusDetails.state === 'past_due_grace') {
     return (
-      <div className="bg-amber-600 text-white px-4 py-2 text-xs flex items-center justify-between shadow-md">
+      <div className="bg-gradient-to-r from-amber-600 to-orange-600 text-white px-4 py-2 text-xs flex items-center justify-between shadow-md">
         <div className="flex items-center gap-2 font-medium">
           <Clock className="h-4 w-4 shrink-0" />
           <span>
@@ -66,7 +76,7 @@ export function TrialBanner() {
           </span>
         </div>
         <Link href={billingUrl}>
-          <Button size="sm" className="bg-white text-amber-800 hover:bg-neutral-100 text-xs font-bold h-7 px-3 gap-1 shadow-sm">
+          <Button size="sm" className="bg-white text-amber-800 hover:bg-neutral-100 font-bold h-7 px-3 gap-1 shadow-sm">
             <span>Update Billing</span>
             <ArrowRight className="h-3 w-3" />
           </Button>
@@ -87,12 +97,12 @@ export function TrialBanner() {
         </div>
         <div className="flex items-center gap-2">
           <Link href={billingUrl}>
-            <Button size="sm" className="bg-white text-orange-700 hover:bg-neutral-100 text-xs font-bold h-7 px-3 gap-1 shadow-sm">
+            <Button size="sm" className="bg-white text-orange-700 hover:bg-neutral-100 font-bold h-7 px-3 gap-1 shadow-sm">
               <span>Upgrade Now</span>
               <ArrowRight className="h-3 w-3" />
             </Button>
           </Link>
-          <button onClick={() => setDismissed(true)} className="text-white/80 hover:text-white p-1">
+          <button onClick={() => setDismissed(true)} className="text-white/80 hover:text-white p-1 cursor-pointer">
             <X className="h-3.5 w-3.5" />
           </button>
         </div>
@@ -103,19 +113,19 @@ export function TrialBanner() {
   // 4. Active Trial Banner
   if (statusDetails.isTrial && statusDetails.state === 'trial_active') {
     return (
-      <div className="bg-blue-600 text-white px-4 py-1.5 text-xs flex items-center justify-between shadow-sm">
+      <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-1.5 text-xs flex items-center justify-between shadow-sm">
         <div className="flex items-center gap-2 font-medium">
           <Sparkles className="h-3.5 w-3.5 text-blue-200 shrink-0" />
           <span>
-            You are on a <strong>Free Trial ({statusDetails.trialRemainingDays} days remaining)</strong>. Explore workflows, AI agents, and integrations.
+            You are on a <strong>Free Trial ({statusDetails.trialRemainingDays} days remaining)</strong>. Explore multi-tenant workflows and AI agents.
           </span>
         </div>
         <div className="flex items-center gap-2">
           <Link href={billingUrl} className="underline font-semibold hover:text-blue-100 text-[11px]">
             View Plans & Upgrade
           </Link>
-          <button onClick={() => setDismissed(true)} className="text-white/80 hover:text-white p-1">
-            <X className="h-3 w-3" />
+          <button onClick={() => setDismissed(true)} className="text-white/80 hover:text-white p-1 cursor-pointer">
+            <X className="h-3.5 w-3.5" />
           </button>
         </div>
       </div>

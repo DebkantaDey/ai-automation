@@ -2,15 +2,19 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { LogOut, Settings, User } from 'lucide-react';
+import { LogOut, Settings, CreditCard, Shield, User } from 'lucide-react';
 import { useAuthStore } from '../../stores/auth-store';
 import { useTenantStore } from '../../stores/tenant-store';
+import { Badge } from '../ui/badge';
 
 export function UserNav() {
   const router = useRouter();
   const { user, logout } = useAuthStore();
-  const { currentOrganization } = useTenantStore();
+  const { currentOrganization, currentWorkspace } = useTenantStore();
   const [isOpen, setIsOpen] = useState(false);
+
+  const orgSlug = currentOrganization?.slug || 'acme-corp';
+  const wsSlug = currentWorkspace?.slug || 'default';
 
   const handleLogout = () => {
     logout();
@@ -25,47 +29,59 @@ export function UserNav() {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 rounded-full p-1 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors focus:outline-none"
+        className="flex items-center gap-2 rounded-full p-0.5 hover:ring-2 hover:ring-blue-500/30 transition-all focus:outline-none cursor-pointer"
       >
-        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-900 text-white text-xs font-semibold dark:bg-neutral-100 dark:text-neutral-900">
+        <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-neutral-800 to-neutral-950 text-white text-xs font-bold ring-1 ring-white/20 shadow-sm">
           {initial}
+          <span className="absolute bottom-0 right-0 h-2 w-2 rounded-full bg-emerald-500 ring-2 ring-white dark:ring-neutral-950" />
         </div>
       </button>
 
       {isOpen && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
-          <div className="absolute right-0 top-full z-50 mt-1 w-56 rounded-lg border border-neutral-200 bg-white p-1.5 shadow-xl dark:border-neutral-800 dark:bg-neutral-950">
-            <div className="px-2 py-2 border-b border-neutral-100 dark:border-neutral-900">
-              <p className="text-xs font-semibold text-neutral-900 dark:text-neutral-100">{displayName}</p>
-              <p className="text-[11px] text-neutral-500 truncate">{displayEmail}</p>
-              <div className="mt-1.5 flex items-center gap-1.5">
-                <span className="rounded bg-blue-100 px-1.5 py-0.5 text-[10px] font-semibold text-blue-700 uppercase dark:bg-blue-950 dark:text-blue-300">
+          <div className="absolute right-0 top-full z-50 mt-1.5 w-60 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white p-1.5 shadow-xl dark:bg-neutral-900 animate-in fade-in-0 zoom-in-95">
+            <div className="px-3 py-2.5 border-b border-neutral-100 dark:border-neutral-800">
+              <p className="text-xs font-bold text-neutral-900 dark:text-white truncate">{displayName}</p>
+              <p className="text-[11px] text-neutral-400 truncate mt-0.5 font-mono">{displayEmail}</p>
+              <div className="mt-2 flex items-center gap-1.5">
+                <Badge variant="default" className="text-[9px] uppercase font-mono py-0">
                   {currentOrganization?.plan || 'PRO'}
-                </span>
-                <span className="text-[10px] text-neutral-400">
-                  Role: {currentOrganization?.role || 'owner'}
+                </Badge>
+                <span className="text-[10px] text-neutral-400 capitalize font-mono">
+                  {currentOrganization?.role || 'owner'}
                 </span>
               </div>
             </div>
 
-            <div className="py-1">
+            <div className="py-1 space-y-0.5">
               <button
                 onClick={() => {
                   setIsOpen(false);
-                  router.push('/settings');
+                  router.push(`/${orgSlug}/${wsSlug}/settings`);
                 }}
-                className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-xs text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-900"
+                className="flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-xs text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800 transition-colors"
               >
-                <Settings className="h-3.5 w-3.5 text-neutral-500" />
-                <span>Account Settings</span>
+                <Settings className="h-3.5 w-3.5 text-neutral-400" />
+                <span>Organization Settings</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setIsOpen(false);
+                  router.push(`/${orgSlug}/${wsSlug}/settings/billing`);
+                }}
+                className="flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-xs text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800 transition-colors"
+              >
+                <CreditCard className="h-3.5 w-3.5 text-neutral-400" />
+                <span>Billing & Subscription</span>
               </button>
             </div>
 
-            <div className="border-t border-neutral-100 dark:border-neutral-900 pt-1">
+            <div className="border-t border-neutral-100 dark:border-neutral-800 pt-1">
               <button
                 onClick={handleLogout}
-                className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-xs text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/50"
+                className="flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-xs text-rose-600 hover:bg-rose-50 dark:text-rose-400 dark:hover:bg-rose-950/40 transition-colors font-medium"
               >
                 <LogOut className="h-3.5 w-3.5" />
                 <span>Sign Out</span>

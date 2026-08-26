@@ -17,13 +17,19 @@ exports.AgentEngineService = void 0;
 const common_1 = require("@nestjs/common");
 const ai_gateway_service_1 = require("../../../integrations/ai/ai-gateway.service");
 const integrations_service_1 = require("../../integrations/integrations.service");
+const agent_tools_registry_1 = require("../tools/agent-tools.registry");
+const approvals_service_1 = require("../services/approvals.service");
 let AgentEngineService = AgentEngineService_1 = class AgentEngineService {
     aiGateway;
     integrationsService;
+    toolsRegistry;
+    approvalsService;
     logger = new common_1.Logger(AgentEngineService_1.name);
-    constructor(aiGateway, integrationsService) {
+    constructor(aiGateway, integrationsService, toolsRegistry, approvalsService) {
         this.aiGateway = aiGateway;
         this.integrationsService = integrationsService;
+        this.toolsRegistry = toolsRegistry;
+        this.approvalsService = approvalsService;
     }
     async runAgentLoop(agent, execution) {
         const limits = agent.limits || { maxSteps: 10, maxTokens: 4000, maxToolCalls: 5, timeoutSeconds: 60 };
@@ -33,13 +39,17 @@ let AgentEngineService = AgentEngineService_1 = class AgentEngineService {
         const startTime = Date.now();
         let currentStepNumber = 0;
         let toolCallsCount = 0;
-        const enabledTools = (agent.tools || []).filter((t) => t.enabled);
-        const toolsPrompt = enabledTools.length > 0
-            ? `You have access to the following tools:\n${enabledTools.map((t) => `- ${t.name}: ${t.description}`).join('\n')}\n`
-            : 'You do not have external tools enabled. Answer directly using your instructions.';
-        const systemPrompt = `${agent.instructions}\n\n${toolsPrompt}
+        const agentTools = (agent.tools || []).filter((t) => t.enabled);
+        const availableToolsList = agentTools.length > 0
+            ? agentTools.map((t) => `- ${t.name}: ${t.description}`).join('\n')
+            : agent_tools_registry_1.CONTROLLED_TOOLS_CATALOG.map((t) => `- ${t.name}: ${t.description}`).join('\n');
+        const systemPrompt = `${agent.instructions}
+
+You have access to the following business tools:
+${availableToolsList}
+
 Respond in valid JSON format ONLY with one of the two structures:
-1. If you need to call a tool:
+1. If you need to perform an action/call a tool:
 {"thought": "reasoning for next step", "action": {"tool": "tool_name", "params": {"param_key": "param_value"}}}
 
 2. If you are ready to deliver the final response to the user:
@@ -102,9 +112,39 @@ Respond in valid JSON format ONLY with one of the two structures:
                     }
                     const toolName = parsedAction.action.tool;
                     const toolParams = parsedAction.action.params || {};
+                    if (this.toolsRegistry?.isToolSensitive(toolName) && this.approvalsService) {
+                        const approval = await this.approvalsService.createApproval(agent.organizationId.toString(), {
+                            actionType: toolName || 'custom',
+                            title: `Approval Required: ${toolName}`,
+                            reason: thought || `Agent requested sensitive operation: ${toolName}`,
+                            payload: toolParams,
+                            agentId: agent._id.toString(),
+                            executionId: execution._id.toString(),
+                            requestedByAgentName: agent.name,
+                        }, agent.workspaceId?.toString());
+                        stepTraces.push({
+                            stepNumber: currentStepNumber,
+                            thought,
+                            toolCall: { name: toolName, input: toolParams },
+                            observation: {
+                                status: 'waiting_human_approval',
+                                approvalId: approval._id,
+                                message: 'Sensitive operation paused. Awaiting manager approval.',
+                            },
+                            durationMs: Date.now() - stepStartTime,
+                        });
+                        execution.status = 'waiting_approval';
+                        execution.finalOutput = `Action paused pending manager approval (Request #${approval._id}).`;
+                        break;
+                    }
                     let toolObservation;
                     try {
-                        toolObservation = await this.executeAgentTool(toolName, toolParams, enabledTools);
+                        if (this.toolsRegistry) {
+                            toolObservation = await this.toolsRegistry.executeTool(agent.organizationId.toString(), toolName, toolParams, agent._id.toString());
+                        }
+                        else {
+                            toolObservation = await this.executeFallbackTool(toolName, toolParams, agentTools);
+                        }
                     }
                     catch (toolErr) {
                         toolObservation = { error: toolErr.message };
@@ -131,7 +171,7 @@ Respond in valid JSON format ONLY with one of the two structures:
                     break;
                 }
             }
-            if (currentStepNumber >= maxSteps && execution.status !== 'completed') {
+            if (currentStepNumber >= maxSteps && execution.status !== 'completed' && execution.status !== 'waiting_approval') {
                 execution.status = 'completed';
                 execution.finalOutput = execution.finalOutput || 'Agent reached maximum step limit without final conclusion.';
             }
@@ -155,14 +195,7 @@ Respond in valid JSON format ONLY with one of the two structures:
             return execution;
         }
     }
-    async executeAgentTool(toolName, params, enabledTools) {
-        const configured = enabledTools.find((t) => t.name === toolName);
-        if (!configured && toolName !== 'current_time' && toolName !== 'calculator') {
-            throw new Error(`Unauthorized tool execution: Tool [${toolName}] is not enabled for this agent`);
-        }
-        if (this.integrationsService && configured?.connectionId) {
-            return this.integrationsService.executeAction(configured.connectionId, toolName, params);
-        }
+    async executeFallbackTool(toolName, params, enabledTools) {
         if (toolName === 'current_time') {
             return { timestamp: new Date().toISOString() };
         }
@@ -173,12 +206,6 @@ Respond in valid JSON format ONLY with one of the two structures:
             }
             return { error: 'Invalid arithmetic expression' };
         }
-        if (toolName === 'search_knowledge_base') {
-            return {
-                query: params.query,
-                context: `Relevant documentation excerpts for query: "${params.query}" (Similarity: 0.94)`,
-            };
-        }
         return { result: `Executed tool ${toolName} with parameters: ${JSON.stringify(params)}` };
     }
 };
@@ -186,7 +213,11 @@ exports.AgentEngineService = AgentEngineService;
 exports.AgentEngineService = AgentEngineService = AgentEngineService_1 = __decorate([
     (0, common_1.Injectable)(),
     __param(1, (0, common_1.Optional)()),
+    __param(2, (0, common_1.Optional)()),
+    __param(3, (0, common_1.Optional)()),
     __metadata("design:paramtypes", [ai_gateway_service_1.AiGatewayService,
-        integrations_service_1.IntegrationsService])
+        integrations_service_1.IntegrationsService,
+        agent_tools_registry_1.AgentToolsRegistry,
+        approvals_service_1.ApprovalsService])
 ], AgentEngineService);
 //# sourceMappingURL=agent-engine.service.js.map

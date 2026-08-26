@@ -28,6 +28,11 @@ import { IntegrationsModule } from './modules/integrations/integrations.module';
 import { WebhooksModule } from './modules/webhooks/webhooks.module';
 import { AuditLogsModule } from './modules/audit-logs/audit-logs.module';
 import { HealthModule } from './modules/health/health.module';
+import { CrmModule } from './modules/crm/crm.module';
+import { InboxModule } from './modules/inbox/inbox.module';
+import { CalendarModule } from './modules/calendar/calendar.module';
+import { TasksModule } from './modules/tasks/tasks.module';
+import { InvoicesModule } from './modules/invoices/invoices.module';
 
 import { validateEnvironment } from './core/config/env-validation';
 
@@ -73,6 +78,11 @@ import { validateEnvironment } from './core/config/env-validation';
     WebhooksModule,
     AuditLogsModule,
     HealthModule,
+    CrmModule,
+    InboxModule,
+    CalendarModule,
+    TasksModule,
+    InvoicesModule,
   ],
 })
 export class AppModule {}

@@ -308,7 +308,7 @@ export default function TeamManagementPage() {
                         <div className="flex items-center gap-2 text-[11px] text-neutral-500">
                           <span>Invited by {inv.invitedBy}</span>
                           <span>•</span>
-                          <span className="flex items-center gap-1">
+                          <span suppressHydrationWarning className="flex items-center gap-1">
                             <Clock className="h-3 w-3" />
                             Expires {new Date(inv.expiresAt).toLocaleDateString()}
                           </span>
